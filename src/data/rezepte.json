@@ -1,0 +1,1212 @@
+[
+  {
+    "id": "1",
+    "name": "Montanablack Nudelauflauf",
+    "kategorie": "fleischhaltig",
+    "zeit": 60,
+    "aufwand": "aufwändig",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "500 g" },
+      { "name": "Hackfleisch", "menge": "500 g" },
+      { "name": "Maggi Ofen-Spirelli", "menge": "2 Packung" },
+      { "name": "Edamer Streuselkäse", "menge": "2 Packung" },
+      { "name": "Crème fraîche", "menge": "1 Packung" },
+      { "name": "Mais (Dose)", "menge": "1 Packung" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Zwiebeln", "menge": "2 Stück" },
+      { "name": "Mozzarella", "menge": "1 Packung" },
+      { "name": "Champignons", "menge": "250 g" }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Gebratene Nudeln mit Hähnchen",
+    "kategorie": "fleischhaltig",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hähnchenbrust", "menge": "2 Stück" },
+      { "name": "Mie Nudeln", "menge": "250 g" },
+      { "name": "Teriyakisoße", "menge": "120 ml" },
+      { "name": "Pak Choi", "menge": "2 Stück" },
+      { "name": "Frühlingszwiebeln", "menge": "2 Stück" },
+      { "name": "Spitzpaprika", "menge": "1 Stück" },
+      { "name": "Pflanzenöl", "menge": "8 EL" },
+      { "name": "Sesam", "menge": "4 EL" },
+      { "name": "Sojasoße", "menge": "2 EL" },
+      { "name": "Speisestärke", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Spätzlepfanne mit Hähnchen",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hähnchenbrustfilet", "menge": "300 g" },
+      { "name": "TK-Erbsen", "menge": "200 g" },
+      { "name": "Rapsöl", "menge": "2 EL" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Champignons", "menge": "250 g" },
+      { "name": "Möhren", "menge": "300 g" },
+      { "name": "Schlagsahne", "menge": "150 ml" },
+      { "name": "Gemüsebrühe", "menge": "150 ml" },
+      { "name": "Spätzle", "menge": "400 g" },
+      { "name": "Petersilie", "menge": "0.5 Bund" }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Nasi Goreng",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Jasminreis", "menge": "250 g" },
+      { "name": "Hähnchenbrustfilet", "menge": "300 g" },
+      { "name": "Möhren", "menge": "2 Stück" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "TK-Erbsen", "menge": "50 g" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Sesamöl", "menge": "2 EL" },
+      { "name": "Eier", "menge": "4 Stück" },
+      { "name": "Sojasauce", "menge": "6 EL" },
+      { "name": "Zucker (braun)", "menge": "3 EL" }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Käse-Lauch-Suppe mit Hackfleisch",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hackfleisch", "menge": "500 g" },
+      { "name": "Porree", "menge": "250 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehen" },
+      { "name": "Gemüsebrühe", "menge": "800 ml" },
+      { "name": "Schmelzkäse", "menge": "200 g" },
+      { "name": "Crème fraîche", "menge": "150 g" },
+      { "name": "Sonnenblumenöl", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Pizzabrötchen",
+    "kategorie": "fleischhaltig",
+    "zeit": 35,
+    "aufwand": "einfach",
+    "portionen": 6,
+    "zutaten": [
+      { "name": "Brötchen", "menge": "8 Stück" },
+      { "name": "Salami", "menge": "100 g" },
+      { "name": "Kochschinken", "menge": "250 g" },
+      { "name": "Gouda (geraspelt)", "menge": "250 g" },
+      { "name": "Champignons", "menge": "400 g" },
+      { "name": "Sahne", "menge": "200 ml" }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Kartoffelauflauf mit Schinken",
+    "kategorie": "fleischhaltig",
+    "zeit": 80,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Kartoffeln", "menge": "800 g" },
+      { "name": "Kochschinken", "menge": "300 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Butter", "menge": "2 EL" },
+      { "name": "Schlagsahne", "menge": "300 ml" },
+      { "name": "Milch", "menge": "150 ml" },
+      { "name": "Eier", "menge": "3 Stück" },
+      { "name": "Streukäse", "menge": "150 g" }
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Würstchengulasch",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Wiener Würstchen", "menge": "500 g" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Paprika gelb", "menge": "1 Stück" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Tomaten (Dose)", "menge": "400 g" },
+      { "name": "Gemüsebrühe", "menge": "250 ml" },
+      { "name": "Schmand", "menge": "200 g" },
+      { "name": "Tomatenmark", "menge": "1 EL" },
+      { "name": "Mehl", "menge": "2 EL" },
+      { "name": "Knoblauch", "menge": "1 Zehen" },
+      { "name": "Pflanzenöl", "menge": "2 EL" },
+      { "name": "Majoran", "menge": "0.5 TL" }
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Nudelsalat mit Mayo",
+    "kategorie": "fleischhaltig",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 6,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "300 g" },
+      { "name": "Fleischwurst", "menge": "200 g" },
+      { "name": "TK-Erbsen", "menge": "150 g" },
+      { "name": "Mais (Dose)", "menge": "140 g" },
+      { "name": "Gewürzgurken", "menge": "4 Stück" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Mayonnaise", "menge": "200 g" },
+      { "name": "Senf", "menge": "1 TL" }
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Chicken Alfredo",
+    "kategorie": "fleischhaltig",
+    "zeit": 50,
+    "aufwand": "mittel",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Hähnchenbrust", "menge": "2 Stück" },
+      { "name": "Fettuccine-Nudeln", "menge": "200 g" },
+      { "name": "Sahne", "menge": "200 ml" },
+      { "name": "Parmesan", "menge": "80 g" },
+      { "name": "Schalotten", "menge": "2 Stück" },
+      { "name": "Butter", "menge": "20 g" },
+      { "name": "Olivenöl", "menge": "2 EL" },
+      { "name": "Mehl", "menge": "20 g" }
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Tortellini Auflauf mit Schinken",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Tortellini (frisch)", "menge": "500 g" },
+      { "name": "Kochschinken", "menge": "200 g" },
+      { "name": "Kirschtomaten", "menge": "200 g" },
+      { "name": "Sahne", "menge": "200 ml" },
+      { "name": "Schmand", "menge": "200 g" },
+      { "name": "Gouda", "menge": "150 g" },
+      { "name": "Paprika rot", "menge": "100 g" },
+      { "name": "Champignons", "menge": "100 g" },
+      { "name": "Zwiebel", "menge": "50 g" },
+      { "name": "Knoblauch", "menge": "1 Zehen" },
+      { "name": "Olivenöl", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Spinat-Sahne-Sauce zu Nudeln",
+    "kategorie": "fleischhaltig",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "250 g" },
+      { "name": "Hähnchengeschnetzeltes", "menge": "400 g" },
+      { "name": "Babyspinat", "menge": "100 g" },
+      { "name": "Getrocknete Tomaten", "menge": "100 g" },
+      { "name": "Sahne", "menge": "250 ml" },
+      { "name": "Gemüsebrühe", "menge": "200 ml" },
+      { "name": "Parmesan", "menge": "60 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Olivenöl", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Gebratener Reis mit Ei & Hähnchen",
+    "kategorie": "fleischhaltig",
+    "zeit": 35,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Langkornreis", "menge": "200 g" },
+      { "name": "Hähnchenbrustfilet", "menge": "250 g" },
+      { "name": "Eier", "menge": "2 Stück" },
+      { "name": "Möhren", "menge": "150 g" },
+      { "name": "TK-Erbsen", "menge": "100 g" },
+      { "name": "Paprika", "menge": "1 Stück" },
+      { "name": "Frühlingszwiebeln", "menge": "1 Bund" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Ingwer", "menge": "10 g" },
+      { "name": "Sojasoße", "menge": "2 EL" },
+      { "name": "Sesamöl", "menge": "1 EL" },
+      { "name": "Peperoni", "menge": "1 Stück" },
+      { "name": "Currypulver", "menge": "2 TL" },
+      { "name": "Pflanzenöl", "menge": "5 EL" }
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Lasagne",
+    "kategorie": "fleischhaltig",
+    "zeit": 100,
+    "aufwand": "aufwändig",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hackfleisch", "menge": "500 g" },
+      { "name": "Lasagneplatten", "menge": "300 g" },
+      { "name": "Tomaten (Dose)", "menge": "800 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Tomatenmark", "menge": "1 EL" },
+      { "name": "Rotwein", "menge": "100 ml" },
+      { "name": "Milch", "menge": "500 ml" },
+      { "name": "Butter", "menge": "30 g" },
+      { "name": "Mehl", "menge": "40 g" },
+      { "name": "Käse (gerieben)", "menge": "150 g" },
+      { "name": "Petersilie", "menge": "1 Bund" }
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Schwedische Sommersuppe",
+    "kategorie": "fischhaltig",
+    "zeit": 35,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Kartoffeln", "menge": "3 Stück" },
+      { "name": "Lauch", "menge": "1 Stange" },
+      { "name": "Butter", "menge": "2 EL" },
+      { "name": "Gemüsebrühe", "menge": "750 ml" },
+      { "name": "Lachsfilet", "menge": "200 g" },
+      { "name": "Sahne", "menge": "100 ml" },
+      { "name": "Dill", "menge": "3 EL" }
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Pasta mit Tomatensauce",
+    "kategorie": "vegetarisch",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Penne", "menge": "400 g" },
+      { "name": "Tomaten (Dose)", "menge": "800 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Tomatenmark", "menge": "1 EL" },
+      { "name": "Olivenöl", "menge": "1 EL" },
+      { "name": "Basilikum", "menge": "1 Handvoll" },
+      { "name": "Parmesan", "menge": "nach Belieben" }
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Käsespätzle mit Röstzwiebeln",
+    "kategorie": "vegetarisch",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Spätzle", "menge": "1000 g" },
+      { "name": "Zwiebeln", "menge": "300 g" },
+      { "name": "Hartkäse (z.B. Bergkäse)", "menge": "250 g" },
+      { "name": "Weizenmehl", "menge": "3 EL" },
+      { "name": "Sahne", "menge": "75 g" },
+      { "name": "Butterschmalz", "menge": "50 g" },
+      { "name": "Schnittlauch", "menge": "0.5 Bund" }
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Gefüllte Champignons mit Spinat",
+    "kategorie": "vegetarisch",
+    "zeit": 35,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Riesenchampignons", "menge": "4 Stück" },
+      { "name": "Blattspinat", "menge": "150 g" },
+      { "name": "Kräuter-Crème-fraîche", "menge": "75 g" },
+      { "name": "Schalotte", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Butter", "menge": "40 g" },
+      { "name": "Gouda (gerieben)", "menge": "60 g" }
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Feldsalat mit Süßkartoffeln",
+    "kategorie": "vegetarisch",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Süßkartoffel", "menge": "200 g" },
+      { "name": "Feldsalat", "menge": "100 g" },
+      { "name": "Heidelbeeren", "menge": "60 g" },
+      { "name": "Feta", "menge": "60 g" },
+      { "name": "Olivenöl", "menge": "1 TL" },
+      { "name": "Naturjoghurt", "menge": "2 EL" },
+      { "name": "Gemüsebrühe", "menge": "2 EL" },
+      { "name": "Honig", "menge": "1 TL" },
+      { "name": "Senf", "menge": "1 TL" }
+    ]
+  },
+  {
+    "id": "20",
+    "name": "Schneller Nudelsalat mit Pesto",
+    "kategorie": "vegetarisch",
+    "zeit": 15,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "300 g" },
+      { "name": "Tomaten", "menge": "200 g" },
+      { "name": "Rucola", "menge": "100 g" },
+      { "name": "Pinienkerne", "menge": "20 g" },
+      { "name": "Pesto (grün)", "menge": "100 g" },
+      { "name": "Mozzarella", "menge": "125 g" }
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Spinatlasagne",
+    "kategorie": "vegetarisch",
+    "zeit": 50,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Blattspinat", "menge": "500 g" },
+      { "name": "Lasagneplatten", "menge": "10 Stück" },
+      { "name": "Käse (gerieben)", "menge": "100 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Olivenöl", "menge": "2 EL" },
+      { "name": "Butter", "menge": "50 g" },
+      { "name": "Mehl", "menge": "50 g" },
+      { "name": "Milch", "menge": "600 ml" },
+      { "name": "Zitronensaft", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Vegetarische Pizzabrötchen",
+    "kategorie": "vegetarisch",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Brötchen", "menge": "8 Stück" },
+      { "name": "Tomaten", "menge": "150 g" },
+      { "name": "Champignons", "menge": "150 g" },
+      { "name": "Zwiebel (rot)", "menge": "1 Stück" },
+      { "name": "Mais (Dose)", "menge": "1 Dose" },
+      { "name": "Sahne", "menge": "100 ml" },
+      { "name": "Käse (gerieben)", "menge": "150 g" },
+      { "name": "Italienische Kräuter", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "23",
+    "name": "Bratkartoffeln",
+    "kategorie": "vegetarisch",
+    "zeit": 55,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Kartoffeln", "menge": "600 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Öl", "menge": "3 EL" }
+    ]
+  },
+  {
+    "id": "24",
+    "name": "Kartoffelcremesuppe",
+    "kategorie": "vegetarisch",
+    "zeit": 50,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Kartoffeln", "menge": "1000 g" },
+      { "name": "Gemüsebrühe", "menge": "1000 ml" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Butter", "menge": "1 EL" },
+      { "name": "Sonnenblumenöl", "menge": "1 EL" },
+      { "name": "Schlagsahne", "menge": "200 ml" },
+      { "name": "Crème fraîche", "menge": "200 g" },
+      { "name": "Majoran", "menge": "1 TL" }
+    ]
+  },
+  {
+    "id": "25",
+    "name": "Fusilli-Salat mit Pesto & Grillgemüse",
+    "kategorie": "vegetarisch",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Fusilli", "menge": "160 g" },
+      { "name": "Zucchini", "menge": "100 g" },
+      { "name": "Strauchtomaten", "menge": "100 g" },
+      { "name": "Pinienkerne", "menge": "30 g" },
+      { "name": "Mozzarella (Baby)", "menge": "100 g" },
+      { "name": "Pesto alla Genovese", "menge": "3 EL" },
+      { "name": "Olivenöl", "menge": "2 EL" },
+      { "name": "Balsamico (weiß)", "menge": "2 EL" },
+      { "name": "Ahornsirup", "menge": "1 EL" },
+      { "name": "Basilikum", "menge": "1 Handvoll" }
+    ]
+  },
+  {
+    "id": "26",
+    "name": "Lemon Pasta",
+    "kategorie": "vegetarisch",
+    "zeit": 15,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Spaghetti", "menge": "500 g" },
+      { "name": "Pecorino", "menge": "150 g" },
+      { "name": "Zitrone", "menge": "1 Stück" },
+      { "name": "Eigelb", "menge": "2 Stück" },
+      { "name": "Sahne", "menge": "200 g" },
+      { "name": "Petersilie", "menge": "5 g" }
+    ]
+  },
+  {
+    "id": "27",
+    "name": "One Pot Gnocchi mit Buttergemüse",
+    "kategorie": "vegetarisch",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Gnocchi", "menge": "400 g" },
+      { "name": "TK-Buttergemüse", "menge": "300 g" },
+      { "name": "Zwiebeln", "menge": "2 Stück" },
+      { "name": "Gemüsebrühe", "menge": "200 ml" },
+      { "name": "Crème fraîche", "menge": "100 g" },
+      { "name": "Rapsöl", "menge": "1 EL" },
+      { "name": "Schnittlauch", "menge": "5 g" }
+    ]
+  },
+  {
+    "id": "28",
+    "name": "Blätterteig-Spinat-Feta-Schnecken",
+    "kategorie": "vegetarisch",
+    "zeit": 35,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Blätterteig", "menge": "1 Packung" },
+      { "name": "TK-Blattspinat", "menge": "250 g" },
+      { "name": "Feta", "menge": "100 g" },
+      { "name": "Zwiebel", "menge": "0.5 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehen" },
+      { "name": "Pinienkerne", "menge": "1 EL" },
+      { "name": "Olivenöl", "menge": "0.5 EL" },
+      { "name": "Ei", "menge": "1 Stück" }
+    ]
+  },
+  {
+    "id": "29",
+    "name": "Italienischer Nudelsalat mit Rucola",
+    "kategorie": "vegetarisch",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Nudeln (kurz)", "menge": "300 g" },
+      { "name": "Rucola", "menge": "100 g" },
+      { "name": "Tomaten", "menge": "250 g" },
+      { "name": "Getrocknete Tomaten", "menge": "50 g" },
+      { "name": "Mozzarella", "menge": "150 g" },
+      { "name": "Pinienkerne", "menge": "20 g" },
+      { "name": "Passierte Tomaten", "menge": "200 ml" },
+      { "name": "Olivenöl", "menge": "2 EL" },
+      { "name": "Aceto Balsamico", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "30",
+    "name": "Tortelliniauflauf Caprese",
+    "kategorie": "vegetarisch",
+    "zeit": 40,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Tortellini (Kühlregal)", "menge": "800 g" },
+      { "name": "Gehackte Tomaten (Dose)", "menge": "1 Dose" },
+      { "name": "Cherry-Tomaten", "menge": "200 g" },
+      { "name": "Mini-Mozzarella", "menge": "150 g" },
+      { "name": "Parmesan", "menge": "100 g" },
+      { "name": "Getrocknete Tomaten in Öl", "menge": "4 Stück" },
+      { "name": "Schalotten", "menge": "2 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehen" },
+      { "name": "Basilikum", "menge": "1 Bund" },
+      { "name": "Balsamico Bianco", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "31",
+    "name": "Chili con Crema",
+    "kategorie": "fleischhaltig",
+    "zeit": 40,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Rinderhackfleisch", "menge": "600 g" },
+      { "name": "Zwiebeln", "menge": "200 g" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Chilischote", "menge": "1 Stück" },
+      { "name": "Öl", "menge": "40 ml" },
+      { "name": "Tomatenmark", "menge": "50 g" },
+      { "name": "Sahne", "menge": "200 ml" },
+      { "name": "Mais (Dose)", "menge": "1 Dose" },
+      { "name": "Paprika rot", "menge": "150 g" },
+      { "name": "Kidneybohnen (Dose)", "menge": "1 Dose" }
+    ]
+  },
+  {
+    "id": "32",
+    "name": "Tortellini-Brokkoli-Auflauf",
+    "kategorie": "fleischhaltig",
+    "zeit": 45,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Tortellini (Kühlregal)", "menge": "500 g" },
+      { "name": "Brokkoli", "menge": "800 g" },
+      { "name": "Kochschinken", "menge": "50 g" },
+      { "name": "Parmesan", "menge": "80 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Rapsöl", "menge": "2 EL" },
+      { "name": "Mehl", "menge": "2 EL" },
+      { "name": "Milch", "menge": "200 ml" }
+    ]
+  },
+  {
+    "id": "33",
+    "name": "Brokkoli-Paprika-Apfel-Salat",
+    "kategorie": "vegetarisch",
+    "zeit": 15,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Brokkoli", "menge": "250 g" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Apfel", "menge": "1 Stück" },
+      { "name": "Öl", "menge": "30 ml" },
+      { "name": "Essig", "menge": "20 ml" },
+      { "name": "Senf", "menge": "1 EL" },
+      { "name": "Honig", "menge": "1 TL" },
+      { "name": "Sonnenblumenkerne", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "34",
+    "name": "Flammkuchen mit Fertigteig",
+    "kategorie": "fleischhaltig",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Flammkuchenteig", "menge": "260 g" },
+      { "name": "Crème fraîche", "menge": "200 g" },
+      { "name": "Frühlingszwiebeln", "menge": "4 Stück" },
+      { "name": "Speckwürfel", "menge": "125 g" }
+    ]
+  },
+  {
+    "id": "35",
+    "name": "Gemüse-Lasagne",
+    "kategorie": "vegetarisch",
+    "zeit": 70,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Lasagne-Platten", "menge": "9 Stück" },
+      { "name": "Zucchini", "menge": "1 Stück" },
+      { "name": "Aubergine", "menge": "1 Stück" },
+      { "name": "Möhren", "menge": "200 g" },
+      { "name": "Passierte Tomaten", "menge": "500 ml" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Rapsöl", "menge": "2 EL" },
+      { "name": "Basilikum", "menge": "15 g" },
+      { "name": "Gratinkäse", "menge": "150 g" }
+    ]
+  },
+  {
+    "id": "36",
+    "name": "Salzkartoffeln",
+    "kategorie": "vegan",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Kartoffeln (festkochend)", "menge": "800 g" }
+    ]
+  },
+  {
+    "id": "37",
+    "name": "Asia-Nudeln",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 3,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "200 g" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Champignons", "menge": "150 g" },
+      { "name": "Frühlingszwiebeln", "menge": "2 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Ingwer", "menge": "1 Stück" },
+      { "name": "Kokosmilch", "menge": "120 ml" },
+      { "name": "Sojasoße", "menge": "2 EL" },
+      { "name": "Sesamöl", "menge": "2 EL" },
+      { "name": "Süß-Sauer-Soße", "menge": "2 EL" },
+      { "name": "Agavensirup", "menge": "1 TL" }
+    ]
+  },
+  {
+    "id": "38",
+    "name": "Vegane Lasagne",
+    "kategorie": "vegan",
+    "zeit": 75,
+    "aufwand": "aufwändig",
+    "portionen": 6,
+    "zutaten": [
+      { "name": "Lasagne-Platten", "menge": "12 Stück" },
+      { "name": "Veggie Hack", "menge": "500 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "3 Zehen" },
+      { "name": "Karotten", "menge": "2 Stück" },
+      { "name": "Sellerie", "menge": "2 Stangen" },
+      { "name": "Passierte Tomaten", "menge": "400 g" },
+      { "name": "Gehackte Tomaten (Dose)", "menge": "400 g" },
+      { "name": "Tomatenmark", "menge": "2 EL" },
+      { "name": "Rotwein", "menge": "120 ml" },
+      { "name": "Vegane Butter", "menge": "30 g" },
+      { "name": "Mehl", "menge": "30 g" },
+      { "name": "Sojamilch", "menge": "500 ml" },
+      { "name": "Hefeflocken", "menge": "2 EL" },
+      { "name": "Olivenöl", "menge": "3 EL" }
+    ]
+  },
+  {
+    "id": "39",
+    "name": "Gebratener Reis mit Tofu",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Gekochter Reis", "menge": "600 g" },
+      { "name": "Tofu", "menge": "200 g" },
+      { "name": "Karotten", "menge": "2 Stück" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Zucchini", "menge": "1 Stück" },
+      { "name": "Zuckerschoten", "menge": "100 g" },
+      { "name": "TK-Erbsen", "menge": "130 g" },
+      { "name": "Babyspinat", "menge": "1 Handvoll" },
+      { "name": "Zwiebeln", "menge": "2 Stück" },
+      { "name": "Knoblauch", "menge": "4 Zehen" },
+      { "name": "Ingwer", "menge": "2 TL" },
+      { "name": "Sojasoße", "menge": "3 EL" },
+      { "name": "Sesamöl", "menge": "3 EL" },
+      { "name": "Rote Thai-Curry-Paste", "menge": "1 EL" },
+      { "name": "Kokosblütensirup", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "40",
+    "name": "Veganer Nudelsalat nach Omas Rezept",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 6,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "250 g" },
+      { "name": "Vegane Fleischwurst", "menge": "175 g" },
+      { "name": "Rote Zwiebel", "menge": "1 Stück" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Gewürzgurken", "menge": "150 g" },
+      { "name": "TK-Erbsen", "menge": "150 g" },
+      { "name": "Mais (Dose)", "menge": "1 Dose" },
+      { "name": "Vegane Mayonnaise", "menge": "200 g" },
+      { "name": "Senf", "menge": "2 TL" },
+      { "name": "Gurkenwasser", "menge": "3 EL" }
+    ]
+  },
+  {
+    "id": "41",
+    "name": "Veganer Nudelsalat mit Pesto",
+    "kategorie": "vegan",
+    "zeit": 15,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "300 g" },
+      { "name": "Kirschtomaten", "menge": "200 g" },
+      { "name": "Rucola", "menge": "3 Handvoll" },
+      { "name": "Rote Zwiebel", "menge": "1 Stück" },
+      { "name": "Pinienkerne", "menge": "50 g" },
+      { "name": "Pesto", "menge": "120 g" },
+      { "name": "Veganer Feta", "menge": "150 g" }
+    ]
+  },
+  {
+    "id": "42",
+    "name": "Vegane Bratensauce",
+    "kategorie": "vegan",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Champignons", "menge": "150 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Karotte", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehe" },
+      { "name": "Vegane Butter", "menge": "1 EL" },
+      { "name": "Tomatenmark", "menge": "1 EL" },
+      { "name": "Mehl", "menge": "1 EL" },
+      { "name": "Rotwein", "menge": "60 ml" },
+      { "name": "Gemüsebrühe", "menge": "300 ml" },
+      { "name": "Sojasauce", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "43",
+    "name": "Vegane Enchiladas",
+    "kategorie": "vegan",
+    "zeit": 45,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Tortillas", "menge": "11 Stück" },
+      { "name": "Veganes Hack", "menge": "250 g" },
+      { "name": "Zwiebeln", "menge": "2 Stück" },
+      { "name": "Knoblauch", "menge": "4 Zehen" },
+      { "name": "Möhre", "menge": "1 Stück" },
+      { "name": "Paprika rot", "menge": "0.5 Stück" },
+      { "name": "Paprika gelb", "menge": "0.5 Stück" },
+      { "name": "Bohnen (Dose)", "menge": "1 Dose" },
+      { "name": "Mais", "menge": "150 g" },
+      { "name": "Gekochter Reis", "menge": "200 g" },
+      { "name": "Gehackte Tomaten (Dose)", "menge": "400 g" },
+      { "name": "Tomatensoße", "menge": "400 ml" },
+      { "name": "Veganer Reibekäse", "menge": "150 g" }
+    ]
+  },
+  {
+    "id": "44",
+    "name": "Veganer Kartoffel-Brokkoli-Auflauf",
+    "kategorie": "vegan",
+    "zeit": 60,
+    "aufwand": "mittel",
+    "portionen": 6,
+    "zutaten": [
+      { "name": "Kartoffeln", "menge": "1 kg" },
+      { "name": "Brokkoli", "menge": "500 g" },
+      { "name": "Pflanzliche Sahne", "menge": "240 ml" },
+      { "name": "Vegane Butter", "menge": "100 g" },
+      { "name": "Mehl", "menge": "3 EL" },
+      { "name": "Gemüsebrühe", "menge": "250 ml" },
+      { "name": "Hefeflocken", "menge": "6 EL" },
+      { "name": "Veganer Reibekäse", "menge": "150 g" }
+    ]
+  },
+  {
+    "id": "45",
+    "name": "Veganer Nudel-Schinken-Gratin",
+    "kategorie": "vegan",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "300 g" },
+      { "name": "Räuchertofu", "menge": "200 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Gemüsebrühe", "menge": "500 ml" },
+      { "name": "Pflanzliche Sahne", "menge": "250 ml" },
+      { "name": "Tomatenmark", "menge": "2 EL" },
+      { "name": "Veganer Reibekäse", "menge": "200 g" },
+      { "name": "Vegane Butter", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "46",
+    "name": "Vegane Tacos",
+    "kategorie": "vegan",
+    "zeit": 15,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Taco Shells", "menge": "12 Stück" },
+      { "name": "Veganes Hack", "menge": "250 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Paprika rot", "menge": "1 Stück" },
+      { "name": "Tomaten", "menge": "2 Stück" },
+      { "name": "Tomatenmark", "menge": "2 EL" },
+      { "name": "Kidneybohnen (Dose)", "menge": "1 Dose" },
+      { "name": "Mais (Dose)", "menge": "1 Dose" }
+    ]
+  },
+  {
+    "id": "47",
+    "name": "Zürcher Geschnetzeltes mit Spätzle",
+    "kategorie": "vegan",
+    "zeit": 25,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Sojaschnetzel", "menge": "100 g" },
+      { "name": "Spätzle", "menge": "400 g" },
+      { "name": "Champignons", "menge": "250 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Gemüsebrühe", "menge": "500 ml" },
+      { "name": "Weißwein", "menge": "120 ml" },
+      { "name": "Soja Cuisine", "menge": "200 ml" },
+      { "name": "Mehl", "menge": "2 TL" },
+      { "name": "Sojasauce", "menge": "2 EL" },
+      { "name": "Öl", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "48",
+    "name": "Pommes frites (Heißluftfritteuse)",
+    "kategorie": "vegan",
+    "zeit": 45,
+    "aufwand": "einfach",
+    "portionen": 3,
+    "zutaten": [
+      { "name": "Kartoffeln (festkochend)", "menge": "1.2 kg" },
+      { "name": "Sonnenblumenöl", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "49",
+    "name": "Thai-Gemüse-Curry mit Kokosmilch",
+    "kategorie": "vegan",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Gemischtes Gemüse", "menge": "1 kg" },
+      { "name": "Kokosmilch", "menge": "500 ml" },
+      { "name": "Rote Currypaste", "menge": "2 EL" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehe" },
+      { "name": "Kokosöl", "menge": "2 EL" },
+      { "name": "Limette", "menge": "1 Stück" }
+    ]
+  },
+  {
+    "id": "50",
+    "name": "Gebratener Reis mit Austern-Seitlingen",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Gekochter Reis", "menge": "200 g" },
+      { "name": "Austern-Seitlinge", "menge": "150 g" },
+      { "name": "Möhre", "menge": "1 Stück" },
+      { "name": "Frühlingszwiebeln", "menge": "2 Stück" },
+      { "name": "TK-Erbsen", "menge": "50 g" },
+      { "name": "Sojasprossen", "menge": "25 g" },
+      { "name": "Ingwer", "menge": "15 g" },
+      { "name": "Knoblauch", "menge": "1 Zehe" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Sojasauce", "menge": "1 EL" },
+      { "name": "Mirin", "menge": "2 EL" },
+      { "name": "Pflanzenöl", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "51",
+    "name": "Ofengemüse mit Dukkah und Toum",
+    "kategorie": "vegan",
+    "zeit": 30,
+    "aufwand": "mittel",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Pastinaken", "menge": "3 Stück" },
+      { "name": "Kartoffeln", "menge": "3 Stück" },
+      { "name": "Möhren", "menge": "3 Stück" },
+      { "name": "Paprika", "menge": "1 Stück" },
+      { "name": "Rote Zwiebeln", "menge": "2 Stück" },
+      { "name": "Knoblauch", "menge": "6 Zehen" },
+      { "name": "Dukkah", "menge": "3 EL" },
+      { "name": "Olivenöl", "menge": "3 EL" },
+      { "name": "Pflanzenöl", "menge": "200 ml" },
+      { "name": "Zitronensaft", "menge": "4 TL" }
+    ]
+  },
+  {
+    "id": "52",
+    "name": "Tortellini in veganer Schinken-Sahne-Soße",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Vegane Tortellini", "menge": "250 g" },
+      { "name": "Veganer Schinkenersatz", "menge": "175 g" },
+      { "name": "Vegane Kochsahne", "menge": "200 g" },
+      { "name": "Gemüsebrühe", "menge": "300 ml" },
+      { "name": "Veganer Weißwein", "menge": "100 ml" },
+      { "name": "Vegane Butter", "menge": "20 g" },
+      { "name": "Hefeflocken", "menge": "2 EL" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Zitrone", "menge": "1 Stück" }
+    ]
+  },
+  {
+    "id": "53",
+    "name": "Vegane Brokkolisuppe",
+    "kategorie": "vegan",
+    "zeit": 45,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Brokkoli", "menge": "500 g" },
+      { "name": "Kartoffeln", "menge": "400 g" },
+      { "name": "Kokosmilch", "menge": "400 ml" },
+      { "name": "Gemüsebrühe", "menge": "750 ml" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehe" }
+    ]
+  },
+  {
+    "id": "54",
+    "name": "Vegane Enchiladas mit Süßkartoffel-Füllung",
+    "kategorie": "vegan",
+    "zeit": 60,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Tortillas", "menge": "6 Stück" },
+      { "name": "Süßkartoffel", "menge": "300 g" },
+      { "name": "Vegane Filetstreifen", "menge": "100 g" },
+      { "name": "Weiße Bohnen (Dose)", "menge": "400 g" },
+      { "name": "Mais", "menge": "100 g" },
+      { "name": "Walnüsse", "menge": "100 g" },
+      { "name": "Passierte Tomaten", "menge": "400 ml" },
+      { "name": "Rote Zwiebel", "menge": "0.5 Stück" },
+      { "name": "Paprika gelb", "menge": "0.5 Stück" },
+      { "name": "Veganer Streukäse", "menge": "150 g" },
+      { "name": "Öl", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "55",
+    "name": "Vegane Fettuccine Alfredo",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Fettuccine", "menge": "200 g" },
+      { "name": "Cashewnüsse", "menge": "250 g" },
+      { "name": "Seidentofu", "menge": "400 g" },
+      { "name": "Hefeflocken", "menge": "3 EL" },
+      { "name": "Vegane Butter", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "56",
+    "name": "Vegane Nudeln mit Lachs-Sahne-Soße",
+    "kategorie": "vegan",
+    "zeit": 45,
+    "aufwand": "aufwändig",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Pasta", "menge": "300 g" },
+      { "name": "Tofu", "menge": "200 g" },
+      { "name": "Gurkenwasser", "menge": "400 ml" },
+      { "name": "Noriblatt", "menge": "2 Stück" },
+      { "name": "Misopaste (hell)", "menge": "1.5 EL" },
+      { "name": "Sojasoße", "menge": "3 EL" },
+      { "name": "Rote-Bete-Saft", "menge": "2 EL" },
+      { "name": "Speisestärke", "menge": "2 EL" },
+      { "name": "Vegane Butter", "menge": "50 g" },
+      { "name": "Mehl", "menge": "1 EL" },
+      { "name": "Veganer Weißwein", "menge": "100 ml" },
+      { "name": "Vegane Sahne", "menge": "125 ml" },
+      { "name": "Vegane Crème fraîche", "menge": "180 g" }
+    ]
+  },
+  {
+    "id": "57",
+    "name": "Vegane Pasta mit Zitronensoße",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Fettuccine", "menge": "250 g" },
+      { "name": "Zitrone", "menge": "1 Stück" },
+      { "name": "Pflanzliche Sahne", "menge": "250 ml" },
+      { "name": "Gemüsebrühe", "menge": "200 ml" },
+      { "name": "Hefeflocken", "menge": "2 EL" },
+      { "name": "Cashewmus", "menge": "3 EL" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Olivenöl", "menge": "2 EL" },
+      { "name": "Panko Paniermehl", "menge": "50 g" }
+    ]
+  },
+  {
+    "id": "58",
+    "name": "Veganer Kartoffel-Hack-Auflauf",
+    "kategorie": "vegan",
+    "zeit": 70,
+    "aufwand": "mittel",
+    "portionen": 6,
+    "zutaten": [
+      { "name": "Kartoffeln (festkochend)", "menge": "1 kg" },
+      { "name": "Veganes Hackfleisch", "menge": "500 g" },
+      { "name": "Vegane Kochsahne", "menge": "500 ml" },
+      { "name": "Veganer Streukäse", "menge": "200 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehe" },
+      { "name": "Vegane Butter", "menge": "3 EL" },
+      { "name": "Tomatenmark", "menge": "2 EL" },
+      { "name": "Sojasoße", "menge": "2 EL" },
+      { "name": "Mehl", "menge": "1 EL" },
+      { "name": "Pflanzenöl", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "59",
+    "name": "Veganer Tortellini-Auflauf",
+    "kategorie": "vegan",
+    "zeit": 45,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Vegane Tortellini", "menge": "450 g" },
+      { "name": "Veganer Rahmspinat", "menge": "800 g" },
+      { "name": "Veganer Parmesan", "menge": "150 g" },
+      { "name": "Kirschtomaten", "menge": "10 Stück" },
+      { "name": "Pinienkerne", "menge": "50 g" }
+    ]
+  },
+  {
+    "id": "60",
+    "name": "Veganes Bistro Baguette",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Baguettestangen", "menge": "2 Stück" },
+      { "name": "Passierte Tomaten", "menge": "6 EL" },
+      { "name": "Tomaten", "menge": "3 Stück" },
+      { "name": "Vegane Crème fraîche", "menge": "12 EL" },
+      { "name": "Champignons", "menge": "5 Stück" },
+      { "name": "Räuchertofu", "menge": "100 g" },
+      { "name": "Paprika", "menge": "0.5 Stück" },
+      { "name": "Rote Zwiebel", "menge": "1 Stück" }
+    ]
+  },
+  {
+    "id": "61",
+    "name": "Veganes Chili sin Carne",
+    "kategorie": "vegan",
+    "zeit": 80,
+    "aufwand": "mittel",
+    "portionen": 5,
+    "zutaten": [
+      { "name": "Soja Schnetzel", "menge": "125 g" },
+      { "name": "Süßkartoffel", "menge": "400 g" },
+      { "name": "Schwarze Bohnen (Dose)", "menge": "400 g" },
+      { "name": "Weiße Bohnen (Dose)", "menge": "400 g" },
+      { "name": "Gehackte Tomaten (Dose)", "menge": "800 g" },
+      { "name": "Tomatenmark", "menge": "150 g" },
+      { "name": "Zwiebeln", "menge": "2 Stück" },
+      { "name": "Möhren", "menge": "2 Stück" },
+      { "name": "Chilischote", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Walnüsse", "menge": "50 g" },
+      { "name": "Rotwein", "menge": "100 ml" },
+      { "name": "Ahornsirup", "menge": "2 EL" },
+      { "name": "Getrocknete Pilze", "menge": "15 g" }
+    ]
+  },
+  {
+    "id": "62",
+    "name": "Veganes Nudel-Schinken-Gratin mit Brokkoli",
+    "kategorie": "vegan",
+    "zeit": 55,
+    "aufwand": "mittel",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Röhrennudeln", "menge": "300 g" },
+      { "name": "Räuchertofu", "menge": "200 g" },
+      { "name": "Brokkoli", "menge": "0.5 Stück" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Pflanzliche Milch", "menge": "300 ml" },
+      { "name": "Pflanzliche Sahne", "menge": "250 ml" },
+      { "name": "Veganer Reibekäse", "menge": "200 g" },
+      { "name": "Vegane Butter", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "63",
+    "name": "Vegane Spaghetti Carbonara",
+    "kategorie": "vegan",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Spaghetti", "menge": "250 g" },
+      { "name": "Cashewnüsse", "menge": "150 g" },
+      { "name": "Hefeflocken", "menge": "2 EL" },
+      { "name": "Misopaste (hell)", "menge": "1 EL" },
+      { "name": "Getrocknete Tomaten in Öl", "menge": "10 Stück" },
+      { "name": "Sojasoße", "menge": "1 TL" }
+    ]
+  },
+  {
+    "id": "64",
+    "name": "Veganes Paprika-Seitan-Gulasch",
+    "kategorie": "vegan",
+    "zeit": 50,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Nudeln", "menge": "400 g" },
+      { "name": "Seitan (Dose)", "menge": "600 g" },
+      { "name": "Paprika rot", "menge": "2 Stück" },
+      { "name": "Zwiebeln", "menge": "3 Stück" },
+      { "name": "Karotte", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehe" },
+      { "name": "Vegane Butter", "menge": "2 EL" },
+      { "name": "Tomatenmark", "menge": "1 EL" },
+      { "name": "Senf", "menge": "2 EL" },
+      { "name": "Rotwein", "menge": "250 ml" },
+      { "name": "Gemüsebrühe", "menge": "250 ml" }
+    ]
+  }
+]
