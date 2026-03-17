@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import rezepteData from '../data/rezepte.json'
-import { ladeVorhandeneZutaten, berechneMatch, matchStufe } from '../utils/matching'
+import { ladeVorhandeneZutaten, berechneMatch, berechneVorratNachPlan, matchStufe } from '../utils/matching'
 
 const KATEGORIEN = ['alle', 'vegetarisch', 'vegan', 'fleischhaltig', 'fischhaltig']
 const TAGE = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
@@ -31,15 +31,17 @@ export default function RezeptePage({ weiter, navigateTo }) {
   const [suche, setSuche]           = useState('')
   const [tagPicker, setTagPicker]   = useState(null)   // rezept-Objekt für das gerade ein Tag gewählt wird
   const [toast, setToast]           = useState(null)   // { name, tag }
+  const [plan, setPlan]             = useState(ladeWochenplan)
 
-  const vorhandene = useMemo(() => ladeVorhandeneZutaten(), [])
+  const vorhandene        = useMemo(() => ladeVorhandeneZutaten(), [])
+  const vorhandeneNachPlan = useMemo(() => berechneVorratNachPlan(plan, vorhandene), [plan, vorhandene])
 
   const rezepteMitMatch = useMemo(() =>
     rezepteData.map((r) => {
-      const { prozent, vorhanden, fehlend } = berechneMatch(r, vorhandene)
+      const { prozent, vorhanden, fehlend } = berechneMatch(r, vorhandeneNachPlan)
       return { rezept: r, match: { prozent, vorhanden, fehlend, stufe: matchStufe(prozent) } }
     }).sort((a, b) => b.match.prozent - a.match.prozent),
-    [vorhandene]
+    [vorhandeneNachPlan]
   )
 
   const gefiltert = rezepteMitMatch.filter(({ rezept }) => {
@@ -51,8 +53,9 @@ export default function RezeptePage({ weiter, navigateTo }) {
   const hatZutaten = vorhandene.length > 0
 
   function rezeptHinzufuegen(rezept, tag) {
-    const plan = ladeWochenplan()
-    speichereWochenplan({ ...plan, [tag]: rezept })
+    const neuerPlan = { ...plan, [tag]: rezept }
+    speichereWochenplan(neuerPlan)
+    setPlan(neuerPlan)
     setTagPicker(null)
     setToast({ name: rezept.name, tag })
     setTimeout(() => setToast(null), 3000)
