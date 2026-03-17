@@ -8,10 +8,10 @@ const KATEGORIEN = ['alle','vegetarisch','vegan','fleischhaltig','fischhaltig']
 const STORAGE_KEY = 'stocker_wochenplan'
 
 const katStyle = {
-  vegetarisch:    'bg-emerald-100 text-emerald-800',
-  vegan:          'bg-lime-100 text-lime-800',
-  fleischhaltig:  'bg-rose-100 text-rose-800',
-  fischhaltig:    'bg-sky-100 text-sky-800',
+  vegetarisch:    'bg-emerald-50 text-emerald-700',
+  vegan:          'bg-lime-50 text-lime-700',
+  fleischhaltig:  'bg-rose-50 text-rose-700',
+  fischhaltig:    'bg-sky-50 text-sky-700',
 }
 
 function ladePlan() {
@@ -26,9 +26,9 @@ export default function PlanenPage({ weiter }) {
   const [selectedTag, setSelected] = useState(null)
   const [filter, setFilter]        = useState('alle')
   const [suche, setSuche]          = useState('')
-  const [sortierung, setSortierung] = useState('match') // 'match' | 'zeit_asc' | 'zeit_desc'
-  const [personenProRezept, setPersonenProRezept] = useState({}) // { [id]: zahl }
-  const [stepperOffen, setStepperOffen] = useState(null) // rezept.id oder null
+  const [sortierung, setSortierung] = useState('match')
+  const [personenProRezept, setPersonenProRezept] = useState({})
+  const [stepperOffen, setStepperOffen] = useState(null)
   const stepperTimer = useRef(null)
 
   const stepperSchliessen = useCallback(() => {
@@ -52,7 +52,6 @@ export default function PlanenPage({ weiter }) {
 
   const vorhandene = useMemo(() => ladeVorhandeneZutaten(), [])
 
-  // Verbleibender Vorrat nach Abzug aller anderen bereits geplanten Tage
   const vorhandeneNachPlan = useMemo(
     () => berechneVorratNachPlan(plan, vorhandene, selectedTag),
     [plan, vorhandene, selectedTag]
@@ -74,7 +73,7 @@ export default function PlanenPage({ weiter }) {
     .sort((a, b) => {
       if (sortierung === 'zeit_asc') return a.zeit - b.zeit
       if (sortierung === 'alpha')    return a.name.localeCompare(b.name, 'de')
-      return 0 // 'match': Reihenfolge kommt schon von rezepteMitMatch
+      return 0
     })
 
   function zuweisen(rezept) {
@@ -98,26 +97,30 @@ export default function PlanenPage({ weiter }) {
   const belegteTagCount = TAGE.filter(t => plan[t]).length
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
 
-
-      {/* Wochenübersicht — vertikale Liste, alles auf einen Blick */}
-      <div className="bg-white rounded-3xl border-2 border-zinc-200 shadow-sm overflow-hidden">
-        <div className="px-5 pt-4 pb-2">
-          <p className="text-xs font-black tracking-widest text-zinc-400">DIESE WOCHE</p>
+      {/* Wochenübersicht */}
+      <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
+        <div className="px-4 pt-4 pb-2 flex items-center justify-between">
+          <p className="text-xs font-medium text-zinc-400">Diese Woche</p>
+          {belegteTagCount > 0 && (
+            <span className="text-xs text-zinc-400">
+              <span className="text-zinc-700 font-semibold">{belegteTagCount}</span>/7 Tage
+            </span>
+          )}
         </div>
         {TAGE.map((tag, i) => {
           const rezept   = plan[tag]
           const selected = selectedTag === tag
           return (
             <div key={tag}>
-              {i > 0 && <div className="h-px bg-zinc-100 mx-5" />}
+              {i > 0 && <div className="h-px bg-zinc-100 mx-4" />}
               <button
                 onClick={() => setSelected(selected ? null : tag)}
-                className={`w-full flex items-center gap-4 px-5 py-3.5 transition-all cursor-pointer active:bg-zinc-50 ${selected ? 'bg-amber-50' : ''}`}
+                className={`w-full flex items-center gap-3 px-4 py-3 transition-colors cursor-pointer ${selected ? 'bg-amber-50' : 'active:bg-zinc-50'}`}
               >
-                {/* Tag-Kürzel */}
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-black text-sm transition-all ${
+                {/* Tag-Badge */}
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-xs font-semibold transition-all ${
                   selected ? 'bg-amber-500 text-white' :
                   rezept   ? 'bg-zinc-900 text-white'  :
                              'bg-zinc-100 text-zinc-400'
@@ -125,15 +128,15 @@ export default function PlanenPage({ weiter }) {
                   {KURZ[tag]}
                 </div>
 
-                {/* Rezept-Info */}
+                {/* Info */}
                 <div className="flex-1 text-left min-w-0">
                   {rezept ? (
                     <>
-                      <p className="font-bold text-zinc-900 text-sm truncate">{rezept.name}</p>
-                      <p className="text-xs text-zinc-400 font-semibold">⏱ {rezept.zeit} Min. · {rezept.personen ?? 2} Pers.</p>
+                      <p className="font-medium text-zinc-900 text-sm truncate">{rezept.name}</p>
+                      <p className="text-xs text-zinc-400 mt-0.5">{rezept.zeit} Min. · {rezept.personen ?? 2} Pers.</p>
                     </>
                   ) : (
-                    <p className="text-sm text-zinc-400 font-semibold">Noch nicht geplant</p>
+                    <p className="text-sm text-zinc-400">Noch nicht geplant</p>
                   )}
                 </div>
 
@@ -141,15 +144,15 @@ export default function PlanenPage({ weiter }) {
                 {rezept && !selected ? (
                   <button
                     onClick={e => { e.stopPropagation(); entfernen(tag) }}
-                    className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400 active:bg-rose-100 active:text-rose-500 transition-colors cursor-pointer shrink-0"
+                    className="w-7 h-7 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 active:bg-rose-50 active:text-rose-400 transition-colors cursor-pointer shrink-0"
                   >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   </button>
                 ) : (
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all ${
                     selected ? 'bg-amber-500 text-white' : 'bg-zinc-100 text-zinc-400'
                   }`}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                       {selected ? <polyline points="18 15 12 9 6 15"/> : <polyline points="6 9 12 15 18 9"/>}
                     </svg>
                   </div>
@@ -160,32 +163,29 @@ export default function PlanenPage({ weiter }) {
         })}
       </div>
 
-      {/* CTA — direkt nach der Wochenübersicht */}
+      {/* CTA */}
       <button
         onClick={weiter}
-        className={`w-full py-5 rounded-3xl text-lg font-black tracking-wide transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3 shadow-xl ${
+        className={`w-full py-4 rounded-2xl text-sm font-semibold tracking-wide transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 ${
           belegteTagCount > 0
-            ? 'bg-amber-500 text-white shadow-amber-500/30'
-            : 'bg-zinc-200 text-zinc-400 shadow-none'
+            ? 'bg-amber-500 text-white'
+            : 'bg-zinc-200 text-zinc-400'
         }`}
       >
-        ZUR EINKAUFSLISTE
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        Zur Einkaufsliste
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
 
       {/* Rezepte-Sektion */}
       {selectedTag && (
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-amber-500"/>
-            <p className="text-xs font-black tracking-widest text-zinc-500">
-              REZEPTE FÜR {selectedTag.toUpperCase()}
-            </p>
-          </div>
+          <p className="text-xs font-medium text-zinc-400 px-0.5">
+            Rezepte für <span className="text-zinc-700 font-semibold">{selectedTag}</span>
+          </p>
 
           {/* Suche */}
           <div className="relative">
-            <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input
@@ -193,115 +193,111 @@ export default function PlanenPage({ weiter }) {
               placeholder="Rezept suchen…"
               value={suche}
               onChange={e => setSuche(e.target.value)}
-              className="w-full pl-11 pr-4 py-3.5 border-2 border-zinc-200 rounded-2xl text-sm font-semibold focus:outline-none focus:border-amber-400 bg-white"
+              className="w-full pl-10 pr-4 py-3 border border-zinc-200 rounded-xl text-sm focus:outline-none focus:border-amber-400 bg-white"
             />
           </div>
 
-          {/* Filter */}
-          <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+          {/* Filter + Sortierung in einer Zeile */}
+          <div className="flex gap-2 overflow-x-auto pb-0.5 no-scrollbar">
             {KATEGORIEN.map(k => (
               <button
                 key={k}
                 onClick={() => setFilter(k)}
-                className={`shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black tracking-wide transition-all cursor-pointer ${
-                  filter === k ? 'bg-zinc-950 text-white' : 'bg-white text-zinc-500 border-2 border-zinc-200'
+                className={`shrink-0 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+                  filter === k ? 'bg-zinc-950 text-white' : 'bg-white text-zinc-500 border border-zinc-200'
                 }`}
               >
-                {k.toUpperCase()}
+                {k.charAt(0).toUpperCase() + k.slice(1)}
+              </button>
+            ))}
+            <div className="w-px bg-zinc-200 shrink-0 mx-1" />
+            {[
+              { key: 'match',    label: 'Match' },
+              { key: 'zeit_asc', label: 'Schnell' },
+              { key: 'alpha',    label: 'A–Z' },
+            ].map(s => (
+              <button
+                key={s.key}
+                onClick={() => setSortierung(s.key)}
+                className={`shrink-0 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+                  sortierung === s.key ? 'bg-amber-500 text-white' : 'bg-white text-zinc-500 border border-zinc-200'
+                }`}
+              >
+                {s.label}
               </button>
             ))}
           </div>
 
-          {/* Sortierung */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-zinc-400 shrink-0">SORTIEREN:</span>
-            <div className="flex gap-1.5">
-              {[
-                { key: 'match',    label: 'Beste Übereinstimmung' },
-                { key: 'zeit_asc', label: '⏱ Schnellste zuerst' },
-                { key: 'alpha',    label: 'A – Z' },
-              ].map(s => (
-                <button
-                  key={s.key}
-                  onClick={() => setSortierung(s.key)}
-                  className={`shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    sortierung === s.key ? 'bg-amber-500 text-white' : 'bg-white text-zinc-500 border-2 border-zinc-200'
-                  }`}
-                >
-                  {s.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Karten */}
-          <div className="grid grid-cols-2 gap-3">
+          {/* Rezept-Karten — 1 Spalte, luftiger */}
+          <div className="flex flex-col gap-2">
             {gefiltert.map(r => {
-              const vorNamen = new Set(r.vorhanden.map(z => z.name))
               const bereitsZugewiesen = Object.entries(plan).find(([, rez]) => rez?.id === r.id)
 
               return (
-                <div key={r.id} className={`bg-white rounded-3xl border-2 overflow-hidden shadow-sm ${
-                  r.stufe === 'hoch' ? 'border-amber-300' : r.stufe === 'mittel' ? 'border-zinc-300' : 'border-zinc-200'
+                <div key={r.id} className={`bg-white rounded-2xl overflow-hidden shadow-sm border ${
+                  r.stufe === 'hoch' ? 'border-emerald-200' : r.stufe === 'mittel' ? 'border-amber-100' : 'border-zinc-100'
                 }`}>
-                  <div className="p-3 pb-2">
-                    <div className="mb-1.5">
-                      <h3 className="font-black text-zinc-900 text-sm leading-tight">{r.name}</h3>
-                    </div>
-                    <div className="flex items-center gap-1.5 mb-2 flex-wrap">
-                      <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${katStyle[r.kategorie] ?? 'bg-zinc-100 text-zinc-600'}`}>
-                        {r.kategorie.toUpperCase()}
-                      </span>
-                      <span className="text-[11px] text-zinc-400 font-semibold">⏱ {r.zeit}'</span>
-                      {vorhandene.length > 0 && (
-                        <span className={`text-[11px] font-black px-2 py-0.5 rounded-full ${
-                          r.stufe === 'hoch'   ? 'bg-amber-100 text-amber-700' :
-                          r.stufe === 'mittel' ? 'bg-zinc-100 text-zinc-600'   : 'bg-zinc-100 text-zinc-400'
-                        }`}>
-                          {r.prozent}%
+                  <div className="flex items-center gap-3 p-3">
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold text-zinc-900 text-sm truncate">{r.name}</h3>
+                      </div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${katStyle[r.kategorie] ?? 'bg-zinc-100 text-zinc-500'}`}>
+                          {r.kategorie}
                         </span>
-                      )}
+                        <span className="text-[11px] text-zinc-400">{r.zeit} Min.</span>
+                        {vorhandene.length > 0 && (
+                          <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full ${
+                            r.stufe === 'hoch'   ? 'bg-emerald-50 text-emerald-700' :
+                            r.stufe === 'mittel' ? 'bg-amber-50 text-amber-600' :
+                                                  'bg-zinc-100 text-zinc-400'
+                          }`}>
+                            {r.prozent}%
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="px-3 pb-3">
+                    {/* Aktion */}
                     {bereitsZugewiesen ? (
-                      <div className="w-full py-3.5 bg-zinc-100 rounded-2xl flex items-center justify-center gap-2">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span className="text-sm font-black text-zinc-500">GEPLANT FÜR {bereitsZugewiesen[0].toUpperCase()}</span>
+                      <div className="flex items-center gap-1.5 shrink-0 bg-zinc-100 rounded-xl px-3 py-2">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span className="text-xs font-medium text-zinc-500">{bereitsZugewiesen[0].slice(0,2)}</span>
                       </div>
                     ) : (
-                      <div className="flex gap-2 items-stretch">
-                        {/* Hinzufügen-Button */}
-                        <button
-                          onClick={() => zuweisen(r)}
-                          className="flex-1 py-4 bg-amber-500 text-white rounded-2xl font-black text-sm active:bg-amber-600 transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
-                        >
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                          FÜR {selectedTag.toUpperCase()}
-                        </button>
-                        {/* Personen-Badge / Stepper */}
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {/* Personen-Stepper */}
                         {stepperOffen === r.id ? (
-                          <div className="flex items-center bg-zinc-100 rounded-2xl px-1.5 gap-0 shrink-0" onClick={e => e.stopPropagation()}>
+                          <div className="flex items-center bg-zinc-100 rounded-xl px-1 gap-0" onClick={e => e.stopPropagation()}>
                             <button
                               onClick={e => { e.stopPropagation(); stepperAendern(r.id, p => p - 1) }}
-                              className="w-7 h-7 flex items-center justify-center text-zinc-500 font-black text-base active:text-zinc-900 cursor-pointer"
+                              className="w-7 h-7 flex items-center justify-center text-zinc-500 font-medium active:text-zinc-900 cursor-pointer"
                             >−</button>
-                            <span className="text-sm font-black text-zinc-800 w-4 text-center tabular-nums">{getPersonen(r.id)}</span>
+                            <span className="text-sm font-semibold text-zinc-800 w-4 text-center tabular-nums">{getPersonen(r.id)}</span>
                             <button
                               onClick={e => { e.stopPropagation(); stepperAendern(r.id, p => p + 1) }}
-                              className="w-7 h-7 flex items-center justify-center text-zinc-500 font-black text-base active:text-zinc-900 cursor-pointer"
+                              className="w-7 h-7 flex items-center justify-center text-zinc-500 font-medium active:text-zinc-900 cursor-pointer"
                             >+</button>
                           </div>
                         ) : (
                           <button
                             onClick={e => { e.stopPropagation(); setStepperOffen(r.id); stepperSchliessen() }}
-                            className="w-12 bg-zinc-100 rounded-2xl flex flex-col items-center justify-center shrink-0 cursor-pointer active:bg-zinc-200 transition-colors"
+                            className="w-9 h-9 bg-zinc-100 rounded-xl flex flex-col items-center justify-center shrink-0 cursor-pointer active:bg-zinc-200 transition-colors"
                           >
-                            <span className="text-base font-black text-zinc-700 leading-none">{getPersonen(r.id)}</span>
-                            <span className="text-[9px] font-bold text-zinc-400 leading-none mt-0.5">Pers.</span>
+                            <span className="text-sm font-semibold text-zinc-700 leading-none">{getPersonen(r.id)}</span>
+                            <span className="text-[9px] text-zinc-400 leading-none mt-0.5">Pers.</span>
                           </button>
                         )}
+                        {/* Hinzufügen */}
+                        <button
+                          onClick={() => zuweisen(r)}
+                          className="h-9 px-3 bg-amber-500 text-white rounded-xl font-semibold text-xs active:bg-amber-600 transition-all active:scale-[0.97] cursor-pointer flex items-center gap-1.5"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                          {KURZ[selectedTag]}
+                        </button>
                       </div>
                     )}
                   </div>
@@ -314,7 +310,7 @@ export default function PlanenPage({ weiter }) {
 
       {!selectedTag && (
         <div className="text-center py-6">
-          <p className="text-zinc-400 font-semibold text-sm">↑ Tag antippen um Rezepte zu sehen</p>
+          <p className="text-zinc-400 text-sm">Tag antippen um Rezepte zuzuweisen</p>
         </div>
       )}
     </div>
