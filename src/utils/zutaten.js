@@ -35,13 +35,18 @@ export function parseZutatMitMenge(text) {
   return { name: m[1].trim(), menge: parseMenge(m[2]) }
 }
 
+// Entfernt Markdown-Codeblöcke (```json ... ``` oder ``` ... ```)
+function stripMarkdown(s) {
+  return s.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim()
+}
+
 // Parst Freitext oder KI-JSON → [{name, menge}]
 export function parseZutatenInput(input) {
   if (!input.trim()) return []
 
-  // KI-JSON versuchen
+  // KI-JSON versuchen (mit Markdown-Bereinigung)
   try {
-    const p = JSON.parse(input)
+    const p = JSON.parse(stripMarkdown(input))
     if (Array.isArray(p.zutaten)) {
       return p.zutaten.map(z => {
         if (typeof z === 'string') return parseZutatMitMenge(z)
@@ -69,7 +74,7 @@ export function parseZutatenInput(input) {
 // Extrahiert KI-Rückfragen aus JSON-Input (falls vorhanden)
 export function extraheKiFragen(input) {
   try {
-    const p = JSON.parse(input.trim())
+    const p = JSON.parse(stripMarkdown(input))
     if (Array.isArray(p.fragen) && p.fragen.length > 0) return p.fragen
   } catch {}
   return []

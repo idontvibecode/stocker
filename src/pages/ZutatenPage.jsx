@@ -12,7 +12,7 @@ const STORAGE_KEY = 'stocker_zutaten_inputs'
 
 const KI_PROMPT = `Analysiere das Foto und liste alle sichtbaren Lebensmittel mit Mengenangabe auf.
 
-Antworte NUR mit folgendem JSON-Format – kein Text, keine Erklärung:
+WICHTIG: Antworte ausschließlich mit rohem JSON – kein Markdown, keine Codeblöcke, kein \`\`\`json, kein Text davor oder danach. Nur das JSON-Objekt:
 {"zutaten": [{"name": "Milch", "menge": "1L"}, {"name": "Eier", "menge": "6x"}], "fragen": []}
 
 Mengenformat:
@@ -21,7 +21,7 @@ Mengenformat:
 - Stückzahl: 3x, 1x
 - Halbvoll/angebrochen: 0.5x, 0.5L, 0.5kg
 
-Falls du etwas nicht sicher erkennen kannst, füge eine Frage in "fragen" ein.
+Falls du etwas nicht sicher erkennen kannst, füge eine kurze Frage als String in "fragen" ein.
 Nutze einfache deutsche Bezeichnungen (z.B. "Milch" statt "Vollmilch 3,5%").`
 
 function parseZutaten(s) {
