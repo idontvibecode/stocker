@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
 }
 
 * {
@@ -10,50 +11,50 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #f5f4f0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: #F7F3EE;
+  color: #1C1917;
 }
 
-/* iOS safe area support */
+/* Serif display */
+.font-display {
+  font-family: 'DM Serif Display', Georgia, serif;
+}
+
+/* iOS safe area */
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Smooth page transitions */
+/* Page transition */
 .page-enter {
   animation: fadeSlideIn 0.25s ease-out;
 }
 
 @keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Scrollbar verstecken (horizontal scroll für Filterpills) */
+/* Scrollbar */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #e4e4e0; border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: #c8c8c2; }
+::-webkit-scrollbar-thumb { background: #E8E2D9; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #C8BFB0; }
 
-/* Card base — subtle lift shadow */
-.card {
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+/* Warm card shadow */
+.card-shadow {
+  box-shadow: 0 1px 3px rgba(100,80,40,0.08), 0 1px 2px rgba(100,80,40,0.05);
 }
-
-.card-lg {
-  background: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+.card-shadow-md {
+  box-shadow: 0 4px 12px rgba(100,80,40,0.10), 0 1px 3px rgba(100,80,40,0.06);
 }
 
 /* Focus ring */
 :focus-visible {
-  outline: 2px solid #f59e0b;
+  outline: 2px solid #D97706;
   outline-offset: 2px;
 }

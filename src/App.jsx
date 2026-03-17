@@ -38,7 +38,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f5f4f0]">
+    <div className="min-h-screen" style={{ backgroundColor: '#F7F3EE' }}>
       <StepProgress activeTab={activeTab} onTabChange={navigateTo} />
       <main className="max-w-2xl mx-auto px-4 py-6 pb-16">
         <div key={activeTab} className="page-enter">

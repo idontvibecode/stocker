@@ -3,30 +3,10 @@ import { kopieren } from '../utils/clipboard'
 import { parseZutatenInput, extraheKiFragen, formatMenge } from '../utils/zutaten'
 
 const BEREICHE = [
-  {
-    id: 'Kühlschrank',
-    icon: '🧊',
-    hint: 'Frisches, Milchprodukte, Reste',
-    placeholder: 'Milch 1L\nEier 6x\nButter 250g\nJoghurt 2x\nKäse 200g',
-  },
-  {
-    id: 'Gefrierfach',
-    icon: '❄️',
-    hint: 'Tiefkühlkost, Fleisch, Gemüse',
-    placeholder: 'Hähnchen 500g\nErbsen 400g\nPommes 1x\nFischstäbchen 0.5x',
-  },
-  {
-    id: 'Vorratsschrank',
-    icon: '🗄️',
-    hint: 'Pasta, Dosen, Gewürze, Öle',
-    placeholder: 'Nudeln 500g\nReis 1kg\nTomaten 2x\nOlivenöl 0.5x\nSalz 1x',
-  },
-  {
-    id: 'Sonstiges',
-    icon: '📦',
-    hint: 'Obst, Brot, Anderes',
-    placeholder: 'Äpfel 6x\nBrot 1x\nZwiebeln 1kg\nKnoblauch 1x',
-  },
+  { id: 'Kühlschrank',   icon: '🧊', hint: 'Frisches, Milchprodukte, Reste',    placeholder: 'Milch 1L\nEier 6x\nButter 250g\nJoghurt 2x\nKäse 200g' },
+  { id: 'Gefrierfach',   icon: '❄️', hint: 'Tiefkühlkost, Fleisch, Gemüse',     placeholder: 'Hähnchen 500g\nErbsen 400g\nPommes 1x' },
+  { id: 'Vorratsschrank',icon: '🗄️', hint: 'Pasta, Dosen, Gewürze, Öle',        placeholder: 'Nudeln 500g\nReis 1kg\nTomaten 2x\nOlivenöl 0.5x' },
+  { id: 'Sonstiges',     icon: '📦', hint: 'Obst, Brot, Anderes',               placeholder: 'Äpfel 6x\nBrot 1x\nZwiebeln 1kg' },
 ]
 const STORAGE_KEY = 'stocker_zutaten_inputs'
 
@@ -42,8 +22,6 @@ Mengenformat:
 - Halbvoll/angebrochen: 0.5x, 0.5L, 0.5kg
 
 Falls du etwas nicht sicher erkennen kannst, füge eine Frage in "fragen" ein.
-Beispiel: {"fragen": ["Was ist das gelbe Glas im hinteren Bereich?"]}
-
 Nutze einfache deutsche Bezeichnungen (z.B. "Milch" statt "Vollmilch 3,5%").`
 
 function parseZutaten(s) {
@@ -60,11 +38,11 @@ function ladeInputs() {
 }
 
 export default function ZutatenPage({ weiter }) {
-  const [inputs, setInputs]        = useState(ladeInputs)
-  const [offener, setOffener]      = useState(null)
-  const [kopiert, setKopiert]      = useState(false)
-  const [anleitung, setAnleitung]  = useState(false)
-  const refs                       = useRef({})
+  const [inputs, setInputs]       = useState(ladeInputs)
+  const [offener, setOffener]     = useState(null)
+  const [kopiert, setKopiert]     = useState(false)
+  const [anleitung, setAnleitung] = useState(false)
+  const refs                      = useRef({})
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(inputs))
@@ -106,32 +84,35 @@ export default function ZutatenPage({ weiter }) {
     <div className="flex flex-col gap-4">
 
       {/* KI-Import */}
-      <div className="bg-zinc-950 rounded-2xl overflow-hidden">
+      <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#1A2E23' }}>
         <div className="p-4">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 bg-zinc-800 rounded-xl flex items-center justify-center text-xl shrink-0">📷</div>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
+              style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+              📷
+            </div>
             <div>
-              <p className="font-semibold text-white text-sm">Mit KI importieren</p>
-              <p className="text-zinc-500 text-xs mt-0.5">Foto → KI → JSON einfügen</p>
+              <p className="font-medium text-white text-sm">Mit KI importieren</p>
+              <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.4)' }}>Foto → KI → JSON einfügen</p>
             </div>
           </div>
 
           <button
             onClick={promptKopieren}
-            className={`w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.97] cursor-pointer ${
-              kopiert
-                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                : 'bg-amber-500 text-white'
-            }`}
+            className="w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.97] cursor-pointer"
+            style={kopiert
+              ? { backgroundColor: 'rgba(16,185,129,0.15)', color: '#6ee7b7', border: '1px solid rgba(16,185,129,0.25)' }
+              : { backgroundColor: '#D97706', color: '#fff' }
+            }
           >
             {kopiert ? (
               <>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                 Prompt kopiert!
               </>
             ) : (
               <>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 KI-Prompt kopieren
               </>
             )}
@@ -139,9 +120,10 @@ export default function ZutatenPage({ weiter }) {
 
           <button
             onClick={() => setAnleitung(v => !v)}
-            className="w-full text-center text-zinc-500 text-xs py-2.5 cursor-pointer font-medium flex items-center justify-center gap-1.5"
+            className="w-full text-center text-xs py-2.5 cursor-pointer font-medium flex items-center justify-center gap-1.5"
+            style={{ color: 'rgba(255,255,255,0.35)' }}
           >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {anleitung ? <polyline points="18 15 12 9 6 15"/> : <polyline points="6 9 12 15 18 9"/>}
             </svg>
             {anleitung ? 'Anleitung ausblenden' : 'Wie funktioniert das?'}
@@ -149,7 +131,7 @@ export default function ZutatenPage({ weiter }) {
         </div>
 
         {anleitung && (
-          <div className="border-t border-zinc-800 px-4 pb-4 pt-3 space-y-2.5">
+          <div className="px-4 pb-4 pt-2 space-y-2.5" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
             {[
               ['📷', 'Mach ein Foto von deinem Kühlschrank'],
               ['🤖', 'Öffne ChatGPT, Claude oder Gemini'],
@@ -158,8 +140,8 @@ export default function ZutatenPage({ weiter }) {
               ['➕', 'Unten auf Bereich tippen und JSON einfügen'],
             ].map(([icon, text], i) => (
               <div key={i} className="flex items-start gap-2.5">
-                <span className="text-base leading-tight">{icon}</span>
-                <p className="text-zinc-400 text-xs leading-relaxed">{text}</p>
+                <span className="text-base">{icon}</span>
+                <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>{text}</p>
               </div>
             ))}
           </div>
@@ -168,7 +150,7 @@ export default function ZutatenPage({ weiter }) {
 
       {/* Bereiche */}
       <div className="flex flex-col gap-2">
-        <p className="text-xs font-medium text-zinc-400 px-1">Bereiche</p>
+        <p className="text-xs font-medium px-1" style={{ color: '#A8A29E' }}>Bereiche</p>
 
         {BEREICHE.map(({ id, icon, hint, placeholder }) => {
           const { zutaten, fragen, error } = parsed[id]
@@ -177,42 +159,42 @@ export default function ZutatenPage({ weiter }) {
           const count      = zutaten.length
 
           return (
-            <div key={id} className="bg-white rounded-2xl overflow-hidden shadow-sm">
+            <div key={id} className="bg-white rounded-2xl overflow-hidden card-shadow">
               <button
                 onClick={() => setOffener(isOpen ? null : id)}
-                className="w-full flex items-center gap-3 px-4 py-4 active:bg-zinc-50 transition-colors cursor-pointer"
+                className="w-full flex items-center gap-3 px-4 py-4 transition-colors cursor-pointer active:bg-stone-50"
               >
-                <div className="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-xl shrink-0">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
+                  style={{ backgroundColor: '#F7F3EE' }}>
                   {icon}
                 </div>
                 <div className="flex-1 text-left min-w-0">
-                  <p className="font-semibold text-zinc-900 text-sm">{id}</p>
-                  <p className={`text-xs mt-0.5 truncate ${
-                    hasContent && !error ? 'text-emerald-600' :
-                    hasContent && error  ? 'text-rose-500' :
-                                          'text-zinc-400'
-                  }`}>
+                  <p className="font-medium text-sm" style={{ color: '#1C1917' }}>{id}</p>
+                  <p className="text-xs mt-0.5 truncate" style={{
+                    color: hasContent && !error ? '#16a34a' : hasContent && error ? '#dc2626' : '#78716C'
+                  }}>
                     {hasContent && !error
                       ? `${count} Zutat${count !== 1 ? 'en' : ''} erkannt`
                       : hasContent && error ? error : hint}
                   </p>
                 </div>
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all shrink-0 ${
-                  isOpen                ? 'bg-zinc-100 text-zinc-500' :
-                  hasContent && !error  ? 'bg-emerald-100 text-emerald-600' :
-                                          'bg-zinc-950 text-white'
-                }`}>
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center transition-all shrink-0" style={{
+                  backgroundColor: isOpen ? '#F7F3EE' :
+                  hasContent && !error ? '#dcfce7' : '#1A2E23',
+                  color: isOpen ? '#78716C' :
+                  hasContent && !error ? '#16a34a' : '#fff',
+                }}>
                   {hasContent && !error && !isOpen
-                    ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    : <span className={`text-lg font-medium leading-none ${isOpen ? 'rotate-45 inline-block' : ''}`}>+</span>
+                    ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    : <span className={`text-lg font-light leading-none ${isOpen ? 'rotate-45 inline-block' : ''}`}>+</span>
                   }
                 </div>
               </button>
 
               {isOpen && (
-                <div className="px-4 pb-4 border-t border-zinc-100">
-                  <p className="text-[11px] text-zinc-400 mt-3 mb-1.5 px-0.5">
-                    Format: <span className="text-zinc-500">Milch 1L · Eier 6x · Nudeln 500g</span>
+                <div className="px-4 pb-4" style={{ borderTop: '1px solid #F7F3EE' }}>
+                  <p className="text-[11px] mt-3 mb-1.5 px-0.5" style={{ color: '#A8A29E' }}>
+                    Format: <span style={{ color: '#78716C' }}>Milch 1L · Eier 6x · Nudeln 500g</span>
                   </p>
                   <textarea
                     ref={el => (refs.current[id] = el)}
@@ -220,18 +202,20 @@ export default function ZutatenPage({ weiter }) {
                     value={inputs[id]}
                     onChange={e => setInputs(prev => ({ ...prev, [id]: e.target.value }))}
                     placeholder={placeholder}
-                    className={`w-full text-sm border rounded-xl px-3 py-2.5 resize-none focus:outline-none transition-colors ${
-                      error && hasContent
-                        ? 'border-rose-200 bg-rose-50'
-                        : 'border-zinc-200 bg-zinc-50 focus:border-amber-400 focus:bg-white'
-                    }`}
+                    className="w-full text-sm rounded-xl px-3 py-2.5 resize-none focus:outline-none transition-colors"
+                    style={{
+                      border: error && hasContent ? '1px solid #fca5a5' : '1px solid #E8E2D9',
+                      backgroundColor: error && hasContent ? '#fff5f5' : '#F7F3EE',
+                      color: '#1C1917',
+                    }}
                   />
 
                   {fragen.length > 0 && (
-                    <div className="mt-2 bg-amber-50 border border-amber-100 rounded-xl p-3 space-y-1">
-                      <p className="text-[11px] font-semibold text-amber-700">KI-Rückfragen:</p>
+                    <div className="mt-2 rounded-xl p-3 space-y-1"
+                      style={{ backgroundColor: '#fffbeb', border: '1px solid #fde68a' }}>
+                      <p className="text-[11px] font-semibold" style={{ color: '#92400e' }}>KI-Rückfragen:</p>
                       {fragen.map((f, i) => (
-                        <p key={i} className="text-xs text-amber-700">· {f}</p>
+                        <p key={i} className="text-xs" style={{ color: '#92400e' }}>· {f}</p>
                       ))}
                     </div>
                   )}
@@ -240,17 +224,19 @@ export default function ZutatenPage({ weiter }) {
                     <>
                       <div className="mt-2 flex flex-wrap gap-1.5">
                         {zutaten.slice(0, 8).map(z => (
-                          <span key={z.name} className="text-xs bg-zinc-100 text-zinc-600 px-2.5 py-1 rounded-full">
+                          <span key={z.name} className="text-xs px-2.5 py-1 rounded-full"
+                            style={{ backgroundColor: '#F7F3EE', color: '#78716C' }}>
                             {z.name}{z.menge ? ` ${formatMenge(z.menge)}` : ''}
                           </span>
                         ))}
                         {zutaten.length > 8 && (
-                          <span className="text-xs text-zinc-400 self-center">+{zutaten.length - 8} weitere</span>
+                          <span className="text-xs self-center" style={{ color: '#A8A29E' }}>+{zutaten.length - 8} weitere</span>
                         )}
                       </div>
                       <button
                         onClick={() => setOffener(null)}
-                        className="mt-3 w-full py-3 bg-zinc-950 text-white rounded-xl font-semibold text-sm active:bg-zinc-800 transition-colors cursor-pointer"
+                        className="mt-3 w-full py-3 rounded-xl font-medium text-sm transition-colors cursor-pointer"
+                        style={{ backgroundColor: '#1A2E23', color: '#fff' }}
                       >
                         Bestätigen
                       </button>
@@ -265,14 +251,18 @@ export default function ZutatenPage({ weiter }) {
 
       {/* Zutaten-Summary */}
       {alleZutaten.length > 0 && (
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
-          <p className="text-xs font-medium text-zinc-400 mb-3">
-            Erkannte Zutaten
-            <span className="ml-1.5 bg-zinc-100 text-zinc-500 text-[11px] px-1.5 py-0.5 rounded-full">{alleZutaten.length}</span>
-          </p>
+        <div className="bg-white rounded-2xl p-4 card-shadow">
+          <div className="flex items-center gap-2 mb-3">
+            <p className="text-xs font-medium" style={{ color: '#A8A29E' }}>Erkannte Zutaten</p>
+            <span className="text-[11px] px-1.5 py-0.5 rounded-full font-medium"
+              style={{ backgroundColor: '#F7F3EE', color: '#78716C' }}>
+              {alleZutaten.length}
+            </span>
+          </div>
           <div className="flex flex-wrap gap-1.5">
             {alleZutaten.map(z => (
-              <span key={z.name} className="bg-zinc-950 text-white text-xs px-2.5 py-1 rounded-full">
+              <span key={z.name} className="text-xs px-2.5 py-1 rounded-full"
+                style={{ backgroundColor: '#1A2E23', color: '#fff' }}>
                 {z.name}{z.menge ? ` ${formatMenge(z.menge)}` : ''}
               </span>
             ))}
@@ -284,14 +274,16 @@ export default function ZutatenPage({ weiter }) {
       <div className="flex flex-col gap-2 pt-1">
         <button
           onClick={weiter}
-          className="w-full py-4 bg-amber-500 text-white rounded-2xl text-sm font-semibold tracking-wide active:bg-amber-600 transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+          className="w-full py-4 rounded-2xl text-sm font-medium tracking-wide transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+          style={{ backgroundColor: '#D97706', color: '#fff' }}
         >
           Weiter zu Rezepten
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <button
           onClick={allesZuruecksetzen}
-          className="w-full py-3 text-zinc-400 text-xs font-medium cursor-pointer active:text-rose-500 transition-colors"
+          className="w-full py-3 text-xs font-medium cursor-pointer transition-colors"
+          style={{ color: '#A8A29E' }}
         >
           Neu starten
         </button>
