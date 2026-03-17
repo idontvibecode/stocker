@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import rezepteData from '../data/rezepte.json'
-import { ladeVorhandeneZutaten, berechneMatch, matchStufe } from '../utils/matching'
+import { ladeVorhandeneZutaten, berechneMatch, berechneVorratNachPlan, matchStufe } from '../utils/matching'
 
 const TAGE = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
 const STORAGE_KEY = 'stocker_wochenplan'
@@ -27,7 +27,8 @@ export default function WochenplanPage({ weiter }) {
   const [auswahlTag, setAuswahlTag] = useState(null)
   const [suche, setSuche] = useState('')
 
-  const vorhandene = ladeVorhandeneZutaten()
+  const vorhandene         = useMemo(() => ladeVorhandeneZutaten(), [])
+  const vorhandeneNachPlan = useMemo(() => berechneVorratNachPlan(plan, vorhandene), [plan, vorhandene])
 
   function speichern(neuerPlan) {
     setPlan(neuerPlan)
@@ -44,13 +45,15 @@ export default function WochenplanPage({ weiter }) {
     speichern({ ...plan, [tag]: null })
   }
 
-  const gefilterteRezepte = rezepteData
+  const gefilterteRezepte = useMemo(() => rezepteData
     .filter((r) => r.name.toLowerCase().includes(suche.toLowerCase()))
     .map((r) => {
-      const { prozent } = berechneMatch(r, vorhandene)
+      const { prozent } = berechneMatch(r, vorhandeneNachPlan)
       return { ...r, prozent, stufe: matchStufe(prozent) }
     })
-    .sort((a, b) => b.prozent - a.prozent)
+    .sort((a, b) => b.prozent - a.prozent),
+    [suche, vorhandeneNachPlan]
+  )
 
   return (
     <div className="flex flex-col gap-4">
@@ -58,7 +61,7 @@ export default function WochenplanPage({ weiter }) {
         {TAGE.map((tag) => {
           const rezept = plan[tag]
           const match = rezept
-            ? (() => { const { prozent } = berechneMatch(rezept, vorhandene); return { prozent, stufe: matchStufe(prozent) } })()
+            ? (() => { const { prozent } = berechneMatch(rezept, vorhandeneNachPlan); return { prozent, stufe: matchStufe(prozent) } })()
             : null
           const ms = match ? matchStyle[match.stufe] : null
 
@@ -75,7 +78,7 @@ export default function WochenplanPage({ weiter }) {
                   <p className="text-sm font-semibold text-zinc-800 leading-snug">{rezept.name}</p>
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-[11px] text-zinc-400">⏱ {rezept.zeit} Min.</span>
-                    {vorhandene.length > 0 && (
+                    {vorhandeneNachPlan.length > 0 && (
                       <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${ms.badge}`}>
                         {match.prozent}%
                       </span>
@@ -157,7 +160,7 @@ export default function WochenplanPage({ weiter }) {
                       <p className="text-sm font-medium text-zinc-800 truncate">{r.name}</p>
                       <p className="text-xs text-zinc-400 mt-0.5">⏱ {r.zeit} Min. · {r.kategorie}</p>
                     </div>
-                    {vorhandene.length > 0 && r.prozent > 0 && (
+                    {vorhandeneNachPlan.length > 0 && r.prozent > 0 && (
                       <span className={`shrink-0 text-[11px] font-bold px-2 py-1 rounded-full ${
                         r.stufe === 'hoch' ? 'bg-emerald-50 text-emerald-700' :
                         r.stufe === 'mittel' ? 'bg-amber-50 text-amber-700' : 'bg-zinc-100 text-zinc-500'

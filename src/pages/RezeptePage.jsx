@@ -205,7 +205,6 @@ export default function RezeptePage({ weiter, navigateTo }) {
             </div>
             <div className="p-3 grid grid-cols-2 gap-2">
               {TAGE.map((tag) => {
-                const plan   = ladeWochenplan()
                 const belegt = plan[tag] != null
                 return (
                   <button
