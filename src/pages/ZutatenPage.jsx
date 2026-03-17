@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { kopieren } from '../utils/clipboard'
-import { parseZutatenInput, extraheKiFragen, formatMenge, parseMenge } from '../utils/zutaten'
+import { parseZutatenInput, formatMenge, parseMenge } from '../utils/zutaten'
 
 const BEREICHE = [
   { id: 'Kühlschrank',   icon: '🧊', hint: 'Frisches, Milchprodukte, Reste',    placeholder: 'Milch 1L\nEier 6x\nButter 250g\nJoghurt 2x\nKäse 200g' },
@@ -8,13 +8,15 @@ const BEREICHE = [
   { id: 'Vorratsschrank',icon: '🗄️', hint: 'Pasta, Dosen, Gewürze, Öle',        placeholder: 'Nudeln 500g\nReis 1kg\nTomaten 2x\nOlivenöl 0.5x' },
   { id: 'Sonstiges',     icon: '📦', hint: 'Obst, Brot, Anderes',               placeholder: 'Äpfel 6x\nBrot 1x\nZwiebeln 1kg' },
 ]
-const STORAGE_KEY  = 'stocker_zutaten_inputs'
-const EDITS_KEY    = 'stocker_zutaten_edits'
+const STORAGE_KEY = 'stocker_zutaten_inputs'
+const EDITS_KEY   = 'stocker_zutaten_edits'
 
 const KI_PROMPT = `Analysiere das Foto und liste alle sichtbaren Lebensmittel mit Mengenangabe auf.
 
-WICHTIG: Antworte ausschließlich mit rohem JSON – kein Markdown, keine Codeblöcke, kein \`\`\`json, kein Text davor oder danach. Nur das JSON-Objekt:
-{"zutaten": [{"name": "Milch", "menge": "1L"}, {"name": "Eier", "menge": "6x"}], "fragen": []}
+WICHTIG: Falls du etwas nicht sicher erkennst, stelle zuerst deine Fragen auf Deutsch – kein JSON, nur Klartext. Warte auf meine Antworten, bevor du das JSON lieferst.
+
+Sobald du alles weißt (oder wenn alles klar ist), antworte ausschließlich mit rohem JSON – kein Markdown, keine Codeblöcke, kein Text davor oder danach:
+{"zutaten": [{"name": "Milch", "menge": "1L"}, {"name": "Eier", "menge": "6x"}]}
 
 Mengenformat:
 - Gewicht: 500g, 1kg, 250g
@@ -22,16 +24,7 @@ Mengenformat:
 - Stückzahl: 3x, 1x
 - Halbvoll/angebrochen: 0.5x, 0.5L, 0.5kg
 
-Falls du etwas nicht sicher erkennen kannst, füge eine kurze Frage als String in "fragen" ein.
 Nutze einfache deutsche Bezeichnungen (z.B. "Milch" statt "Vollmilch 3,5%").`
-
-function generiereFollowupPrompt(fragen, antworten) {
-  const zeilen = fragen.map((f, i) => {
-    const a = (antworten[i] ?? '').trim()
-    return `${i + 1}. ${f}\n   → ${a || '(keine Antwort)'}`
-  })
-  return `Ich habe deine Rückfragen beantwortet:\n\n${zeilen.join('\n\n')}\n\nBitte gib mir jetzt das aktualisierte und vollständige JSON mit allen Zutaten (einschließlich der bereits erkannten). Antworte ausschließlich mit rohem JSON, kein Markdown:\n{"zutaten": [...], "fragen": []}`
-}
 
 function mengeZuStr(menge) {
   if (!menge) return ''
@@ -40,10 +33,6 @@ function mengeZuStr(menge) {
   if (unit === 'ml' && amount >= 1000) return `${+(amount / 1000).toFixed(2).replace(/\.?0+$/, '')}L`
   if (unit === 'x') return `${amount}x`
   return `${amount}${unit}`
-}
-
-function parseZutaten(s) {
-  return { zutaten: parseZutatenInput(s), fragen: extraheKiFragen(s), error: null }
 }
 
 function ladeInputs() {
@@ -61,9 +50,9 @@ function ladeEdits() {
     if (!s) return { deleted: [], overrides: {}, extra: [] }
     const e = JSON.parse(s)
     return {
-      deleted:   Array.isArray(e.deleted)                          ? e.deleted   : [],
-      overrides: e.overrides && typeof e.overrides === 'object'    ? e.overrides : {},
-      extra:     Array.isArray(e.extra)                            ? e.extra     : [],
+      deleted:   Array.isArray(e.deleted)                       ? e.deleted   : [],
+      overrides: e.overrides && typeof e.overrides === 'object' ? e.overrides : {},
+      extra:     Array.isArray(e.extra)                         ? e.extra     : [],
     }
   } catch {
     return { deleted: [], overrides: {}, extra: [] }
@@ -71,15 +60,13 @@ function ladeEdits() {
 }
 
 export default function ZutatenPage({ weiter }) {
-  const [inputs, setInputs]             = useState(ladeInputs)
-  const [edits, setEdits]               = useState(ladeEdits)
-  const [offener, setOffener]           = useState(null)
-  const [kopiert, setKopiert]           = useState(false)
-  const [anleitung, setAnleitung]       = useState(false)
-  const [antworten, setAntworten]       = useState({})        // {bereichId: {frageIdx: string}}
-  const [antwortKopiert, setAntwortKopiert] = useState({})    // {bereichId: bool}
-  const [editChip, setEditChip]         = useState(null)      // {key: string|null, name: string, mengeStr: string}
-  const refs                            = useRef({})
+  const [inputs, setInputs]   = useState(ladeInputs)
+  const [edits, setEdits]     = useState(ladeEdits)
+  const [offener, setOffener] = useState(null)
+  const [kopiert, setKopiert] = useState(false)
+  const [anleitung, setAnleitung] = useState(false)
+  const [editChip, setEditChip]   = useState(null) // {key: string|null, name: string, mengeStr: string}
+  const refs = useRef({})
 
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(inputs)) }, [inputs])
   useEffect(() => { localStorage.setItem(EDITS_KEY,   JSON.stringify(edits))  }, [edits])
@@ -94,20 +81,6 @@ export default function ZutatenPage({ weiter }) {
     setTimeout(() => setKopiert(false), 2500)
   }
 
-  async function followupKopieren(bereichId, fragen) {
-    const bereichAntworten = antworten[bereichId] ?? {}
-    await kopieren(generiereFollowupPrompt(fragen, bereichAntworten))
-    setAntwortKopiert(prev => ({ ...prev, [bereichId]: true }))
-    setTimeout(() => setAntwortKopiert(prev => ({ ...prev, [bereichId]: false })), 2500)
-  }
-
-  function setAntwort(bereichId, idx, val) {
-    setAntworten(prev => ({
-      ...prev,
-      [bereichId]: { ...(prev[bereichId] ?? {}), [idx]: val },
-    }))
-  }
-
   function allesZuruecksetzen() {
     if (!window.confirm('Wirklich alles zurücksetzen?\n\nZutaten, Wochenplan und Einkaufsliste werden gelöscht.')) return
     localStorage.removeItem(STORAGE_KEY)
@@ -120,7 +93,7 @@ export default function ZutatenPage({ weiter }) {
     setEditChip(null)
   }
 
-  // ── Chip-Edits ──────────────────────────────────────────────────────────────
+  // ── Chip-Edits ───────────────────────────────────────────────────────────────
 
   function chipSpeichern() {
     if (!editChip) return
@@ -129,10 +102,8 @@ export default function ZutatenPage({ weiter }) {
     const menge = editChip.mengeStr.trim() ? parseMenge(editChip.mengeStr.trim()) : null
 
     if (editChip.key === null) {
-      // Neue Zutat
       setEdits(prev => ({ ...prev, extra: [...prev.extra.filter(e => e.name.toLowerCase() !== name.toLowerCase()), { name, menge }] }))
     } else {
-      // Override bestehender Zutat
       setEdits(prev => ({ ...prev, overrides: { ...prev.overrides, [editChip.key]: { name, menge } } }))
     }
     setEditChip(null)
@@ -152,14 +123,14 @@ export default function ZutatenPage({ weiter }) {
     setEditChip(null)
   }
 
-  // ── Derived data ─────────────────────────────────────────────────────────────
+  // ── Derived data ──────────────────────────────────────────────────────────────
 
-  const parsed = Object.fromEntries(BEREICHE.map(b => [b.id, parseZutaten(inputs[b.id])]))
+  const parsed = Object.fromEntries(BEREICHE.map(b => [b.id, parseZutatenInput(inputs[b.id])]))
 
   const alleZutaten = (() => {
     const map = new Map()
     BEREICHE.forEach(b => {
-      parsed[b.id].zutaten.forEach(z => {
+      parsed[b.id].forEach(z => {
         const key = z.name.toLowerCase()
         if (edits.deleted.includes(key)) return
         if (!map.has(key)) map.set(key, edits.overrides[key] ?? z)
@@ -171,6 +142,11 @@ export default function ZutatenPage({ weiter }) {
     })
     return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, 'de'))
   })()
+
+  function chipLabel(z) {
+    const m = z.menge ? formatMenge(z.menge) : null
+    return m ? `${m} ${z.name}` : z.name
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -228,9 +204,9 @@ export default function ZutatenPage({ weiter }) {
               ['📷', 'Mach ein Foto von deinem Kühlschrank'],
               ['🤖', 'Öffne ChatGPT, Claude oder Gemini'],
               ['📋', 'Foto hochladen + kopierten Prompt einfügen'],
-              ['💾', 'JSON aus der Antwort kopieren'],
+              ['❓', 'Bei Rückfragen der KI direkt dort antworten'],
+              ['💾', 'JSON aus der finalen Antwort kopieren'],
               ['➕', 'Unten auf Bereich tippen und JSON einfügen'],
-              ['❓', 'Bei Rückfragen: Antworten eingeben + Follow-up kopieren'],
             ].map(([icon, text], i) => (
               <div key={i} className="flex items-start gap-2.5">
                 <span className="text-base">{icon}</span>
@@ -246,11 +222,10 @@ export default function ZutatenPage({ weiter }) {
         <p className="text-xs font-medium px-1" style={{ color: '#A8A29E' }}>Bereiche</p>
 
         {BEREICHE.map(({ id, icon, hint, placeholder }) => {
-          const { zutaten, fragen, error } = parsed[id]
+          const zutaten  = parsed[id]
           const hasContent = inputs[id].trim().length > 0
           const isOpen     = offener === id
           const count      = zutaten.length
-          const bereichAntworten = antworten[id] ?? {}
 
           return (
             <div key={id} className="bg-white rounded-2xl overflow-hidden card-shadow">
@@ -265,25 +240,17 @@ export default function ZutatenPage({ weiter }) {
                 <div className="flex-1 text-left min-w-0">
                   <p className="font-medium text-sm" style={{ color: '#1C1917' }}>{id}</p>
                   <p className="text-xs mt-0.5 truncate" style={{
-                    color: hasContent && !error ? '#16a34a' : hasContent && error ? '#dc2626' : '#78716C'
+                    color: hasContent ? '#16a34a' : '#78716C'
                   }}>
-                    {hasContent && !error
-                      ? `${count} Zutat${count !== 1 ? 'en' : ''} erkannt${fragen.length > 0 ? ` · ${fragen.length} Rückfrage${fragen.length !== 1 ? 'n' : ''}` : ''}`
-                      : hasContent && error ? error : hint}
+                    {hasContent ? `${count} Zutat${count !== 1 ? 'en' : ''} erkannt` : hint}
                   </p>
                 </div>
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center transition-all shrink-0" style={{
-                  backgroundColor: isOpen ? '#F7F3EE' :
-                  hasContent && !error && fragen.length === 0 ? '#dcfce7' :
-                  hasContent && fragen.length > 0 ? '#fef9c3' : '#1A2E23',
-                  color: isOpen ? '#78716C' :
-                  hasContent && !error && fragen.length === 0 ? '#16a34a' :
-                  hasContent && fragen.length > 0 ? '#a16207' : '#fff',
+                  backgroundColor: isOpen ? '#F7F3EE' : hasContent ? '#dcfce7' : '#1A2E23',
+                  color: isOpen ? '#78716C' : hasContent ? '#16a34a' : '#fff',
                 }}>
-                  {hasContent && !error && !isOpen && fragen.length === 0
+                  {hasContent && !isOpen
                     ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    : hasContent && fragen.length > 0 && !isOpen
-                    ? <span className="text-sm">?</span>
                     : <span className={`text-lg font-light leading-none ${isOpen ? 'rotate-45 inline-block' : ''}`}>+</span>
                   }
                 </div>
@@ -301,66 +268,16 @@ export default function ZutatenPage({ weiter }) {
                     onChange={e => setInputs(prev => ({ ...prev, [id]: e.target.value }))}
                     placeholder={placeholder}
                     className="w-full text-sm rounded-xl px-3 py-2.5 resize-none focus:outline-none transition-colors"
-                    style={{
-                      border: error && hasContent ? '1px solid #fca5a5' : '1px solid #E8E2D9',
-                      backgroundColor: error && hasContent ? '#fff5f5' : '#F7F3EE',
-                      color: '#1C1917',
-                    }}
+                    style={{ border: '1px solid #E8E2D9', backgroundColor: '#F7F3EE', color: '#1C1917' }}
                   />
 
-                  {/* KI-Rückfragen mit Antwortfeldern */}
-                  {fragen.length > 0 && (
-                    <div className="mt-2 rounded-xl p-3 space-y-3"
-                      style={{ backgroundColor: '#fffbeb', border: '1px solid #fde68a' }}>
-                      <p className="text-[11px] font-semibold" style={{ color: '#92400e' }}>
-                        KI-Rückfragen — bitte beantworten:
-                      </p>
-                      {fragen.map((f, i) => (
-                        <div key={i} className="space-y-1">
-                          <p className="text-xs" style={{ color: '#92400e' }}>{i + 1}. {f}</p>
-                          <input
-                            type="text"
-                            value={bereichAntworten[i] ?? ''}
-                            onChange={e => setAntwort(id, i, e.target.value)}
-                            placeholder="Deine Antwort…"
-                            className="w-full text-sm rounded-lg px-3 py-2 focus:outline-none"
-                            style={{ border: '1px solid #fcd34d', backgroundColor: '#fff', color: '#1C1917' }}
-                          />
-                        </div>
-                      ))}
-                      <button
-                        onClick={() => followupKopieren(id, fragen)}
-                        className="w-full py-2.5 rounded-lg font-medium text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.97] cursor-pointer"
-                        style={antwortKopiert[id]
-                          ? { backgroundColor: 'rgba(16,185,129,0.12)', color: '#059669', border: '1px solid rgba(16,185,129,0.3)' }
-                          : { backgroundColor: '#D97706', color: '#fff' }
-                        }
-                      >
-                        {antwortKopiert[id] ? (
-                          <>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            Follow-up Prompt kopiert!
-                          </>
-                        ) : (
-                          <>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                            Follow-up Prompt kopieren
-                          </>
-                        )}
-                      </button>
-                      <p className="text-[10px] text-center" style={{ color: '#a16207' }}>
-                        In ChatGPT/Claude einfügen → neues JSON zurück einfügen
-                      </p>
-                    </div>
-                  )}
-
-                  {hasContent && !error && (
+                  {hasContent && (
                     <>
                       <div className="mt-2 flex flex-wrap gap-1.5">
                         {zutaten.slice(0, 8).map(z => (
                           <span key={z.name} className="text-xs px-2.5 py-1 rounded-full"
                             style={{ backgroundColor: '#F7F3EE', color: '#78716C' }}>
-                            {z.name}{z.menge ? ` ${formatMenge(z.menge)}` : ''}
+                            {chipLabel(z)}
                           </span>
                         ))}
                         {zutaten.length > 8 && (
@@ -401,26 +318,23 @@ export default function ZutatenPage({ weiter }) {
             {alleZutaten.map(z => {
               const key = z.name.toLowerCase()
               const isEditing = editChip?.key === key
-              const isExtra   = edits.extra.some(e => e.name.toLowerCase() === key)
               return (
                 <button
                   key={key}
                   onClick={() => setEditChip(isEditing ? null : { key, name: z.name, mengeStr: mengeZuStr(z.menge) })}
                   className="text-xs px-2.5 py-1 rounded-full transition-all active:scale-95 cursor-pointer"
                   style={{
-                    backgroundColor: isEditing ? '#D97706' : isExtra ? '#1A2E23' : '#1A2E23',
+                    backgroundColor: '#1A2E23',
                     color: '#fff',
                     outline: isEditing ? '2px solid #D97706' : 'none',
                     outlineOffset: '2px',
-                    opacity: isEditing ? 1 : 0.9,
                   }}
                 >
-                  {z.name}{z.menge ? ` ${formatMenge(z.menge)}` : ''}
+                  {chipLabel(z)}
                 </button>
               )
             })}
 
-            {/* Neue Zutat hinzufügen */}
             <button
               onClick={() => setEditChip(editChip?.key === null ? null : { key: null, name: '', mengeStr: '' })}
               className="text-xs px-2.5 py-1 rounded-full transition-all active:scale-95 cursor-pointer font-medium"
@@ -442,16 +356,7 @@ export default function ZutatenPage({ weiter }) {
               </p>
               <div className="flex gap-2">
                 <input
-                  autoFocus
-                  type="text"
-                  value={editChip.name}
-                  onChange={e => setEditChip(prev => ({ ...prev, name: e.target.value }))}
-                  onKeyDown={e => { if (e.key === 'Enter') chipSpeichern(); if (e.key === 'Escape') setEditChip(null) }}
-                  placeholder="Name (z.B. Milch)"
-                  className="flex-1 text-sm px-3 py-2 rounded-lg focus:outline-none"
-                  style={{ border: '1px solid #E8E2D9', backgroundColor: '#fff', color: '#1C1917' }}
-                />
-                <input
+                  autoFocus={editChip.key !== null}
                   type="text"
                   value={editChip.mengeStr}
                   onChange={e => setEditChip(prev => ({ ...prev, mengeStr: e.target.value }))}
@@ -460,11 +365,21 @@ export default function ZutatenPage({ weiter }) {
                   className="w-20 text-sm px-3 py-2 rounded-lg focus:outline-none"
                   style={{ border: '1px solid #E8E2D9', backgroundColor: '#fff', color: '#1C1917' }}
                 />
+                <input
+                  autoFocus={editChip.key === null}
+                  type="text"
+                  value={editChip.name}
+                  onChange={e => setEditChip(prev => ({ ...prev, name: e.target.value }))}
+                  onKeyDown={e => { if (e.key === 'Enter') chipSpeichern(); if (e.key === 'Escape') setEditChip(null) }}
+                  placeholder="Name (z.B. Milch)"
+                  className="flex-1 text-sm px-3 py-2 rounded-lg focus:outline-none"
+                  style={{ border: '1px solid #E8E2D9', backgroundColor: '#fff', color: '#1C1917' }}
+                />
               </div>
               <div className="flex gap-2 mt-2">
                 <button
                   onClick={chipSpeichern}
-                  className="flex-1 py-2 rounded-lg text-xs font-medium cursor-pointer transition-colors"
+                  className="flex-1 py-2 rounded-lg text-xs font-medium cursor-pointer"
                   style={{ backgroundColor: '#1A2E23', color: '#fff' }}
                 >
                   Speichern
@@ -476,7 +391,7 @@ export default function ZutatenPage({ weiter }) {
                       if (isExtra) extraLoeschen(editChip.name)
                       else chipLoeschen(editChip.key)
                     }}
-                    className="px-4 py-2 rounded-lg text-xs font-medium cursor-pointer transition-colors"
+                    className="px-4 py-2 rounded-lg text-xs font-medium cursor-pointer"
                     style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}
                   >
                     Löschen
@@ -484,7 +399,7 @@ export default function ZutatenPage({ weiter }) {
                 )}
                 <button
                   onClick={() => setEditChip(null)}
-                  className="px-4 py-2 rounded-lg text-xs font-medium cursor-pointer transition-colors"
+                  className="px-4 py-2 rounded-lg text-xs font-medium cursor-pointer"
                   style={{ backgroundColor: '#E8E2D9', color: '#78716C' }}
                 >
                   Abbrechen
