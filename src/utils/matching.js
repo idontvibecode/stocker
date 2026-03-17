@@ -1,6 +1,7 @@
 import { parseZutatenInput, parseMenge, vergleicheMengen } from './zutaten'
 
 const STORAGE_KEY = 'stocker_zutaten_inputs'
+const EDITS_KEY   = 'stocker_zutaten_edits'
 
 export function ladeVorhandeneZutaten() {
   try {
@@ -25,6 +26,23 @@ export function ladeVorhandeneZutaten() {
         }
       }
     })
+    // Manuelle Edits anwenden (Löschungen, Overrides, Extras)
+    try {
+      const editsSaved = localStorage.getItem(EDITS_KEY)
+      if (editsSaved) {
+        const edits = JSON.parse(editsSaved)
+        ;(edits.deleted ?? []).forEach(key => map.delete(key))
+        Object.entries(edits.overrides ?? {}).forEach(([oldKey, z]) => {
+          map.delete(oldKey)
+          if (z?.name) map.set(z.name.toLowerCase(), z)
+        })
+        ;(edits.extra ?? []).forEach(z => {
+          if (!z?.name) return
+          const key = z.name.toLowerCase()
+          if (!map.has(key)) map.set(key, z)
+        })
+      }
+    } catch {}
     return [...map.values()]
   } catch {
     return []
