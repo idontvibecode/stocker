@@ -106,28 +106,42 @@ function skalierungsFaktor(rezept) {
 
 // Berechnet verbleibenden Vorrat nach Abzug des Plans (optional: einen Tag ausschließen)
 export function berechneVorratNachPlan(plan, vorhandene, ausnahmeTag = null) {
-  const verbrauch = new Map()
+  // Welche Zutaten werden verbraucht (Name) + wie viel (Menge, falls angegeben)
+  const verbrauchNamen  = new Set()
+  const verbrauchMengen = new Map()
+
   Object.entries(plan).forEach(([tag, rezept]) => {
     if (!rezept || tag === ausnahmeTag) return
     const faktor = skalierungsFaktor(rezept)
     rezept.zutaten.forEach(z => {
       const key = z.name.toLowerCase()
+      verbrauchNamen.add(key)
       const m = typeof z.menge === 'string' ? parseMenge(z.menge) : z.menge
       if (!m) return
       const ms = skaliereMenge(m, faktor)
-      if (!verbrauch.has(key)) {
-        verbrauch.set(key, { ...ms })
+      if (!verbrauchMengen.has(key)) {
+        verbrauchMengen.set(key, { ...ms })
       } else {
-        const e = verbrauch.get(key)
+        const e = verbrauchMengen.get(key)
         if (e.unit === ms.unit) e.amount = +(e.amount + ms.amount).toFixed(2)
       }
     })
   })
-  return vorhandene.map(z => {
-    const v = verbrauch.get(z.name.toLowerCase())
-    if (!v || !z.menge || v.unit !== z.menge.unit) return z
-    return { ...z, menge: { amount: Math.max(0, +(z.menge.amount - v.amount).toFixed(2)), unit: z.menge.unit } }
-  })
+
+  return vorhandene
+    .map(z => {
+      const key = z.name.toLowerCase()
+      if (!verbrauchNamen.has(key)) return z  // nicht im Plan → unverändert
+
+      const v = verbrauchMengen.get(key)
+      // Kein Mengenvergleich möglich (keine Menge im Rezept, keine Menge im Vorrat,
+      // oder inkompatible Einheiten) → als aufgebraucht werten
+      if (!v || !z.menge || v.unit !== z.menge.unit) return null
+
+      const rest = Math.max(0, +(z.menge.amount - v.amount).toFixed(2))
+      return rest > 0 ? { ...z, menge: { amount: rest, unit: z.menge.unit } } : null
+    })
+    .filter(Boolean)
 }
 
 // Berechnet die vollständige Fehlmenge für die Einkaufsliste
