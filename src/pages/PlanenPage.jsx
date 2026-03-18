@@ -245,19 +245,16 @@ export default function PlanenPage({ weiter }) {
             .favorit-karte {
               background: linear-gradient(
                 118deg,
-                #fffef9 0%,
-                #fef6d6 12%,
-                #edfff9 26%,
-                #f5eeff 40%,
-                #fffef9 52%,
-                #fef0d0 64%,
-                #e8fff8 76%,
-                #f0eaff 88%,
-                #fffef9 100%
+                #fff9e6 0%,
+                #d1fae5 20%,
+                #ede9fe 40%,
+                #fef3c7 60%,
+                #d1fae5 80%,
+                #fff9e6 100%
               ) !important;
               background-size: 400% 400% !important;
-              animation: foil 7s ease infinite;
-              box-shadow: 0 0 0 1px rgba(180,140,60,0.25), 0 2px 12px rgba(180,140,60,0.10) !important;
+              animation: foil 4s ease infinite;
+              box-shadow: 0 0 0 1px rgba(180,140,60,0.3), 0 2px 14px rgba(180,140,60,0.12) !important;
             }
           `}</style>
           <div className="flex flex-col gap-2">
