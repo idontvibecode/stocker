@@ -170,7 +170,7 @@ export default function ZutatenPage({ weiter }) {
             className="w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.97] cursor-pointer"
             style={kopiert
               ? { backgroundColor: 'rgba(16,185,129,0.15)', color: '#6ee7b7', border: '1px solid rgba(16,185,129,0.25)' }
-              : { backgroundColor: '#D97706', color: '#fff' }
+              : { backgroundColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.12)' }
             }
           >
             {kopiert ? (
