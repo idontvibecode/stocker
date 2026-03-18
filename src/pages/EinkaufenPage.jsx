@@ -9,7 +9,7 @@ const EXTRA_KEY      = 'stocker_einkaufen_extra'
 // Extra-Items: [{ name: "Brot", menge: "1 Laib" }, ...]
 const VORSCHLAEGE = {
   'Frühstück & Snacks': [
-    'Brot', 'Aufschnitt (fleischig)', 'Aufschnitt (vegan)', 'Eier',
+    'Brot', 'Butter', 'Aufschnitt (fleischig)', 'Aufschnitt (vegan)', 'Eier',
     'Griechischer Joghurt', 'Milch', 'Müsli', 'Bananen',
     'Gummibärchen', 'Cookies', 'Äpfel',
   ],
@@ -25,11 +25,14 @@ function speichereExtra(arr) {
   localStorage.setItem(EXTRA_KEY, JSON.stringify(arr))
 }
 
+const KOCHEINHEIT_LABEL = { el: 'EL', tl: 'TL', zehen: 'Zehen', bund: 'Bund', prise: 'Prise' }
+
 function zeigeEinkaufsMenge(menge) {
   if (!menge) return null
-  if (!['g', 'ml', 'x'].includes(menge.unit)) return null
   const m = menge.unit === 'x' ? { ...menge, amount: Math.ceil(menge.amount) } : menge
   if (m.unit === 'x' && m.amount === 1) return null
+  // Kocheinheiten lesbar formatieren (z.B. "2 EL" statt "2el")
+  if (KOCHEINHEIT_LABEL[m.unit]) return `${m.amount} ${KOCHEINHEIT_LABEL[m.unit]}`
   return formatMenge(m)
 }
 
