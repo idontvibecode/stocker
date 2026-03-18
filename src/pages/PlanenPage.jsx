@@ -5,7 +5,8 @@ import { ladeVorhandeneZutaten, berechneMatch, matchStufe, berechneVorratNachPla
 const TAGE      = ['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag']
 const KURZ      = { Montag:'Mo', Dienstag:'Di', Mittwoch:'Mi', Donnerstag:'Do', Freitag:'Fr', Samstag:'Sa', Sonntag:'So' }
 const KATEGORIEN = ['alle','vegetarisch','vegan','fleischhaltig','fischhaltig']
-const STORAGE_KEY = 'stocker_wochenplan'
+const STORAGE_KEY     = 'stocker_wochenplan'
+const BEWERTUNG_KEY   = 'stocker_bewertungen'
 
 const katStyle = {
   vegetarisch:   { bg: '#f0fdf4', text: '#15803d' },
@@ -20,6 +21,12 @@ function ladePlan() {
 function speicherePlan(p) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(p))
 }
+function ladeBewertungen() {
+  try { return JSON.parse(localStorage.getItem(BEWERTUNG_KEY) ?? '{}') } catch { return {} }
+}
+function speichereBewertungen(b) {
+  localStorage.setItem(BEWERTUNG_KEY, JSON.stringify(b))
+}
 
 export default function PlanenPage({ weiter }) {
   const [plan, setPlan]             = useState(ladePlan)
@@ -29,6 +36,8 @@ export default function PlanenPage({ weiter }) {
   const [sortierung, setSortierung] = useState('match')
   const [personenProRezept, setPersonenProRezept] = useState({})
   const [stepperOffen, setStepperOffen] = useState(null)
+  const [bewertungen, setBewertungen] = useState(ladeBewertungen)
+  const [bewertungOffen, setBewertungOffen] = useState(null)
   const stepperTimer = useRef(null)
 
   const stepperSchliessen = useCallback(() => {
@@ -44,6 +53,17 @@ export default function PlanenPage({ weiter }) {
   }, [stepperOffen])
 
   function getPersonen(id) { return personenProRezept[id] ?? 2 }
+
+  function bewerten(rezeptId, wert) {
+    setBewertungen(prev => {
+      const neu = { ...prev }
+      // Gleiche Bewertung nochmal → entfernen
+      if (neu[rezeptId] === wert) { delete neu[rezeptId] } else { neu[rezeptId] = wert }
+      speichereBewertungen(neu)
+      return neu
+    })
+    setBewertungOffen(null)
+  }
 
   function stepperAendern(id, fn) {
     setPersonenProRezept(prev => ({ ...prev, [id]: Math.max(1, Math.min(12, fn(prev[id] ?? 2))) }))
@@ -72,6 +92,12 @@ export default function PlanenPage({ weiter }) {
     .sort((a, b) => {
       if (sortierung === 'zeit_asc') return a.zeit - b.zeit
       if (sortierung === 'alpha')    return a.name.localeCompare(b.name, 'de')
+      if (sortierung === 'bewertung') {
+        const ba = bewertungen[a.id] ?? 0
+        const bb = bewertungen[b.id] ?? 0
+        if (bb !== ba) return bb - ba // Höchste zuerst
+        return b.prozent - a.prozent  // Bei gleicher Bewertung: Match
+      }
       return 0
     })
 
@@ -134,7 +160,12 @@ export default function PlanenPage({ weiter }) {
                   {rezept ? (
                     <>
                       <p className="font-medium text-sm truncate" style={{ color: '#1C1917' }}>{rezept.name}</p>
-                      <p className="text-xs mt-0.5" style={{ color: '#A8A29E' }}>{rezept.zeit} Min. · {rezept.personen ?? 2} Pers.</p>
+                      <p className="text-xs mt-0.5" style={{ color: '#A8A29E' }}>
+                        {rezept.zeit} Min. · {rezept.personen ?? 2} Pers.
+                        {bewertungen[rezept.id] && (
+                          <span style={{ color: '#D97706' }}> · {'★'.repeat(bewertungen[rezept.id])}</span>
+                        )}
+                      </p>
                     </>
                   ) : (
                     <p className="text-sm" style={{ color: '#A8A29E' }}>Noch nicht geplant</p>
@@ -216,9 +247,10 @@ export default function PlanenPage({ weiter }) {
             ))}
             <div className="w-px shrink-0 mx-1" style={{ backgroundColor: '#E8E2D9' }} />
             {[
-              { key: 'match',    label: 'Match' },
-              { key: 'zeit_asc', label: 'Schnell' },
-              { key: 'alpha',    label: 'A–Z' },
+              { key: 'match',     label: 'Match' },
+              { key: 'bewertung', label: '★ Best' },
+              { key: 'zeit_asc',  label: 'Schnell' },
+              { key: 'alpha',     label: 'A–Z' },
             ].map(s => (
               <button
                 key={s.key}
@@ -261,6 +293,32 @@ export default function PlanenPage({ weiter }) {
                           }}>
                             {r.prozent}%
                           </span>
+                        )}
+                        {/* Bewertung */}
+                        {bewertungOffen === r.id ? (
+                          <span className="inline-flex items-center gap-0.5">
+                            {[1,2,3,4,5].map(w => (
+                              <button key={w}
+                                onClick={e => { e.stopPropagation(); bewerten(r.id, w) }}
+                                className="cursor-pointer text-sm leading-none px-0.5 transition-transform active:scale-125"
+                                style={{ color: w <= (bewertungen[r.id] ?? 0) ? '#D97706' : '#D4CFC8' }}
+                              >★</button>
+                            ))}
+                          </span>
+                        ) : (
+                          <button
+                            onClick={e => { e.stopPropagation(); setBewertungOffen(r.id) }}
+                            className="cursor-pointer text-[11px] font-semibold px-1.5 py-0.5 rounded-full transition-colors"
+                            style={bewertungen[r.id]
+                              ? { backgroundColor: '#fffbeb', color: '#D97706' }
+                              : { backgroundColor: '#F7F3EE', color: '#D4CFC8' }
+                            }
+                          >
+                            {bewertungen[r.id]
+                              ? '★'.repeat(bewertungen[r.id])
+                              : '☆'
+                            }
+                          </button>
                         )}
                       </div>
                     </div>
