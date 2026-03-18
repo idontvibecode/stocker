@@ -111,21 +111,21 @@ export default function EinkaufslistePage({ navigateTo }) {
 
   const gesamtFehlend = alleEintraege.length
   const fortschritt   = gesamtFehlend > 0 ? Math.round((erledigt.length / gesamtFehlend) * 100) : 100
-  const planLeer      = benoetigt.length === 0 && extraItems.length === 0
-
-  if (planLeer) {
-    return (
-      <div className="flex flex-col items-center justify-center py-20 gap-3 text-center">
-        <span className="text-5xl">📅</span>
-        <p className="text-zinc-500 font-medium">Kein Wochenplan vorhanden</p>
-        <p className="text-sm text-zinc-400">Fülle zuerst den Wochenplan mit Rezepten.</p>
-      </div>
-    )
-  }
+  const keinPlan      = benoetigt.length === 0
 
   return (
     <div className="flex flex-col gap-5 max-w-lg">
+      {/* Kein Wochenplan – Hinweis */}
+      {keinPlan && extraItems.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-12 gap-3 text-center">
+          <span className="text-5xl">📅</span>
+          <p className="text-zinc-500 font-medium">Kein Wochenplan vorhanden</p>
+          <p className="text-sm text-zinc-400">Fülle zuerst den Wochenplan mit Rezepten – oder füge unten eigene Punkte hinzu.</p>
+        </div>
+      )}
+
       {/* Fortschritts-Header */}
+      {!keinPlan && (
       <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-4 flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <div>
@@ -158,6 +158,7 @@ export default function EinkaufslistePage({ navigateTo }) {
           </div>
         )}
       </div>
+      )}
 
       {/* Offene Einträge */}
       {offen.length > 0 && (
