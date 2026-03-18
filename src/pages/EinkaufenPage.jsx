@@ -80,9 +80,9 @@ function generiereMarkdown(alleItems) {
 }
 
 export default function EinkaufenPage({ navigateTo }) {
-  const [geteilt, setGeteilt]       = useState(false)
-  const [extraItems, setExtraItems] = useState(ladeExtra)
-  const [eingabe, setEingabe]       = useState('')
+  const [geteilt, setGeteilt]           = useState(false)
+  const [extraItems, setExtraItems]     = useState(ladeExtra)
+  const [eingabe, setEingabe]           = useState('')
   const [eingabeMenge, setEingabeMenge] = useState('')
 
   const vorhandene = useMemo(() => ladeVorhandeneZutaten(), [])
@@ -95,7 +95,7 @@ export default function EinkaufenPage({ navigateTo }) {
 
   const planLeer = Object.values(plan).every(v => !v)
 
-  // Zusammengeführte Liste: Rezept-Items + Extra-Items, einheitliches Format
+  // Zusammengeführte Liste: Rezept-Items + Extra-Items
   const alleListen = useMemo(() => {
     const rezeptItems = fehlend.map(z => ({
       name: z.name,
@@ -110,9 +110,8 @@ export default function EinkaufenPage({ navigateTo }) {
     return [...rezeptItems, ...extra]
   }, [fehlend, extraItems])
 
-  // Aktive Items (nicht durchgestrichen)
-  const aktiv     = alleListen.filter(z => !entfernt.has(z.name))
-  const gestrichen = alleListen.filter(z => entfernt.has(z.name))
+  // Aktive Items (nicht durchgestrichen) — für Export/Zähler
+  const aktiv = alleListen.filter(z => !entfernt.has(z.name))
 
   // Namen für Duplikat-Check bei Vorschlägen
   const alleNamen = useMemo(
@@ -131,7 +130,6 @@ export default function EinkaufenPage({ navigateTo }) {
   }
 
   function extraEntfernen(name) {
-    // Aus entfernt-Set rausnehmen falls drin
     setEntfernt(prev => {
       const next = new Set(prev)
       next.delete(name)
@@ -148,6 +146,12 @@ export default function EinkaufenPage({ navigateTo }) {
       next.has(name) ? next.delete(name) : next.add(name)
       return next
     })
+  }
+
+  // Vorschlag-Klick: Name ins Eingabefeld setzen (statt sofort hinzufügen)
+  function vorschlagWaehlen(name) {
+    setEingabe(name)
+    setEingabeMenge('')
   }
 
   async function teilen() {
@@ -172,30 +176,32 @@ export default function EinkaufenPage({ navigateTo }) {
   return (
     <div className="flex flex-col gap-4">
 
-      {/* Kein Wochenplan & keine Extra-Items */}
-      {planLeer && !hatItems && (
-        <div className="bg-white rounded-2xl p-8 text-center card-shadow">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4"
+      {/* Dezenter Hinweis wenn kein Wochenplan */}
+      {planLeer && (
+        <div className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3 card-shadow">
+          <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
             style={{ backgroundColor: '#F7F3EE' }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" strokeWidth="1.5" strokeLinecap="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" strokeWidth="1.5" strokeLinecap="round">
               <rect x="3" y="4" width="18" height="18" rx="2"/>
               <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
               <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
           </div>
-          <p className="font-medium text-base mb-1" style={{ color: '#1C1917' }}>Kein Wochenplan</p>
-          <p className="text-sm mb-5" style={{ color: '#78716C' }}>Zuerst Schritt 2 ausfüllen – oder füge unten eigene Punkte hinzu.</p>
+          <div className="flex-1">
+            <p className="text-sm font-medium" style={{ color: '#1C1917' }}>Kein Wochenplan</p>
+            <p className="text-xs" style={{ color: '#A8A29E' }}>Eigene Punkte kannst du trotzdem hinzufügen.</p>
+          </div>
           <button
             onClick={() => navigateTo('planen')}
-            className="w-full py-3 rounded-xl font-medium text-sm cursor-pointer transition-all"
+            className="text-xs font-medium px-3 py-1.5 rounded-lg cursor-pointer transition-all shrink-0"
             style={{ backgroundColor: '#D97706', color: '#fff' }}
           >
-            Zum Wochenplan
+            Planen
           </button>
         </div>
       )}
 
-      {/* Alles vorhanden (nur Rezept-Zutaten, keine Extra) */}
+      {/* Alles vorhanden (nur wenn Plan existiert, keine fehlenden Rezept-Zutaten, keine Extras) */}
       {!planLeer && fehlend.length === 0 && extraItems.length === 0 && (
         <div className="bg-white rounded-2xl p-8 text-center card-shadow">
           <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4"
@@ -241,6 +247,7 @@ export default function EinkaufenPage({ navigateTo }) {
           <div className="flex flex-col">
             {alleListen.map((item, i) => {
               const removed = entfernt.has(item.name)
+              const isExtra = item.quelle === 'extra'
               return (
                 <div key={item.name}>
                   {i > 0 && <div className="h-px mx-4" style={{ backgroundColor: removed ? '#fafaf9' : '#F7F3EE' }} />}
@@ -260,33 +267,37 @@ export default function EinkaufenPage({ navigateTo }) {
                         {item.mengeLabel}
                       </span>
                     )}
-                    {removed && (
+                    {removed && !isExtra && (
                       <span className="text-[10px] shrink-0" style={{ color: '#D4CFC8' }}>nicht kaufen</span>
                     )}
-                    {/* Extra-Items: ×-Button zum Entfernen */}
-                    {item.quelle === 'extra' && !removed && (
+
+                    {/* Rezept-Items: Toggle durchstreichen/wiederherstellen */}
+                    {!isExtra && (
+                      <button
+                        onClick={() => toggleItem(item.name)}
+                        className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all cursor-pointer"
+                        style={{ backgroundColor: '#F7F3EE', color: '#A8A29E' }}
+                      >
+                        {removed
+                          ? <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          : <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        }
+                      </button>
+                    )}
+
+                    {/* Extra-Items: Ein Button — entfernt das Item komplett */}
+                    {isExtra && (
                       <button
                         onClick={() => extraEntfernen(item.name)}
                         className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all cursor-pointer"
-                        style={{ backgroundColor: '#fee2e2', color: '#ef4444' }}
-                        title="Von Liste entfernen"
+                        style={{ backgroundColor: '#F7F3EE', color: '#A8A29E' }}
+                        title="Entfernen"
                       >
                         <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                           <line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/>
                         </svg>
                       </button>
                     )}
-                    {/* Toggle durchgestrichen/aktiv */}
-                    <button
-                      onClick={() => toggleItem(item.name)}
-                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all cursor-pointer"
-                      style={{ backgroundColor: '#F7F3EE', color: '#A8A29E' }}
-                    >
-                      {removed
-                        ? <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        : <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                      }
-                    </button>
                   </div>
                 </div>
               )
@@ -295,7 +306,7 @@ export default function EinkaufenPage({ navigateTo }) {
         </div>
       )}
 
-      {/* Share-Button — nur wenn es aktive Items gibt */}
+      {/* Share-Button */}
       {aktiv.length > 0 && (
         <>
           <button
@@ -358,7 +369,7 @@ export default function EinkaufenPage({ navigateTo }) {
           </div>
         </form>
 
-        {/* Vorschläge */}
+        {/* Vorschläge — Klick füllt das Eingabefeld, damit man Menge ergänzen kann */}
         {Object.entries(VORSCHLAEGE).map(([kategorie, items]) => {
           const verfuegbar = items.filter(name => !alleNamen.has(name))
           if (verfuegbar.length === 0) return null
@@ -369,11 +380,14 @@ export default function EinkaufenPage({ navigateTo }) {
                 {verfuegbar.map(name => (
                   <button
                     key={name}
-                    onClick={() => extraHinzufuegen(name, '')}
+                    onClick={() => vorschlagWaehlen(name)}
                     className="text-xs font-medium px-2.5 py-1 rounded-full border transition-all cursor-pointer"
-                    style={{ backgroundColor: '#F7F3EE', color: '#78716C', borderColor: '#E7E5E4' }}
+                    style={eingabe === name
+                      ? { backgroundColor: '#1C1917', color: '#fff', borderColor: '#1C1917' }
+                      : { backgroundColor: '#F7F3EE', color: '#78716C', borderColor: '#E7E5E4' }
+                    }
                   >
-                    + {name}
+                    {name}
                   </button>
                 ))}
               </div>
