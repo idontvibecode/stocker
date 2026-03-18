@@ -4,6 +4,25 @@ import { formatMenge } from '../utils/zutaten'
 import { kopieren } from '../utils/clipboard'
 
 const WOCHENPLAN_KEY = 'stocker_wochenplan'
+const EXTRA_KEY      = 'stocker_einkaufen_extra'
+
+const VORSCHLAEGE = {
+  'Frühstück & Snacks': [
+    'Brot', 'Aufschnitt (fleischig)', 'Aufschnitt (vegan)', 'Eier',
+    'Griechischer Joghurt', 'Milch', 'Müsli', 'Bananen',
+    'Gummibärchen', 'Cookies', 'Äpfel',
+  ],
+  'Haushalt': [
+    'Klopapier', 'Cewa', 'Müllbeutel 25L', 'Taschentücher',
+  ],
+}
+
+function ladeExtra() {
+  try { return JSON.parse(localStorage.getItem(EXTRA_KEY) ?? '[]') } catch { return [] }
+}
+function speichereExtra(arr) {
+  localStorage.setItem(EXTRA_KEY, JSON.stringify(arr))
+}
 
 function zeigeEinkaufsMenge(menge) {
   if (!menge) return null
@@ -47,7 +66,7 @@ function ladePlan() {
   try { return JSON.parse(localStorage.getItem(WOCHENPLAN_KEY) ?? '{}') } catch { return {} }
 }
 
-function generiereMarkdown(liste) {
+function generiereMarkdown(liste, extra = []) {
   const datum = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
   const sortiert = [...liste].sort((a, b) => supermarktIndex(a.name) - supermarktIndex(b.name))
   let md = `## Einkaufsliste ${datum}\n\n`
@@ -55,11 +74,17 @@ function generiereMarkdown(liste) {
     const menge = zeigeEinkaufsMenge(z.fehlendMenge)
     md += `- [ ] ${z.name}${menge ? ` (${menge})` : ''}\n`
   })
+  if (extra.length > 0) {
+    md += `\n### Sonstiges\n`
+    extra.forEach(name => { md += `- [ ] ${name}\n` })
+  }
   return md
 }
 
 export default function EinkaufenPage({ navigateTo }) {
-  const [geteilt, setGeteilt] = useState(false)
+  const [geteilt, setGeteilt]     = useState(false)
+  const [extraItems, setExtraItems] = useState(ladeExtra)
+  const [eingabe, setEingabe]     = useState('')
 
   const vorhandene = useMemo(() => ladeVorhandeneZutaten(), [])
   const plan       = useMemo(() => ladePlan(), [])
@@ -72,6 +97,27 @@ export default function EinkaufenPage({ navigateTo }) {
   const liste    = fehlend.filter(z => !entfernt.has(z.name))
   const planLeer = Object.values(plan).every(v => !v)
 
+  // Namen aller aktuellen Listeneinträge (Rezept + Extra) für Vorschlag-Filter
+  const alleNamen = useMemo(
+    () => new Set([...fehlend.map(z => z.name), ...extraItems]),
+    [fehlend, extraItems]
+  )
+
+  function extraHinzufuegen(name) {
+    const bereinigt = name.trim()
+    if (!bereinigt || alleNamen.has(bereinigt)) return
+    const neu = [...extraItems, bereinigt]
+    setExtraItems(neu)
+    speichereExtra(neu)
+    setEingabe('')
+  }
+
+  function extraEntfernen(name) {
+    const neu = extraItems.filter(n => n !== name)
+    setExtraItems(neu)
+    speichereExtra(neu)
+  }
+
   function toggleItem(name) {
     setEntfernt(prev => {
       const next = new Set(prev)
@@ -81,7 +127,7 @@ export default function EinkaufenPage({ navigateTo }) {
   }
 
   async function teilen() {
-    const text = generiereMarkdown(liste)
+    const text = generiereMarkdown(liste, extraItems)
     try {
       if (navigator.share) {
         await navigator.share({ title: 'Einkaufsliste', text })
@@ -236,6 +282,87 @@ export default function EinkaufenPage({ navigateTo }) {
           <p className="text-center text-xs -mt-2" style={{ color: '#A8A29E' }}>{liste.length} Zutaten</p>
         </>
       )}
+
+      {/* Eigene Punkte — immer sichtbar */}
+      <EigenePunkte
+        extraItems={extraItems}
+        alleNamen={alleNamen}
+        eingabe={eingabe}
+        setEingabe={setEingabe}
+        onHinzufuegen={extraHinzufuegen}
+        onEntfernen={extraEntfernen}
+      />
+    </div>
+  )
+}
+
+function EigenePunkte({ extraItems, alleNamen, eingabe, setEingabe, onHinzufuegen, onEntfernen }) {
+  return (
+    <div className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-4">
+      <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#A8A29E' }}>Eigene Punkte</p>
+
+      {/* Bereits hinzugefügte Extra-Items */}
+      {extraItems.length > 0 && (
+        <ul className="flex flex-col gap-1.5">
+          {extraItems.map(name => (
+            <li key={name} className="flex items-center gap-3 px-3 py-2.5 rounded-xl" style={{ backgroundColor: '#F7F3EE' }}>
+              <span className="flex-1 text-sm font-medium" style={{ color: '#1C1917' }}>{name}</span>
+              <button
+                onClick={() => onEntfernen(name)}
+                className="w-6 h-6 flex items-center justify-center rounded-lg transition-colors cursor-pointer"
+                style={{ color: '#A8A29E' }}
+              >
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/>
+                </svg>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Freitext-Eingabe */}
+      <form onSubmit={e => { e.preventDefault(); onHinzufuegen(eingabe) }} className="flex gap-2">
+        <input
+          type="text"
+          value={eingabe}
+          onChange={e => setEingabe(e.target.value)}
+          placeholder="z.B. Orangensaft …"
+          className="flex-1 text-sm rounded-xl px-3 py-2.5 outline-none transition-all"
+          style={{ backgroundColor: '#F7F3EE', border: '1.5px solid #E7E5E4', color: '#1C1917' }}
+        />
+        <button
+          type="submit"
+          disabled={!eingabe.trim()}
+          className="px-4 py-2.5 rounded-xl font-semibold text-sm transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          style={{ backgroundColor: '#1C1917', color: '#fff' }}
+        >
+          +
+        </button>
+      </form>
+
+      {/* Vorschläge */}
+      {Object.entries(VORSCHLAEGE).map(([kategorie, items]) => {
+        const verfuegbar = items.filter(name => !alleNamen.has(name) && !extraItems.includes(name))
+        if (verfuegbar.length === 0) return null
+        return (
+          <div key={kategorie} className="flex flex-col gap-2">
+            <p className="text-[11px] font-medium" style={{ color: '#A8A29E' }}>{kategorie}</p>
+            <div className="flex flex-wrap gap-1.5">
+              {verfuegbar.map(name => (
+                <button
+                  key={name}
+                  onClick={() => onHinzufuegen(name)}
+                  className="text-xs font-medium px-2.5 py-1 rounded-full border transition-all cursor-pointer"
+                  style={{ backgroundColor: '#F7F3EE', color: '#78716C', borderColor: '#E7E5E4' }}
+                >
+                  + {name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }
