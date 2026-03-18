@@ -240,21 +240,17 @@ export default function PlanenPage({ weiter }) {
             {gefiltert.map(r => {
               const kat = katStyle[r.kategorie] ?? { bg: '#F7F3EE', text: '#78716C' }
               const bereitsZugewiesen = Object.entries(plan).find(([, rez]) => rez?.id === r.id)
-              const borderColor = r.stufe === 'hoch' ? '#bbf7d0' : r.stufe === 'mittel' ? '#fde68a' : '#E8E2D9'
+              const borderColor = r.stufe === 'hoch' ? '#bbf7d0' : r.stufe === 'mittel' ? '#fde68a' : r.favorit ? '#E8D9C0' : '#E8E2D9'
+              const cardBg = r.favorit ? '#FDFAF4' : '#ffffff'
 
               return (
-                <div key={r.id} className="bg-white rounded-2xl overflow-hidden card-shadow"
-                  style={{ border: `1px solid ${borderColor}` }}>
+                <div key={r.id} className="rounded-2xl overflow-hidden card-shadow"
+                  style={{ border: `1px solid ${borderColor}`, backgroundColor: cardBg }}>
                   <div className="flex items-center gap-3 p-3">
                     {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-1.5 mb-1.5">
+                      <div className="mb-1.5">
                         <p className="font-medium text-sm truncate" style={{ color: '#1C1917' }}>{r.name}</p>
-                        {r.favorit && (
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="#D97706" stroke="none" className="shrink-0">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                          </svg>
-                        )}
                       </div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full"
