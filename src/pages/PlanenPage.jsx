@@ -26,7 +26,7 @@ export default function PlanenPage({ weiter }) {
   const [selectedTag, setSelected]  = useState(null)
   const [filter, setFilter]         = useState('alle')
   const [suche, setSuche]           = useState('')
-  const [sortierung, setSortierung] = useState('match')
+  const [sortierung, setSortierung] = useState(() => ladeVorhandeneZutaten().length > 0 ? 'match' : 'alpha')
   const [personenProRezept, setPersonenProRezept] = useState({})
   const [stepperOffen, setStepperOffen] = useState(null)
   const stepperTimer = useRef(null)
@@ -217,7 +217,7 @@ export default function PlanenPage({ weiter }) {
             ))}
             <div className="w-px shrink-0 mx-1" style={{ backgroundColor: '#E8E2D9' }} />
             {[
-              ...(hasZutaten ? [{ key: 'match', label: 'Match' }] : []),
+              { key: 'match',    label: 'Match' },
               { key: 'zeit_asc', label: 'Schnell' },
               { key: 'alpha',    label: 'A–Z' },
             ].map(s => (
@@ -248,7 +248,14 @@ export default function PlanenPage({ weiter }) {
                   <div className="flex items-center gap-3 p-3">
                     {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm truncate mb-1.5" style={{ color: '#1C1917' }}>{r.name}</p>
+                      <div className="flex items-center gap-1.5 mb-1.5">
+                        <p className="font-medium text-sm truncate" style={{ color: '#1C1917' }}>{r.name}</p>
+                        {r.favorit && (
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="#D97706" stroke="none" className="shrink-0">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                          </svg>
+                        )}
+                      </div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full"
                           style={{ backgroundColor: kat.bg, color: kat.text }}>
