@@ -51,6 +51,7 @@ export default function PlanenPage({ weiter }) {
   }
 
   const vorhandene = useMemo(() => ladeVorhandeneZutaten(), [])
+  const hasZutaten = vorhandene.length > 0
   const vorhandeneNachPlan = useMemo(
     () => berechneVorratNachPlan(plan, vorhandene, selectedTag),
     [plan, vorhandene, selectedTag]
@@ -71,7 +72,7 @@ export default function PlanenPage({ weiter }) {
     })
     .sort((a, b) => {
       if (sortierung === 'zeit_asc') return a.zeit - b.zeit
-      if (sortierung === 'alpha')    return a.name.localeCompare(b.name, 'de')
+      if (sortierung === 'alpha' || (!hasZutaten && sortierung === 'match')) return a.name.localeCompare(b.name, 'de')
       return 0
     })
 
@@ -216,7 +217,7 @@ export default function PlanenPage({ weiter }) {
             ))}
             <div className="w-px shrink-0 mx-1" style={{ backgroundColor: '#E8E2D9' }} />
             {[
-              { key: 'match',    label: 'Match' },
+              ...(hasZutaten ? [{ key: 'match', label: 'Match' }] : []),
               { key: 'zeit_asc', label: 'Schnell' },
               { key: 'alpha',    label: 'A–Z' },
             ].map(s => (

@@ -1208,5 +1208,330 @@
       { "name": "Rotwein", "menge": "250 ml" },
       { "name": "Gemüsebrühe", "menge": "250 ml" }
     ]
+  },
+  {
+    "id": "65",
+    "name": "Rotes Thai-Curry mit Hähnchen",
+    "kategorie": "fleischhaltig",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hähnchenbrustfilet", "menge": "500 g" },
+      { "name": "Paprikaschoten", "menge": "2 Stück" },
+      { "name": "Frühlingszwiebeln", "menge": "3 Stück" },
+      { "name": "Möhren", "menge": "100 g" },
+      { "name": "Kaiserschoten", "menge": "200 g" },
+      { "name": "Sesamöl", "menge": "2 EL" },
+      { "name": "Rote Currypaste", "menge": "2 EL" },
+      { "name": "Kokosmilch", "menge": "800 ml" },
+      { "name": "Jasminreis", "menge": "300 g" }
+    ]
+  },
+  {
+    "id": "66",
+    "name": "Maultaschen Pfanne",
+    "kategorie": "fleischhaltig",
+    "zeit": 15,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Maultaschen (Kühlregal)", "menge": "400 g" },
+      { "name": "Eier", "menge": "5 Stück" },
+      { "name": "Frühlingszwiebeln", "menge": "1 Bund" },
+      { "name": "Butter", "menge": "2 EL" },
+      { "name": "Petersilie oder Schnittlauch", "menge": "nach Belieben" }
+    ]
+  },
+  {
+    "id": "67",
+    "name": "Zucchinisuppe",
+    "kategorie": "vegetarisch",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 6,
+    "zutaten": [
+      { "name": "Zucchini", "menge": "1 kg" },
+      { "name": "Gemüsebrühe", "menge": "750 ml" },
+      { "name": "Mascarpone", "menge": "100 g" },
+      { "name": "Parmesan", "menge": "100 g" },
+      { "name": "Zwiebeln", "menge": "100 g" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Pflanzenöl", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "68",
+    "name": "Taco-Salat",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 10,
+    "zutaten": [
+      { "name": "Hackfleisch (gemischt)", "menge": "600 g" },
+      { "name": "Eisbergsalat", "menge": "250 g" },
+      { "name": "Paprika rot", "menge": "250 g" },
+      { "name": "Kidneybohnen (Dose)", "menge": "250 g" },
+      { "name": "Schmand", "menge": "500 g" },
+      { "name": "Gouda (gerieben)", "menge": "200 g" },
+      { "name": "Tortilla-Chips", "menge": "150 g" },
+      { "name": "Salsa-Sauce", "menge": "500 g" },
+      { "name": "Zwiebeln", "menge": "50 g" },
+      { "name": "Milch", "menge": "15 ml" },
+      { "name": "Sonnenblumenöl", "menge": "2 EL" }
+    ]
+  },
+  {
+    "id": "69",
+    "name": "Griechischer Hack-Nudel-Auflauf mit Feta (Kritharaki)",
+    "kategorie": "fleischhaltig",
+    "zeit": 60,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hackfleisch (gemischt)", "menge": "500 g" },
+      { "name": "Kritharaki-Nudeln", "menge": "250 g" },
+      { "name": "Feta", "menge": "200 g" },
+      { "name": "Stückige Tomaten (Dose)", "menge": "425 ml" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "2 Zehen" },
+      { "name": "Olivenöl", "menge": "2 EL" },
+      { "name": "Tomatenmark", "menge": "1 EL" },
+      { "name": "Gemüsebrühe (instant)", "menge": "3 EL" },
+      { "name": "Milch", "menge": "100 ml" },
+      { "name": "Crème fraîche", "menge": "2 EL" },
+      { "name": "Thymian", "menge": "1 EL" }
+    ]
+  },
+  {
+    "id": "70",
+    "name": "Überbackenes Fladenbrot",
+    "kategorie": "fleischhaltig",
+    "zeit": 40,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Fladenbrot", "menge": "1 Stück" },
+      { "name": "Frischkäse mit Kräutern", "menge": "200 g" },
+      { "name": "Salami", "menge": "6 Scheiben" },
+      { "name": "Tomaten", "menge": "4 Stück" },
+      { "name": "Mozzarella", "menge": "1 Kugel" },
+      { "name": "Kochschinken", "menge": "4 Scheiben" },
+      { "name": "Gouda (gerieben)", "menge": "200 g" }
+    ]
+  },
+  {
+    "id": "71",
+    "name": "Blätterteigecken mit Thunfischpaste",
+    "kategorie": "fischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Blätterteig", "menge": "2 Packung" },
+      { "name": "Thunfisch (Dose)", "menge": "1 Dose" },
+      { "name": "Frischkäse", "menge": "1 Packung" },
+      { "name": "Crème fraîche", "menge": "1 Packung" },
+      { "name": "Zwiebel", "menge": "1 Stück" }
+    ]
+  },
+  {
+    "id": "72",
+    "name": "Salzkartoffeln mit Brokkoli und Hollandaise",
+    "kategorie": "vegetarisch",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Kartoffeln (festkochend)", "menge": "500 g" },
+      { "name": "Brokkoli", "menge": "1 Stück" },
+      { "name": "Sauce Hollandaise", "menge": "1 Packung" }
+    ]
+  },
+  {
+    "id": "73",
+    "name": "Nudeln mit Pesto",
+    "kategorie": "vegetarisch",
+    "zeit": 15,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Spaghetti oder Linguine", "menge": "250 g" },
+      { "name": "Pesto nach Wahl", "menge": "1 Glas" },
+      { "name": "Mozzarella", "menge": "1 Kugel" }
+    ]
+  },
+  {
+    "id": "74",
+    "name": "Klöße mit Pilzrahmsoße und Rotkohl",
+    "kategorie": "vegetarisch",
+    "zeit": 45,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Semmelknödel", "menge": "1 Packung" },
+      { "name": "Kartoffelklöße", "menge": "1 Packung" },
+      { "name": "Rotkohl (Glas)", "menge": "1 Glas" },
+      { "name": "Champignons", "menge": "400 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Knoblauch", "menge": "1 Zehe" },
+      { "name": "Sahne", "menge": "400 ml" },
+      { "name": "Mehl", "menge": "2 TL" },
+      { "name": "Hartkäse (gerieben)", "menge": "5 TL" }
+    ]
+  },
+  {
+    "id": "75",
+    "name": "Backofengemüse mit Hirtenkäse",
+    "kategorie": "vegetarisch",
+    "zeit": 50,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hirtenkäse", "menge": "1 Packung" },
+      { "name": "Kartoffeln", "menge": "500 g" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Paprika", "menge": "1 Stück" },
+      { "name": "Zucchini", "menge": "1 Stück" },
+      { "name": "Champignons", "menge": "250 g" },
+      { "name": "Karotten", "menge": "2 Stück" },
+      { "name": "Brokkoli", "menge": "0.5 Stück" }
+    ]
+  },
+  {
+    "id": "76",
+    "name": "Maultaschenauflauf",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Maultaschen", "menge": "2 Packung" },
+      { "name": "TK-Kaisergemüse", "menge": "1 Packung" },
+      { "name": "Knorr Fix 4-Käse-Soße", "menge": "2 Packung" },
+      { "name": "Gouda (gerieben)", "menge": "250 g" }
+    ]
+  },
+  {
+    "id": "77",
+    "name": "Waffeln",
+    "kategorie": "vegetarisch",
+    "zeit": 30,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Butter (weich)", "menge": "125 g" },
+      { "name": "Puderzucker", "menge": "80 g" },
+      { "name": "Vanillezucker", "menge": "1 Packung" },
+      { "name": "Eier", "menge": "2 Stück" },
+      { "name": "Mehl", "menge": "250 g" },
+      { "name": "Backpulver", "menge": "1 TL" },
+      { "name": "Buttermilch", "menge": "200 ml" }
+    ]
+  },
+  {
+    "id": "78",
+    "name": "Hot Dogs (veggie)",
+    "kategorie": "vegetarisch",
+    "zeit": 10,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Hot-Dog-Brötchen", "menge": "1 Packung" },
+      { "name": "Hot-Dog-Würstchen (veggie)", "menge": "1 Packung" },
+      { "name": "Mayonnaise", "menge": "nach Belieben" },
+      { "name": "Ketchup", "menge": "nach Belieben" },
+      { "name": "Saure Gürkchen", "menge": "nach Belieben" },
+      { "name": "Röstzwiebeln", "menge": "nach Belieben" }
+    ]
+  },
+  {
+    "id": "79",
+    "name": "Wraps",
+    "kategorie": "fleischhaltig",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Tortilla Wraps", "menge": "1 Packung" },
+      { "name": "Hackfleisch", "menge": "400 g" },
+      { "name": "Mozzarella", "menge": "2 Kugeln" },
+      { "name": "Salat", "menge": "1 Handvoll" },
+      { "name": "Mais (Dose, klein)", "menge": "1 Dose" },
+      { "name": "Gurke", "menge": "1 Stück" },
+      { "name": "Paprika", "menge": "1 Stück" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Burgersoße", "menge": "nach Belieben" },
+      { "name": "Frischkäse", "menge": "1 Packung" },
+      { "name": "Champignons", "menge": "250 g" }
+    ]
+  },
+  {
+    "id": "80",
+    "name": "Pfannkuchen",
+    "kategorie": "fleischhaltig",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Eier", "menge": "4 Stück" },
+      { "name": "Mehl", "menge": "250 g" },
+      { "name": "Milch", "menge": "500 ml" },
+      { "name": "Bacon", "menge": "1 Packung" },
+      { "name": "Gouda (Scheiben)", "menge": "1 Packung" },
+      { "name": "Nutella", "menge": "nach Belieben" }
+    ]
+  },
+  {
+    "id": "81",
+    "name": "Burger",
+    "kategorie": "fleischhaltig",
+    "zeit": 30,
+    "aufwand": "mittel",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Hackfleisch", "menge": "400 g" },
+      { "name": "Burger Buns Brioche", "menge": "4 Stück" },
+      { "name": "Gouda (Scheiben)", "menge": "4 Scheiben" },
+      { "name": "Salat", "menge": "1 Handvoll" },
+      { "name": "Zwiebel", "menge": "1 Stück" },
+      { "name": "Gurke", "menge": "1 Stück" },
+      { "name": "Burgersoße", "menge": "nach Belieben" },
+      { "name": "Mayonnaise", "menge": "nach Belieben" },
+      { "name": "Bacon", "menge": "1 Packung" },
+      { "name": "Champignons", "menge": "1 Packung" }
+    ]
+  },
+  {
+    "id": "82",
+    "name": "Lachs-Sahne-Gratin",
+    "kategorie": "fischhaltig",
+    "zeit": 25,
+    "aufwand": "einfach",
+    "portionen": 4,
+    "zutaten": [
+      { "name": "Knorr Fix Lachs-Sahne-Gratin", "menge": "2 Packung" },
+      { "name": "Sahne", "menge": "400 ml" },
+      { "name": "Lachsfilet", "menge": "250 g" },
+      { "name": "Reis", "menge": "200 g" }
+    ]
+  },
+  {
+    "id": "83",
+    "name": "Pizza",
+    "kategorie": "fleischhaltig",
+    "zeit": 20,
+    "aufwand": "einfach",
+    "portionen": 2,
+    "zutaten": [
+      { "name": "Pizzateig (fertig mit Tomatensoße)", "menge": "1 Packung" },
+      { "name": "Gouda oder Mozzarella (gerieben)", "menge": "250 g" },
+      { "name": "Salami", "menge": "100 g" },
+      { "name": "Kochschinken", "menge": "100 g" },
+      { "name": "Champignons", "menge": "150 g" },
+      { "name": "Thunfisch (Dose)", "menge": "1 Dose" },
+      { "name": "Bacon", "menge": "100 g" },
+      { "name": "Mais (Dose, klein)", "menge": "1 Dose" }
+    ]
   }
 ]
