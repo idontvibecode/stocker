@@ -1,11 +1,35 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Document, Page, pdfjs } from 'react-pdf'
+import 'react-pdf/dist/Page/AnnotationLayer.css'
+import 'react-pdf/dist/Page/TextLayer.css'
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString()
 
 export default function PdfModal({ rezept, onClose }) {
+  const [numPages, setNumPages] = useState(null)
+  const [containerWidth, setContainerWidth] = useState(0)
+  const containerRef = useRef(null)
+
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   }, [onClose])
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    const ro = new ResizeObserver(([entry]) => {
+      setContainerWidth(entry.contentRect.width)
+    })
+    ro.observe(containerRef.current)
+    return () => ro.disconnect()
+  }, [])
+
+  // Seiten zurücksetzen wenn Rezept wechselt
+  useEffect(() => { setNumPages(null) }, [rezept])
 
   if (!rezept) return null
 
@@ -18,8 +42,8 @@ export default function PdfModal({ rezept, onClose }) {
       onClick={onClose}
     >
       <div
-        className="flex flex-col flex-1 m-3 rounded-2xl overflow-hidden"
-        style={{ backgroundColor: '#F7F3EE', boxShadow: '0 8px 40px rgba(0,0,0,0.25)' }}
+        className="flex flex-col m-3 rounded-2xl overflow-hidden"
+        style={{ backgroundColor: '#F7F3EE', boxShadow: '0 8px 40px rgba(0,0,0,0.25)', maxHeight: 'calc(100vh - 24px)' }}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -36,13 +60,38 @@ export default function PdfModal({ rezept, onClose }) {
           </button>
         </div>
 
-        {/* PDF embed */}
-        <embed
-          src={pdfUrl}
-          type="application/pdf"
-          className="flex-1 w-full"
-          style={{ minHeight: 0 }}
-        />
+        {/* PDF-Seiten */}
+        <div
+          ref={containerRef}
+          className="overflow-y-auto"
+          style={{ flex: '1 1 0', minHeight: 0, backgroundColor: '#e5e7eb' }}
+        >
+          {containerWidth > 0 && (
+            <Document
+              file={pdfUrl}
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+              loading={
+                <div className="flex items-center justify-center py-16">
+                  <p className="text-sm" style={{ color: '#78716C' }}>Lädt…</p>
+                </div>
+              }
+              error={
+                <div className="flex items-center justify-center py-16">
+                  <p className="text-sm" style={{ color: '#78716C' }}>PDF konnte nicht geladen werden.</p>
+                </div>
+              }
+            >
+              {numPages && Array.from({ length: numPages }, (_, i) => (
+                <Page
+                  key={i + 1}
+                  pageNumber={i + 1}
+                  width={containerWidth}
+                  className="block"
+                />
+              ))}
+            </Document>
+          )}
+        </div>
 
         {/* Footer */}
         <div className="px-4 py-3 shrink-0 flex justify-end" style={{ borderTop: '1px solid #E8E2D9' }}>
