@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from 'react'
 import rezepteData from '../data/rezepte.json'
 import { ladeVorhandeneZutaten, berechneMatch, matchStufe, berechneVorratNachPlan } from '../utils/matching'
+import PdfModal from '../components/PdfModal'
 
 const TAGE      = ['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag']
 const KURZ      = { Montag:'Mo', Dienstag:'Di', Mittwoch:'Mi', Donnerstag:'Do', Freitag:'Fr', Samstag:'Sa', Sonntag:'So' }
@@ -29,6 +30,7 @@ export default function PlanenPage({ weiter }) {
   const [sortierung, setSortierung] = useState(() => ladeVorhandeneZutaten().length > 0 ? 'match' : 'alpha')
   const [personenProRezept, setPersonenProRezept] = useState({})
   const [stepperOffen, setStepperOffen] = useState(null)
+  const [pdfRezept, setPdfRezept] = useState(null)
   const stepperTimer = useRef(null)
 
   const stepperSchliessen = useCallback(() => {
@@ -286,6 +288,19 @@ export default function PlanenPage({ weiter }) {
                             {r.prozent}%
                           </span>
                         )}
+                        {r.pdf && (
+                          <button
+                            onClick={e => { e.stopPropagation(); setPdfRezept(r) }}
+                            className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full cursor-pointer transition-opacity hover:opacity-70"
+                            style={{ backgroundColor: '#F7F3EE', color: '#78716C' }}
+                            title="Rezept-PDF anzeigen"
+                          >
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                            <span className="text-[10px] font-medium">PDF</span>
+                          </button>
+                        )}
                       </div>
                     </div>
 
@@ -343,6 +358,8 @@ export default function PlanenPage({ weiter }) {
           <p className="text-sm" style={{ color: '#A8A29E' }}>Tag antippen um Rezepte zuzuweisen</p>
         </div>
       )}
+
+      <PdfModal rezept={pdfRezept} onClose={() => setPdfRezept(null)} />
     </div>
   )
 }

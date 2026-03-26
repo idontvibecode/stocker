@@ -47,7 +47,8 @@
         "name": "Champignons",
         "menge": "250 g"
       }
-    ]
+    ],
+    "pdf": "1.pdf"
   },
   {
     "id": "2",
@@ -97,7 +98,8 @@
         "name": "Speisestärke",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "2.pdf"
   },
   {
     "id": "3",
@@ -147,7 +149,8 @@
         "name": "Petersilie",
         "menge": "0.5 Bund"
       }
-    ]
+    ],
+    "pdf": "3.pdf"
   },
   {
     "id": "4",
@@ -201,7 +204,8 @@
         "name": "Zucker (braun)",
         "menge": "3 EL"
       }
-    ]
+    ],
+    "pdf": "4.pdf"
   },
   {
     "id": "5",
@@ -243,7 +247,8 @@
         "name": "Sonnenblumenöl",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "5.pdf"
   },
   {
     "id": "6",
@@ -277,7 +282,8 @@
         "name": "Sahne",
         "menge": "200 ml"
       }
-    ]
+    ],
+    "pdf": "6.pdf"
   },
   {
     "id": "7",
@@ -319,7 +325,8 @@
         "name": "Streukäse",
         "menge": "150 g"
       }
-    ]
+    ],
+    "pdf": "7.pdf"
   },
   {
     "id": "8",
@@ -377,7 +384,8 @@
         "name": "Majoran",
         "menge": "0.5 TL"
       }
-    ]
+    ],
+    "pdf": "8.pdf"
   },
   {
     "id": "9",
@@ -419,7 +427,8 @@
         "name": "Senf",
         "menge": "1 TL"
       }
-    ]
+    ],
+    "pdf": "9.pdf"
   },
   {
     "id": "10",
@@ -461,7 +470,8 @@
         "name": "Mehl",
         "menge": "20 g"
       }
-    ]
+    ],
+    "pdf": "10.pdf"
   },
   {
     "id": "11",
@@ -515,7 +525,8 @@
         "name": "Olivenöl",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "11.pdf"
   },
   {
     "id": "12",
@@ -565,7 +576,8 @@
         "name": "Olivenöl",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "12.pdf"
   },
   {
     "id": "13",
@@ -635,7 +647,8 @@
         "name": "Pflanzenöl",
         "menge": "5 EL"
       }
-    ]
+    ],
+    "pdf": "13.pdf"
   },
   {
     "id": "14",
@@ -693,7 +706,8 @@
         "name": "Petersilie",
         "menge": "1 Bund"
       }
-    ]
+    ],
+    "pdf": "14.pdf"
   },
   {
     "id": "15",
@@ -731,7 +745,8 @@
         "name": "Dill",
         "menge": "3 EL"
       }
-    ]
+    ],
+    "pdf": "15.pdf"
   },
   {
     "id": "16",
@@ -773,7 +788,8 @@
         "name": "Parmesan",
         "menge": "nach Belieben"
       }
-    ]
+    ],
+    "pdf": "16.pdf"
   },
   {
     "id": "17",
@@ -811,7 +827,8 @@
         "name": "Schnittlauch",
         "menge": "0.5 Bund"
       }
-    ]
+    ],
+    "pdf": "17.pdf"
   },
   {
     "id": "18",
@@ -849,7 +866,8 @@
         "name": "Gouda (gerieben)",
         "menge": "60 g"
       }
-    ]
+    ],
+    "pdf": "18.pdf"
   },
   {
     "id": "19",
@@ -895,7 +913,8 @@
         "name": "Senf",
         "menge": "1 TL"
       }
-    ]
+    ],
+    "pdf": "19.pdf"
   },
   {
     "id": "20",
@@ -929,7 +948,8 @@
         "name": "Mozzarella",
         "menge": "125 g"
       }
-    ]
+    ],
+    "pdf": "20.pdf"
   },
   {
     "id": "21",
@@ -979,7 +999,8 @@
         "name": "Zitronensaft",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "21.pdf"
   },
   {
     "id": "22",
@@ -1021,7 +1042,8 @@
         "name": "Italienische Kräuter",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "22.pdf"
   },
   {
     "id": "23",
@@ -1043,7 +1065,8 @@
         "name": "Öl",
         "menge": "3 EL"
       }
-    ]
+    ],
+    "pdf": "23.pdf"
   },
   {
     "id": "24",
@@ -1085,7 +1108,8 @@
         "name": "Majoran",
         "menge": "1 TL"
       }
-    ]
+    ],
+    "pdf": "24.pdf"
   },
   {
     "id": "25",
@@ -1135,7 +1159,8 @@
         "name": "Basilikum",
         "menge": "1 Handvoll"
       }
-    ]
+    ],
+    "pdf": "25.pdf"
   },
   {
     "id": "26",
@@ -1169,7 +1194,8 @@
         "name": "Petersilie",
         "menge": "5 g"
       }
-    ]
+    ],
+    "pdf": "26.pdf"
   },
   {
     "id": "27",
@@ -1207,7 +1233,8 @@
         "name": "Schnittlauch",
         "menge": "5 g"
       }
-    ]
+    ],
+    "pdf": "27.pdf"
   },
   {
     "id": "28",
@@ -1249,7 +1276,8 @@
         "name": "Ei",
         "menge": "1 Stück"
       }
-    ]
+    ],
+    "pdf": "28.pdf"
   },
   {
     "id": "29",
@@ -1295,7 +1323,8 @@
         "name": "Aceto Balsamico",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "29.pdf"
   },
   {
     "id": "30",
@@ -1345,7 +1374,8 @@
         "name": "Balsamico Bianco",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "30.pdf"
   },
   {
     "id": "31",
@@ -1441,7 +1471,8 @@
         "name": "Milch",
         "menge": "200 ml"
       }
-    ]
+    ],
+    "pdf": "32.pdf"
   },
   {
     "id": "33",
@@ -1483,7 +1514,8 @@
         "name": "Sonnenblumenkerne",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "33.pdf"
   },
   {
     "id": "34",
@@ -1509,7 +1541,8 @@
         "name": "Speckwürfel",
         "menge": "125 g"
       }
-    ]
+    ],
+    "pdf": "34.pdf"
   },
   {
     "id": "35",
@@ -1559,7 +1592,8 @@
         "name": "Gratinkäse",
         "menge": "150 g"
       }
-    ]
+    ],
+    "pdf": "35.pdf"
   },
   {
     "id": "36",
@@ -1573,7 +1607,8 @@
         "name": "Kartoffeln (festkochend)",
         "menge": "800 g"
       }
-    ]
+    ],
+    "pdf": "36.pdf"
   },
   {
     "id": "37",
@@ -1627,7 +1662,8 @@
         "name": "Agavensirup",
         "menge": "1 TL"
       }
-    ]
+    ],
+    "pdf": "37.pdf"
   },
   {
     "id": "38",
@@ -1697,7 +1733,8 @@
         "name": "Olivenöl",
         "menge": "3 EL"
       }
-    ]
+    ],
+    "pdf": "38.pdf"
   },
   {
     "id": "39",
@@ -1767,7 +1804,8 @@
         "name": "Kokosblütensirup",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "39.pdf"
   },
   {
     "id": "40",
@@ -1817,7 +1855,8 @@
         "name": "Gurkenwasser",
         "menge": "3 EL"
       }
-    ]
+    ],
+    "pdf": "40.pdf"
   },
   {
     "id": "41",
@@ -1855,7 +1894,8 @@
         "name": "Veganer Feta",
         "menge": "150 g"
       }
-    ]
+    ],
+    "pdf": "41.pdf"
   },
   {
     "id": "42",
@@ -1905,7 +1945,8 @@
         "name": "Sojasauce",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "42.pdf"
   },
   {
     "id": "43",
@@ -1967,7 +2008,8 @@
         "name": "Veganer Reibekäse",
         "menge": "150 g"
       }
-    ]
+    ],
+    "pdf": "43.pdf"
   },
   {
     "id": "44",
@@ -2009,7 +2051,8 @@
         "name": "Veganer Reibekäse",
         "menge": "150 g"
       }
-    ]
+    ],
+    "pdf": "44.pdf"
   },
   {
     "id": "45",
@@ -2055,7 +2098,8 @@
         "name": "Vegane Butter",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "45.pdf"
   },
   {
     "id": "46",
@@ -2101,7 +2145,8 @@
         "name": "Mais (Dose)",
         "menge": "1 Dose"
       }
-    ]
+    ],
+    "pdf": "46.pdf"
   },
   {
     "id": "47",
@@ -2155,7 +2200,8 @@
         "name": "Öl",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "47.pdf"
   },
   {
     "id": "48",
@@ -2173,7 +2219,8 @@
         "name": "Sonnenblumenöl",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "48.pdf"
   },
   {
     "id": "49",
@@ -2211,7 +2258,8 @@
         "name": "Limette",
         "menge": "1 Stück"
       }
-    ]
+    ],
+    "pdf": "49.pdf"
   },
   {
     "id": "50",
@@ -2269,7 +2317,8 @@
         "name": "Pflanzenöl",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "50.pdf"
   },
   {
     "id": "51",
@@ -2319,7 +2368,8 @@
         "name": "Zitronensaft",
         "menge": "4 TL"
       }
-    ]
+    ],
+    "pdf": "51.pdf"
   },
   {
     "id": "52",
@@ -2369,7 +2419,8 @@
         "name": "Zitrone",
         "menge": "1 Stück"
       }
-    ]
+    ],
+    "pdf": "52.pdf"
   },
   {
     "id": "53",
@@ -2403,7 +2454,8 @@
         "name": "Knoblauch",
         "menge": "1 Zehe"
       }
-    ]
+    ],
+    "pdf": "53.pdf"
   },
   {
     "id": "54",
@@ -2457,7 +2509,8 @@
         "name": "Öl",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "54.pdf"
   },
   {
     "id": "55",
@@ -2487,7 +2540,8 @@
         "name": "Vegane Butter",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "55.pdf"
   },
   {
     "id": "56",
@@ -2549,7 +2603,8 @@
         "name": "Vegane Crème fraîche",
         "menge": "180 g"
       }
-    ]
+    ],
+    "pdf": "56.pdf"
   },
   {
     "id": "57",
@@ -2595,7 +2650,8 @@
         "name": "Panko Paniermehl",
         "menge": "50 g"
       }
-    ]
+    ],
+    "pdf": "57.pdf"
   },
   {
     "id": "58",
@@ -2649,7 +2705,8 @@
         "name": "Pflanzenöl",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "58.pdf"
   },
   {
     "id": "59",
@@ -2679,7 +2736,8 @@
         "name": "Pinienkerne",
         "menge": "50 g"
       }
-    ]
+    ],
+    "pdf": "59.pdf"
   },
   {
     "id": "60",
@@ -2721,7 +2779,8 @@
         "name": "Rote Zwiebel",
         "menge": "1 Stück"
       }
-    ]
+    ],
+    "pdf": "60.pdf"
   },
   {
     "id": "61",
@@ -2787,7 +2846,8 @@
         "name": "Getrocknete Pilze",
         "menge": "15 g"
       }
-    ]
+    ],
+    "pdf": "61.pdf"
   },
   {
     "id": "62",
@@ -2829,7 +2889,8 @@
         "name": "Vegane Butter",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "62.pdf"
   },
   {
     "id": "63",
@@ -2863,7 +2924,8 @@
         "name": "Sojasoße",
         "menge": "1 TL"
       }
-    ]
+    ],
+    "pdf": "63.pdf"
   },
   {
     "id": "64",
@@ -2917,7 +2979,8 @@
         "name": "Gemüsebrühe",
         "menge": "250 ml"
       }
-    ]
+    ],
+    "pdf": "64.pdf"
   },
   {
     "id": "65",
@@ -2963,7 +3026,8 @@
         "name": "Jasminreis",
         "menge": "300 g"
       }
-    ]
+    ],
+    "pdf": "65.pdf"
   },
   {
     "id": "66",
@@ -2994,7 +3058,8 @@
         "menge": "nach Belieben"
       }
     ],
-    "favorit": true
+    "favorit": true,
+    "pdf": "66.pdf"
   },
   {
     "id": "67",
@@ -3032,7 +3097,8 @@
         "name": "Pflanzenöl",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "67.pdf"
   },
   {
     "id": "68",
@@ -3086,7 +3152,8 @@
         "name": "Sonnenblumenöl",
         "menge": "2 EL"
       }
-    ]
+    ],
+    "pdf": "68.pdf"
   },
   {
     "id": "69",
@@ -3144,7 +3211,8 @@
         "name": "Thymian",
         "menge": "1 EL"
       }
-    ]
+    ],
+    "pdf": "69.pdf"
   },
   {
     "id": "70",
@@ -3182,7 +3250,8 @@
         "name": "Gouda (gerieben)",
         "menge": "200 g"
       }
-    ]
+    ],
+    "pdf": "70.pdf"
   },
   {
     "id": "71",
