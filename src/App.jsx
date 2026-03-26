@@ -75,35 +75,46 @@ export default function App() {
       onTouchEnd={onTouchEnd}
       onTouchCancel={() => { gesture.current = null }}
     >
-      {/* Top brand bar */}
-      <header
-        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4"
-        style={{ backgroundColor: '#1A2E23', height: '48px' }}
-      >
-        <div className="flex items-center gap-2">
-          <svg width="22" height="22" viewBox="0 0 48 48" fill="none">
-            <line x1="13" y1="8"  x2="13" y2="18" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-            <line x1="10" y1="8"  x2="10" y2="14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-            <line x1="16" y1="8"  x2="16" y2="14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-            <path d="M10 14 Q13 18 16 14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
-            <line x1="13" y1="18" x2="13" y2="40" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-            <path d="M35 8 C35 8 38 12 38 18 L35 20 L35 40" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-            <line x1="35" y1="20" x2="38" y2="18" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
-          </svg>
-          <span className="font-display text-lg" style={{ color: '#fff', letterSpacing: '0.01em' }}>
-            Stocker
-          </span>
-        </div>
-        <span className="text-[10px] font-medium tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.35)' }}>
-          Dein Heimrestaurant
-        </span>
-      </header>
-
       {/* Page content */}
       <main
-        className="max-w-2xl mx-auto px-4"
-        style={{ paddingTop: '68px', paddingBottom: '96px' }}
+        className="max-w-2xl mx-auto px-4 relative"
+        style={{ paddingTop: '20px', paddingBottom: '96px' }}
       >
+        {/* Brand stamp — like a wax seal pressed into paper */}
+        <div className="flex justify-end mb-1 pointer-events-none select-none">
+          <div
+            className="relative flex items-center justify-center"
+            style={{ width: '42px', height: '42px' }}
+          >
+            {/* Outer ring — dotted, like an old restaurant stamp */}
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                border: '1.5px dashed rgba(26,46,35,0.25)',
+              }}
+            />
+            {/* Inner seal */}
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center"
+              style={{
+                backgroundColor: '#1A2E23',
+                boxShadow: '0 1px 4px rgba(26,46,35,0.3), inset 0 1px 0 rgba(255,255,255,0.06)',
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
+                {/* Fork — amber */}
+                <line x1="15" y1="10" x2="15" y2="20" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
+                <line x1="12" y1="10" x2="12" y2="16" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
+                <line x1="18" y1="10" x2="18" y2="16" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M12 16 Q15 20 18 16" stroke="#D97706" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                <line x1="15" y1="20" x2="15" y2="38" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
+                {/* Knife — cream white */}
+                <path d="M33 10 C33 10 36 14 36 20 L33 22 L33 38" stroke="#F7F3EE" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                <line x1="33" y1="22" x2="36" y2="20" stroke="#F7F3EE" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
         <div key={activeTab} className="page-enter">
           <Page navigateTo={navigateTo} weiter={weiter} />
         </div>
