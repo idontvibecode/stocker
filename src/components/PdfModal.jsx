@@ -81,16 +81,6 @@ export default function PdfModal({ rezept, onClose }) {
           </Document>
         </div>
 
-        {/* Footer */}
-        <div className="px-4 py-3 shrink-0 flex justify-end" style={{ borderTop: '1px solid #E8E2D9' }}>
-          <button
-            onClick={() => window.open(pdfUrl, '_blank')}
-            className="px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-opacity hover:opacity-80"
-            style={{ backgroundColor: '#D97706', color: '#fff' }}
-          >
-            In neuem Tab öffnen
-          </button>
-        </div>
       </div>
     </div>
   )
