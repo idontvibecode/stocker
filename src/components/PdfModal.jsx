@@ -36,11 +36,12 @@ export default function PdfModal({ rezept, onClose }) {
           </button>
         </div>
 
-        {/* PDF iframe */}
-        <iframe
+        {/* PDF embed */}
+        <embed
           src={pdfUrl}
-          className="flex-1 w-full border-0"
-          title={rezept.name}
+          type="application/pdf"
+          className="flex-1 w-full"
+          style={{ minHeight: 0 }}
         />
 
         {/* Footer */}
