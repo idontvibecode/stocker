@@ -69,3 +69,44 @@ body {
     transform: translateY(-1px);
   }
 }
+
+/* Recipe cards stagger in when list opens */
+@keyframes cardStagger {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card-stagger {
+  animation: cardStagger 0.2s ease-out backwards;
+}
+
+/* Day badge spring-pop when recipe is assigned */
+@keyframes badgePop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.25); }
+  65%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.badge-pop {
+  animation: badgePop 0.38s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* Bon Appétit overlay */
+@keyframes bonAppetitAnim {
+  0%   { opacity: 0; transform: scale(0.82) rotate(-2deg); }
+  18%  { opacity: 1; transform: scale(1.04) rotate(1deg); }
+  75%  { opacity: 1; transform: scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: scale(0.96) rotate(-1deg); }
+}
+.bon-appetit {
+  animation: bonAppetitAnim 2.6s ease-in-out forwards;
+}
+
+/* Shopping list strikethrough drawn left-to-right */
+@keyframes strikeOut {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.strikethrough-line {
+  transform-origin: left;
+  animation: strikeOut 0.28s ease-out forwards;
+}

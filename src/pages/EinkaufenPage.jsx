@@ -182,14 +182,14 @@ export default function EinkaufenPage({ navigateTo }) {
       {/* Page Header */}
       <div>
         <h1 className="font-display text-2xl" style={{ color: '#1C1917', letterSpacing: '-0.01em' }}>
-          Einkaufsliste
+          Küchenzettel
         </h1>
         <p className="text-sm mt-0.5" style={{ color: '#78716C' }}>
           {aktiv.length > 0
-            ? `${aktiv.length} ${aktiv.length === 1 ? 'Eintrag' : 'Einträge'}`
+            ? `${aktiv.length} ${aktiv.length === 1 ? 'Posten' : 'Posten'} für den Einkauf`
             : planLeer
             ? 'Noch kein Wochenplan'
-            : 'Alles vorhanden'}
+            : 'Alles vorhanden — Küche ist versorgt!'}
         </p>
       </div>
 
@@ -227,8 +227,8 @@ export default function EinkaufenPage({ navigateTo }) {
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
-          <p className="font-medium text-base mb-1" style={{ color: '#1C1917' }}>Alles vorhanden!</p>
-          <p className="text-sm" style={{ color: '#78716C' }}>Du hast alle Zutaten für diese Woche.</p>
+          <p className="font-display text-lg mb-1" style={{ color: '#1C1917' }}>Alles vorhanden!</p>
+          <p className="text-sm" style={{ color: '#78716C' }}>Die Küche ist bestens versorgt.</p>
         </div>
       )}
 
@@ -237,7 +237,7 @@ export default function EinkaufenPage({ navigateTo }) {
         <div className="bg-white rounded-2xl overflow-hidden card-shadow">
           <div className="px-4 pt-4 pb-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <p className="text-xs font-medium" style={{ color: '#A8A29E' }}>Einkaufsliste</p>
+              <p className="text-xs font-medium" style={{ color: '#A8A29E' }}>Einkaufsposten</p>
               <span className="text-[11px] px-1.5 py-0.5 rounded-full font-medium"
                 style={{ backgroundColor: '#F7F3EE', color: '#78716C' }}>
                 {aktiv.length}
@@ -270,13 +270,18 @@ export default function EinkaufenPage({ navigateTo }) {
                   {i > 0 && <div className="h-px mx-4" style={{ backgroundColor: removed ? '#fafaf9' : '#F7F3EE' }} />}
                   <div className="flex items-center gap-3 px-4 py-3 transition-colors"
                     style={{ backgroundColor: removed ? '#fafaf9' : 'transparent' }}>
-                    <span className="flex-1 text-sm capitalize transition-all"
+                    <span className="flex-1 text-sm capitalize transition-all relative"
                       style={{
-                        textDecoration: removed ? 'line-through' : 'none',
                         color: removed ? '#D4CFC8' : '#1C1917',
                         fontWeight: removed ? 400 : 500,
                       }}>
                       {item.name}
+                      {removed && (
+                        <span
+                          className="strikethrough-line absolute left-0 top-1/2 w-full"
+                          style={{ height: '1.5px', backgroundColor: '#D4CFC8' }}
+                        />
+                      )}
                     </span>
                     {!removed && item.mengeLabel && (
                       <span className="text-xs font-medium px-2 py-0.5 rounded-full shrink-0"
