@@ -179,6 +179,20 @@ export default function EinkaufenPage({ navigateTo }) {
   return (
     <div className="flex flex-col gap-4">
 
+      {/* Page Header */}
+      <div>
+        <h1 className="font-display text-2xl" style={{ color: '#1C1917', letterSpacing: '-0.01em' }}>
+          Einkaufsliste
+        </h1>
+        <p className="text-sm mt-0.5" style={{ color: '#78716C' }}>
+          {aktiv.length > 0
+            ? `${aktiv.length} ${aktiv.length === 1 ? 'Eintrag' : 'Einträge'}`
+            : planLeer
+            ? 'Noch kein Wochenplan'
+            : 'Alles vorhanden'}
+        </p>
+      </div>
+
       {/* Dezenter Hinweis wenn kein Wochenplan */}
       {planLeer && (
         <div className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3 card-shadow">
@@ -335,7 +349,6 @@ export default function EinkaufenPage({ navigateTo }) {
               </>
             )}
           </button>
-          <p className="text-center text-xs -mt-2" style={{ color: '#A8A29E' }}>{aktiv.length} Einträge</p>
         </>
       )}
 

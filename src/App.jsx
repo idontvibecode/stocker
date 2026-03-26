@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import StepProgress from './components/StepProgress'
+import TabBar from './components/TabBar'
 import WelcomePage from './pages/WelcomePage'
 import ZutatenPage from './pages/ZutatenPage'
 import PlanenPage from './pages/PlanenPage'
@@ -15,7 +15,8 @@ const pages = {
 
 export default function App() {
   const [welcomed, setWelcomed]   = useState(() => !!localStorage.getItem('stocker_welcomed'))
-  const [activeTab, setActiveTab] = useState('zutaten')
+  const [activeTab, setActiveTab] = useState('planen')
+
   const Page = pages[activeTab]
 
   function navigateTo(tab) {
@@ -39,12 +40,29 @@ export default function App() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F7F3EE' }}>
-      <StepProgress activeTab={activeTab} onTabChange={navigateTo} />
-      <main className="max-w-2xl mx-auto px-4 py-6 pb-16">
+
+      {/* Top brand bar */}
+      <header
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-center"
+        style={{ backgroundColor: '#1A2E23', height: '48px' }}
+      >
+        <span className="font-display text-xl" style={{ color: '#fff', letterSpacing: '0.01em' }}>
+          Stocker
+        </span>
+      </header>
+
+      {/* Page content */}
+      <main
+        className="max-w-2xl mx-auto px-4"
+        style={{ paddingTop: '68px', paddingBottom: '96px' }}
+      >
         <div key={activeTab} className="page-enter">
           <Page navigateTo={navigateTo} weiter={weiter} />
         </div>
       </main>
+
+      {/* Bottom tab bar */}
+      <TabBar activeTab={activeTab} onTabChange={navigateTo} />
     </div>
   )
 }

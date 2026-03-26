@@ -151,6 +151,18 @@ export default function ZutatenPage({ weiter }) {
   return (
     <div className="flex flex-col gap-4">
 
+      {/* Page Header */}
+      <div>
+        <h1 className="font-display text-2xl" style={{ color: '#1C1917', letterSpacing: '-0.01em' }}>
+          Zutaten
+        </h1>
+        <p className="text-sm mt-0.5" style={{ color: '#78716C' }}>
+          {alleZutaten.length > 0
+            ? `${alleZutaten.length} Zutaten erfasst`
+            : 'Kühlschrank & Vorrat eintragen'}
+        </p>
+      </div>
+
       {/* KI-Import */}
       <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#1A2E23' }}>
         <div className="p-4">
@@ -414,16 +426,16 @@ export default function ZutatenPage({ weiter }) {
       <div className="flex flex-col gap-2 pt-1">
         <button
           onClick={weiter}
-          className="w-full py-4 rounded-2xl text-sm font-medium tracking-wide transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
-          style={{ backgroundColor: '#D97706', color: '#fff' }}
+          className="w-full py-3.5 rounded-2xl text-sm font-medium tracking-wide transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+          style={{ backgroundColor: '#1A2E23', color: '#fff' }}
         >
-          Weiter zu Rezepten
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Zum Wochenplan
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <button
           onClick={allesZuruecksetzen}
-          className="w-full py-3 text-xs font-medium cursor-pointer transition-colors"
-          style={{ color: '#A8A29E' }}
+          className="w-full py-2.5 text-xs cursor-pointer transition-colors"
+          style={{ color: '#C4BCBA' }}
         >
           Neu starten
         </button>

@@ -27,14 +27,14 @@ export default function WelcomePage({ onStart }) {
           Mahlzeiten planen. Einkauf erledigt.
         </p>
 
-        {/* Steps */}
+        {/* Features */}
         <div className="w-full max-w-sm flex flex-col gap-2 mb-10">
           {[
-            { n: 1, icon: '🧊', title: 'Zutaten erfassen',  sub: 'Kühlschrank & Vorrat eintragen' },
-            { n: 2, icon: '📅', title: 'Woche planen',      sub: 'Rezepte für jeden Tag wählen' },
-            { n: 3, icon: '✅', title: 'Einkaufsliste',     sub: 'Wird automatisch erstellt' },
-          ].map(({ n, icon, title, sub }) => (
-            <div key={n} className="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 card-shadow">
+            { icon: '🧊', title: 'Zutaten erfassen',  sub: 'Kühlschrank & Vorrat eintragen' },
+            { icon: '📅', title: 'Woche planen',      sub: 'Rezepte für jeden Tag wählen'   },
+            { icon: '✅', title: 'Einkaufsliste',     sub: 'Wird automatisch erstellt'       },
+          ].map(({ icon, title, sub }) => (
+            <div key={title} className="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 card-shadow">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0"
                 style={{ backgroundColor: '#F7F3EE' }}>
                 {icon}
@@ -42,10 +42,6 @@ export default function WelcomePage({ onStart }) {
               <div className="flex-1 text-left">
                 <p className="font-medium text-sm" style={{ color: '#1C1917' }}>{title}</p>
                 <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>{sub}</p>
-              </div>
-              <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                style={{ backgroundColor: '#F7F3EE' }}>
-                <span className="text-[10px] font-semibold" style={{ color: '#78716C' }}>{n}</span>
               </div>
             </div>
           ))}

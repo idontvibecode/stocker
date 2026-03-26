@@ -58,3 +58,14 @@ body {
   outline: 2px solid #D97706;
   outline-offset: 2px;
 }
+
+/* Card hover (desktop only) */
+.card-hover {
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+@media (hover: hover) {
+  .card-hover:hover {
+    box-shadow: 0 6px 20px rgba(100,80,40,0.13), 0 2px 6px rgba(100,80,40,0.07);
+    transform: translateY(-1px);
+  }
+}
