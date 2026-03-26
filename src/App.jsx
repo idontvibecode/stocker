@@ -16,7 +16,9 @@ const pages = {
 export default function App() {
   const [welcomed, setWelcomed]   = useState(() => !!localStorage.getItem('stocker_welcomed'))
   const [activeTab, setActiveTab] = useState('planen')
-  const touchStart = useRef(null)
+
+  // Swipe: track start position + direction lock (null | 'h' | 'v')
+  const gesture = useRef(null)
 
   const Page = pages[activeTab]
 
@@ -30,25 +32,29 @@ export default function App() {
     if (next) navigateTo(next)
   }
 
-  function handleTouchStart(e) {
-    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  function onTouchStart(e) {
+    const tag = document.activeElement?.tagName
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return
+    gesture.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: null }
   }
 
-  function handleTouchEnd(e) {
-    if (!touchStart.current) return
-    const tag = document.activeElement?.tagName
-    if (tag === 'INPUT' || tag === 'TEXTAREA') { touchStart.current = null; return }
+  function onTouchMove(e) {
+    if (!gesture.current || gesture.current.dir) return
+    const dx = Math.abs(e.touches[0].clientX - gesture.current.x)
+    const dy = Math.abs(e.touches[0].clientY - gesture.current.y)
+    // Lock direction once we've moved ≥ 8 px
+    if (dx + dy < 8) return
+    gesture.current.dir = dx > dy ? 'h' : 'v'
+  }
 
-    const dx = e.changedTouches[0].clientX - touchStart.current.x
-    const dy = e.changedTouches[0].clientY - touchStart.current.y
-    touchStart.current = null
-
-    // Only fire if clearly horizontal (1.5× wider than tall) and ≥ 60 px
-    if (Math.abs(dx) > Math.abs(dy) * 1.5 && Math.abs(dx) > 60) {
-      const idx = TAB_ORDER.indexOf(activeTab)
-      if (dx < 0 && idx < TAB_ORDER.length - 1) navigateTo(TAB_ORDER[idx + 1])
-      else if (dx > 0 && idx > 0)               navigateTo(TAB_ORDER[idx - 1])
-    }
+  function onTouchEnd(e) {
+    if (!gesture.current || gesture.current.dir !== 'h') { gesture.current = null; return }
+    const dx = e.changedTouches[0].clientX - gesture.current.x
+    gesture.current = null
+    if (Math.abs(dx) < 55) return
+    const idx = TAB_ORDER.indexOf(activeTab)
+    if (dx < 0 && idx < TAB_ORDER.length - 1) navigateTo(TAB_ORDER[idx + 1])
+    else if (dx > 0 && idx > 0)               navigateTo(TAB_ORDER[idx - 1])
   }
 
   if (!welcomed) {
@@ -61,14 +67,19 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F7F3EE' }}>
-
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: '#F7F3EE' }}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      onTouchCancel={() => { gesture.current = null }}
+    >
       {/* Top brand bar */}
       <header
         className="fixed top-0 left-0 right-0 z-40 flex items-center justify-center gap-2.5"
         style={{ backgroundColor: '#1A2E23', height: '48px' }}
       >
-        {/* Logo */}
         <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
           <line x1="13" y1="8"  x2="13" y2="18" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
           <line x1="10" y1="8"  x2="10" y2="14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
@@ -83,12 +94,10 @@ export default function App() {
         </span>
       </header>
 
-      {/* Page content – swipe area */}
+      {/* Page content */}
       <main
         className="max-w-2xl mx-auto px-4"
         style={{ paddingTop: '68px', paddingBottom: '96px' }}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
       >
         <div key={activeTab} className="page-enter">
           <Page navigateTo={navigateTo} weiter={weiter} />
