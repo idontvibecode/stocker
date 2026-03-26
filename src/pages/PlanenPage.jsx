@@ -8,8 +8,10 @@ const KURZ       = { Montag:'Mo', Dienstag:'Di', Mittwoch:'Mi', Donnerstag:'Do',
 const KATEGORIEN = ['alle','vegetarisch','vegan','fleischhaltig','fischhaltig']
 const STORAGE_KEY = 'stocker_wochenplan'
 
-// Today in TAGE order (Mo=0 … So=6)
-const HEUTE_TAG = TAGE[(new Date().getDay() + 6) % 7]
+// Next day (tomorrow) in TAGE order (Mo=0 … So=6)
+const HEUTE_IDX    = (new Date().getDay() + 6) % 7
+const NAECHSTER_IDX = (HEUTE_IDX + 1) % 7
+const NAECHSTER_TAG = TAGE[NAECHSTER_IDX]
 
 const katStyle = {
   vegetarisch:   { bg: '#f0fdf4', text: '#15803d' },
@@ -109,6 +111,15 @@ export default function PlanenPage() {
 
   const belegteTagCount = TAGE.filter(t => plan[t]).length
 
+  // First empty day starting from tomorrow – used for the quick-open button
+  const naechsterOffenerTag = useMemo(() => {
+    for (let i = 0; i < 7; i++) {
+      const tag = TAGE[(NAECHSTER_IDX + i) % 7]
+      if (!plan[tag]) return tag
+    }
+    return NAECHSTER_TAG
+  }, [plan])
+
   return (
     <div className="flex flex-col gap-4">
 
@@ -129,19 +140,19 @@ export default function PlanenPage() {
       {/* ── Wochenübersicht ─────────────────────────────────────────── */}
       <div className="bg-white rounded-2xl overflow-hidden card-shadow">
         {TAGE.map((tag, i) => {
-          const rezept   = plan[tag]
-          const selected = selectedTag === tag
-          const isHeute  = tag === HEUTE_TAG
+          const rezept      = plan[tag]
+          const selected    = selectedTag === tag
+          const isNaechster = tag === NAECHSTER_TAG
 
           const badgeBg = selected
             ? '#D97706'
             : rezept
             ? (katDayBadge[rezept.kategorie] ?? '#1A2E23')
-            : isHeute
+            : isNaechster
             ? '#fffbeb'
             : '#F7F3EE'
 
-          const badgeColor = selected || rezept ? '#fff' : isHeute ? '#D97706' : '#A8A29E'
+          const badgeColor = selected || rezept ? '#fff' : isNaechster ? '#D97706' : '#A8A29E'
 
           return (
             <div key={tag}>
@@ -167,13 +178,13 @@ export default function PlanenPage() {
                         {rezept.name}
                       </p>
                       <p className="text-xs mt-0.5" style={{ color: '#A8A29E' }}>
-                        {isHeute && <span style={{ color: '#D97706' }}>Heute · </span>}
+                        {isNaechster && <span style={{ color: '#D97706' }}>Morgen · </span>}
                         {rezept.zeit} Min. · {rezept.personen ?? 2} Pers.
                       </p>
                     </>
-                  ) : isHeute ? (
+                  ) : isNaechster ? (
                     <p className="text-sm">
-                      <span className="font-semibold" style={{ color: '#D97706' }}>Heute</span>
+                      <span className="font-semibold" style={{ color: '#D97706' }}>Morgen</span>
                       <span style={{ color: '#A8A29E' }}> – noch leer</span>
                     </p>
                   ) : (
@@ -448,9 +459,12 @@ export default function PlanenPage() {
         </div>
       )}
 
-      {/* Empty state when no day selected */}
+      {/* Empty state – click opens next open day */}
       {!selectedTag && (
-        <div className="text-center py-12">
+        <button
+          onClick={() => setSelected(naechsterOffenerTag)}
+          className="text-center py-10 w-full cursor-pointer"
+        >
           <div
             className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3"
             style={{ backgroundColor: '#F7F3EE' }}
@@ -463,8 +477,10 @@ export default function PlanenPage() {
             </svg>
           </div>
           <p className="text-sm font-medium" style={{ color: '#78716C' }}>Tag antippen</p>
-          <p className="text-xs mt-1" style={{ color: '#A8A29E' }}>Dann ein Rezept zuweisen</p>
-        </div>
+          <p className="text-xs mt-1.5 font-medium" style={{ color: '#D97706' }}>
+            {naechsterOffenerTag} öffnen →
+          </p>
+        </button>
       )}
 
       <PdfModal rezept={pdfRezept} onClose={() => setPdfRezept(null)} />
