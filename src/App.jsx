@@ -75,46 +75,56 @@ export default function App() {
       onTouchEnd={onTouchEnd}
       onTouchCancel={() => { gesture.current = null }}
     >
+      {/* Background sketch illustrations — fork left, knife right */}
+      <div className="fixed inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+        {/* Fork — sketched from bottom-left, angled inward */}
+        <svg
+          className="absolute"
+          style={{ bottom: '80px', left: '-30px', opacity: 0.04, transform: 'rotate(25deg)' }}
+          width="180" height="520" viewBox="0 0 60 180" fill="none"
+        >
+          {/* Tine left */}
+          <line x1="20" y1="4" x2="20" y2="50" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round"/>
+          {/* Tine center */}
+          <line x1="30" y1="4" x2="30" y2="55" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round"/>
+          {/* Tine right */}
+          <line x1="40" y1="4" x2="40" y2="50" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round"/>
+          {/* Tine bridge */}
+          <path d="M20 50 Q30 62 40 50" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
+          {/* Handle */}
+          <line x1="30" y1="55" x2="30" y2="176" stroke="#1C1917" strokeWidth="2.8" strokeLinecap="round"/>
+          {/* Handle end — rounded bulge */}
+          <ellipse cx="30" cy="176" rx="5" ry="3" stroke="#1C1917" strokeWidth="1.8" fill="none"/>
+        </svg>
+
+        {/* Knife — sketched from top-right, angled inward */}
+        <svg
+          className="absolute"
+          style={{ top: '-20px', right: '-20px', opacity: 0.04, transform: 'rotate(-20deg)' }}
+          width="140" height="480" viewBox="0 0 50 170" fill="none"
+        >
+          {/* Blade spine */}
+          <line x1="25" y1="4" x2="25" y2="70" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
+          {/* Blade edge — curved */}
+          <path d="M25 4 C25 4 38 20 38 50 L25 70" stroke="#1C1917" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          {/* Bolster */}
+          <rect x="20" y="68" width="10" height="8" rx="2" stroke="#1C1917" strokeWidth="1.8" fill="none"/>
+          {/* Handle */}
+          <line x1="25" y1="76" x2="25" y2="166" stroke="#1C1917" strokeWidth="3" strokeLinecap="round"/>
+          {/* Handle rivets */}
+          <circle cx="25" cy="90" r="2" stroke="#1C1917" strokeWidth="1.2" fill="none"/>
+          <circle cx="25" cy="110" r="2" stroke="#1C1917" strokeWidth="1.2" fill="none"/>
+          <circle cx="25" cy="130" r="2" stroke="#1C1917" strokeWidth="1.2" fill="none"/>
+          {/* Handle end */}
+          <ellipse cx="25" cy="166" rx="5" ry="3" stroke="#1C1917" strokeWidth="1.8" fill="none"/>
+        </svg>
+      </div>
+
       {/* Page content */}
       <main
         className="max-w-2xl mx-auto px-4 relative"
         style={{ paddingTop: '20px', paddingBottom: '96px' }}
       >
-        {/* Brand stamp — like a wax seal pressed into paper */}
-        <div className="flex justify-end mb-1 pointer-events-none select-none">
-          <div
-            className="relative flex items-center justify-center"
-            style={{ width: '42px', height: '42px' }}
-          >
-            {/* Outer ring — dotted, like an old restaurant stamp */}
-            <div
-              className="absolute inset-0 rounded-full"
-              style={{
-                border: '1.5px dashed rgba(26,46,35,0.25)',
-              }}
-            />
-            {/* Inner seal */}
-            <div
-              className="w-8 h-8 rounded-full flex items-center justify-center"
-              style={{
-                backgroundColor: '#1A2E23',
-                boxShadow: '0 1px 4px rgba(26,46,35,0.3), inset 0 1px 0 rgba(255,255,255,0.06)',
-              }}
-            >
-              <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
-                {/* Fork — amber */}
-                <line x1="15" y1="10" x2="15" y2="20" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
-                <line x1="12" y1="10" x2="12" y2="16" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
-                <line x1="18" y1="10" x2="18" y2="16" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
-                <path d="M12 16 Q15 20 18 16" stroke="#D97706" strokeWidth="3" strokeLinecap="round" fill="none"/>
-                <line x1="15" y1="20" x2="15" y2="38" stroke="#D97706" strokeWidth="3" strokeLinecap="round"/>
-                {/* Knife — cream white */}
-                <path d="M33 10 C33 10 36 14 36 20 L33 22 L33 38" stroke="#F7F3EE" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                <line x1="33" y1="22" x2="36" y2="20" stroke="#F7F3EE" strokeWidth="3" strokeLinecap="round"/>
-              </svg>
-            </div>
-          </div>
-        </div>
         <div key={activeTab} className="page-enter">
           <Page navigateTo={navigateTo} weiter={weiter} />
         </div>
