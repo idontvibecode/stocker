@@ -75,48 +75,31 @@ export default function App() {
       onTouchEnd={onTouchEnd}
       onTouchCancel={() => { gesture.current = null }}
     >
-      {/* Background sketch illustrations — fork left, knife right */}
+      {/* Background sketch — original logo fork & knife, blown up large */}
       <div className="fixed inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-        {/* Fork — sketched from bottom-left, angled inward */}
+        {/* Fork (logo shape) — from bottom-left, angled inward */}
         <svg
           className="absolute"
-          style={{ bottom: '80px', left: '-30px', opacity: 0.04, transform: 'rotate(25deg)' }}
-          width="180" height="520" viewBox="0 0 60 180" fill="none"
+          style={{ bottom: '60px', left: '-24px', opacity: 0.045, transform: 'rotate(22deg)' }}
+          width="160" height="500" viewBox="0 0 48 48" fill="none"
+          preserveAspectRatio="none"
         >
-          {/* Tine left */}
-          <line x1="20" y1="4" x2="20" y2="50" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round"/>
-          {/* Tine center */}
-          <line x1="30" y1="4" x2="30" y2="55" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round"/>
-          {/* Tine right */}
-          <line x1="40" y1="4" x2="40" y2="50" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round"/>
-          {/* Tine bridge */}
-          <path d="M20 50 Q30 62 40 50" stroke="#1C1917" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
-          {/* Handle */}
-          <line x1="30" y1="55" x2="30" y2="176" stroke="#1C1917" strokeWidth="2.8" strokeLinecap="round"/>
-          {/* Handle end — rounded bulge */}
-          <ellipse cx="30" cy="176" rx="5" ry="3" stroke="#1C1917" strokeWidth="1.8" fill="none"/>
+          <line x1="13" y1="8" x2="13" y2="18" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
+          <line x1="10" y1="8" x2="10" y2="14" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
+          <line x1="16" y1="8" x2="16" y2="14" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
+          <path d="M10 14 Q13 18 16 14" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+          <line x1="13" y1="18" x2="13" y2="40" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
         </svg>
 
-        {/* Knife — sketched from top-right, angled inward */}
+        {/* Knife (logo shape) — from top-right, angled inward */}
         <svg
           className="absolute"
-          style={{ top: '-20px', right: '-20px', opacity: 0.04, transform: 'rotate(-20deg)' }}
-          width="140" height="480" viewBox="0 0 50 170" fill="none"
+          style={{ top: '-40px', right: '-16px', opacity: 0.045, transform: 'rotate(-18deg)' }}
+          width="130" height="460" viewBox="0 0 48 48" fill="none"
+          preserveAspectRatio="none"
         >
-          {/* Blade spine */}
-          <line x1="25" y1="4" x2="25" y2="70" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
-          {/* Blade edge — curved */}
-          <path d="M25 4 C25 4 38 20 38 50 L25 70" stroke="#1C1917" strokeWidth="2" strokeLinecap="round" fill="none"/>
-          {/* Bolster */}
-          <rect x="20" y="68" width="10" height="8" rx="2" stroke="#1C1917" strokeWidth="1.8" fill="none"/>
-          {/* Handle */}
-          <line x1="25" y1="76" x2="25" y2="166" stroke="#1C1917" strokeWidth="3" strokeLinecap="round"/>
-          {/* Handle rivets */}
-          <circle cx="25" cy="90" r="2" stroke="#1C1917" strokeWidth="1.2" fill="none"/>
-          <circle cx="25" cy="110" r="2" stroke="#1C1917" strokeWidth="1.2" fill="none"/>
-          <circle cx="25" cy="130" r="2" stroke="#1C1917" strokeWidth="1.2" fill="none"/>
-          {/* Handle end */}
-          <ellipse cx="25" cy="166" rx="5" ry="3" stroke="#1C1917" strokeWidth="1.8" fill="none"/>
+          <path d="M35 8 C35 8 38 12 38 18 L35 20 L35 40" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          <line x1="35" y1="20" x2="38" y2="18" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round"/>
         </svg>
       </div>
 
