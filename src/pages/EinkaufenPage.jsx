@@ -186,7 +186,7 @@ export default function EinkaufenPage({ navigateTo }) {
         </h1>
         <p className="text-sm mt-0.5" style={{ color: '#78716C' }}>
           {aktiv.length > 0
-            ? `${aktiv.length} ${aktiv.length === 1 ? 'Posten' : 'Posten'} für den Einkauf`
+            ? `${aktiv.length} ${aktiv.length === 1 ? 'Sache' : 'Sachen'} auf der Liste`
             : planLeer
             ? 'Noch kein Wochenplan'
             : 'Alles vorhanden — Küche ist versorgt!'}
@@ -237,7 +237,7 @@ export default function EinkaufenPage({ navigateTo }) {
         <div className="bg-white rounded-2xl overflow-hidden card-shadow">
           <div className="px-4 pt-4 pb-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <p className="text-xs font-medium" style={{ color: '#A8A29E' }}>Einkaufsposten</p>
+              <p className="text-xs font-medium" style={{ color: '#A8A29E' }}>Was du brauchst</p>
               <span className="text-[11px] px-1.5 py-0.5 rounded-full font-medium"
                 style={{ backgroundColor: '#F7F3EE', color: '#78716C' }}>
                 {aktiv.length}

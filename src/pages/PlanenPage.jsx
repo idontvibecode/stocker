@@ -21,14 +21,6 @@ const katStyle = {
   fischhaltig:   { bg: '#f0f9ff', text: '#0369a1' },
 }
 
-// Very subtle card tint per category — like different recipe-card papers
-const katCardBg = {
-  vegetarisch:   '#f6fdf8',
-  vegan:         '#f8fdf3',
-  fleischhaltig: '#fdf6f7',
-  fischhaltig:   '#f5f8fd',
-}
-
 // Dark day-badge backgrounds when recipe is assigned
 const katDayBadge = {
   vegetarisch:   '#166534',
@@ -344,18 +336,13 @@ export default function PlanenPage() {
             {gefiltert.map((r, index) => {
               const kat              = katStyle[r.kategorie] ?? { bg: '#F7F3EE', text: '#78716C' }
               const bereitsZugewiesen = Object.entries(plan).find(([, rez]) => rez?.id === r.id)
-              const cardBg           = katCardBg[r.kategorie] ?? '#FEFCF8'
-
               return (
                 <div
                   key={r.id}
                   className={`card-stagger rounded-2xl overflow-hidden card-shadow card-hover${r.favorit ? ' favorit-karte' : ''}`}
                   style={r.favorit ? {} : {
-                    borderTop:    `3px solid ${kat.text}`,
-                    borderRight:  '1px solid #E8E2D9',
-                    borderBottom: '1px solid #E8E2D9',
-                    borderLeft:   '1px solid #E8E2D9',
-                    backgroundColor: cardBg,
+                    border: '1px solid #E8E2D9',
+                    backgroundColor: '#fff',
                     animationDelay: `${index * 35}ms`,
                   }}
                 >

@@ -77,20 +77,25 @@ export default function App() {
     >
       {/* Top brand bar */}
       <header
-        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-center gap-2.5"
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4"
         style={{ backgroundColor: '#1A2E23', height: '48px' }}
       >
-        <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
-          <line x1="13" y1="8"  x2="13" y2="18" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-          <line x1="10" y1="8"  x2="10" y2="14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-          <line x1="16" y1="8"  x2="16" y2="14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-          <path d="M10 14 Q13 18 16 14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
-          <line x1="13" y1="18" x2="13" y2="40" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
-          <path d="M35 8 C35 8 38 12 38 18 L35 20 L35 40" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-          <line x1="35" y1="20" x2="38" y2="18" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
-        </svg>
-        <span className="font-display text-xl" style={{ color: '#fff', letterSpacing: '0.01em' }}>
-          Stocker
+        <div className="flex items-center gap-2">
+          <svg width="22" height="22" viewBox="0 0 48 48" fill="none">
+            <line x1="13" y1="8"  x2="13" y2="18" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
+            <line x1="10" y1="8"  x2="10" y2="14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
+            <line x1="16" y1="8"  x2="16" y2="14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
+            <path d="M10 14 Q13 18 16 14" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
+            <line x1="13" y1="18" x2="13" y2="40" stroke="#D97706" strokeWidth="3.5" strokeLinecap="round"/>
+            <path d="M35 8 C35 8 38 12 38 18 L35 20 L35 40" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            <line x1="35" y1="20" x2="38" y2="18" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
+          </svg>
+          <span className="font-display text-lg" style={{ color: '#fff', letterSpacing: '0.01em' }}>
+            Stocker
+          </span>
+        </div>
+        <span className="text-[10px] font-medium tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          Dein Heimrestaurant
         </span>
       </header>
 
