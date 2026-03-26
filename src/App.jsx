@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react'
 import TabBar from './components/TabBar'
-import WelcomePage from './pages/WelcomePage'
 import ZutatenPage from './pages/ZutatenPage'
 import PlanenPage from './pages/PlanenPage'
 import EinkaufenPage from './pages/EinkaufenPage'
@@ -14,7 +13,6 @@ const pages = {
 }
 
 export default function App() {
-  const [welcomed, setWelcomed]   = useState(() => !!localStorage.getItem('stocker_welcomed'))
   const [activeTab, setActiveTab] = useState('planen')
 
   // Swipe: track start position + direction lock (null | 'h' | 'v')
@@ -55,15 +53,6 @@ export default function App() {
     const idx = TAB_ORDER.indexOf(activeTab)
     if (dx < 0 && idx < TAB_ORDER.length - 1) navigateTo(TAB_ORDER[idx + 1])
     else if (dx > 0 && idx > 0)               navigateTo(TAB_ORDER[idx - 1])
-  }
-
-  if (!welcomed) {
-    return (
-      <WelcomePage onStart={() => {
-        localStorage.setItem('stocker_welcomed', '1')
-        setWelcomed(true)
-      }} />
-    )
   }
 
   return (
