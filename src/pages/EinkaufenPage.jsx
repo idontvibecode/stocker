@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { ladeVorhandeneZutaten, berechneFehlend } from '../utils/matching'
 import { formatMenge } from '../utils/zutaten'
 import { kopieren } from '../utils/clipboard'
 
-const WOCHENPLAN_KEY = 'stocker_wochenplan'
-const EXTRA_KEY      = 'stocker_einkaufen_extra'
+const WOCHENPLAN_KEY  = 'stocker_wochenplan'
+const EXTRA_KEY       = 'stocker_einkaufen_extra'
+const OVERRIDES_KEY   = 'stocker_einkaufen_overrides'
 
 // Extra-Items: [{ name: "Brot", menge: "1 Laib" }, ...]
 const VORSCHLAEGE = {
@@ -23,6 +24,12 @@ function ladeExtra() {
 }
 function speichereExtra(arr) {
   localStorage.setItem(EXTRA_KEY, JSON.stringify(arr))
+}
+function ladeOverrides() {
+  try { return JSON.parse(localStorage.getItem(OVERRIDES_KEY) ?? '{}') } catch { return {} }
+}
+function speichereOverrides(obj) {
+  localStorage.setItem(OVERRIDES_KEY, JSON.stringify(obj))
 }
 
 const KOCHEINHEIT_LABEL = { el: 'EL', tl: 'TL', zehen: 'Zehen', bund: 'Bund', prise: 'Prise' }
@@ -82,16 +89,24 @@ function generiereMarkdown(alleItems) {
   return md
 }
 
-export default function EinkaufenPage({ navigateTo }) {
+export default function EinkaufenPage({ navigateTo, isActive }) {
   const [geteilt, setGeteilt]           = useState(false)
   const [extraItems, setExtraItems]     = useState(ladeExtra)
   const [eingabe, setEingabe]           = useState('')
   const [eingabeMenge, setEingabeMenge] = useState('')
   const [editingItem, setEditingItem]   = useState(null) // { name, newName, newMenge }
 
-  const vorhandene = useMemo(() => ladeVorhandeneZutaten(), [])
-  const plan       = useMemo(() => ladePlan(), [])
-  const fehlend    = useMemo(() => berechneFehlend(plan, vorhandene), [plan, vorhandene])
+  const [plan, setPlan]             = useState(ladePlan)
+  const [vorhandene, setVorhandene] = useState(ladeVorhandeneZutaten)
+  const [overrides, setOverrides]   = useState(ladeOverrides)
+  const fehlend = useMemo(() => berechneFehlend(plan, vorhandene), [plan, vorhandene])
+
+  useEffect(() => {
+    if (isActive) {
+      setPlan(ladePlan())
+      setVorhandene(ladeVorhandeneZutaten())
+    }
+  }, [isActive])
 
   const [entfernt, setEntfernt] = useState(() =>
     new Set(fehlend.filter(z => istVormarkiert(z.name)).map(z => z.name))
@@ -101,18 +116,23 @@ export default function EinkaufenPage({ navigateTo }) {
 
   // Zusammengeführte Liste: Rezept-Items + Extra-Items
   const alleListen = useMemo(() => {
-    const rezeptItems = fehlend.map(z => ({
-      name: z.name,
-      mengeLabel: zeigeEinkaufsMenge(z.fehlendMenge),
-      quelle: 'rezept',
-    }))
+    const rezeptItems = fehlend.map(z => {
+      const ovr = overrides[z.name]
+      return {
+        name: ovr?.name ?? z.name,
+        mengeLabel: ovr?.menge || zeigeEinkaufsMenge(z.fehlendMenge),
+        quelle: 'rezept',
+        originalName: z.name,
+      }
+    })
     const extra = extraItems.map(item => ({
       name: item.name,
       mengeLabel: item.menge || null,
       quelle: 'extra',
+      originalName: item.name,
     }))
     return [...rezeptItems, ...extra]
-  }, [fehlend, extraItems])
+  }, [fehlend, extraItems, overrides])
 
   // Aktive Items (nicht durchgestrichen) — für Export/Zähler
   const aktiv = alleListen.filter(z => !entfernt.has(z.name))
@@ -133,14 +153,20 @@ export default function EinkaufenPage({ navigateTo }) {
     setEingabeMenge('')
   }
 
-  function extraBearbeiten(oldName, newName, newMenge) {
+  function itemBearbeiten(originalName, quelle, newName, newMenge) {
     const bereinigt = newName.trim()
     if (!bereinigt) return
-    const neu = extraItems.map(item =>
-      item.name === oldName ? { name: bereinigt, menge: newMenge?.trim() || '' } : item
-    )
-    setExtraItems(neu)
-    speichereExtra(neu)
+    if (quelle === 'extra') {
+      const neu = extraItems.map(item =>
+        item.name === originalName ? { name: bereinigt, menge: newMenge?.trim() || '' } : item
+      )
+      setExtraItems(neu)
+      speichereExtra(neu)
+    } else {
+      const neu = { ...overrides, [originalName]: { name: bereinigt, menge: newMenge?.trim() || '' } }
+      setOverrides(neu)
+      speichereOverrides(neu)
+    }
     setEditingItem(null)
   }
 
@@ -278,19 +304,19 @@ export default function EinkaufenPage({ navigateTo }) {
               const removed = entfernt.has(item.name)
               const isExtra = item.quelle === 'extra'
               return (
-                <div key={item.name}>
+                <div key={item.originalName}>
                   {i > 0 && <div className="h-px mx-4" style={{ backgroundColor: removed ? '#fafaf9' : '#F7F3EE' }} />}
                   <div className="flex items-center gap-3 px-4 py-3 transition-colors"
                     style={{ backgroundColor: removed ? '#fafaf9' : 'transparent' }}>
 
-                    {/* Edit-Modus für Extra-Items */}
-                    {isExtra && editingItem?.name === item.name ? (
+                    {/* Edit-Modus — für alle Items */}
+                    {editingItem?.originalName === item.originalName ? (
                       <>
                         <input
                           autoFocus
                           value={editingItem.newName}
                           onChange={e => setEditingItem({ ...editingItem, newName: e.target.value })}
-                          onKeyDown={e => e.key === 'Enter' && extraBearbeiten(item.name, editingItem.newName, editingItem.newMenge)}
+                          onKeyDown={e => e.key === 'Enter' && itemBearbeiten(editingItem.originalName, editingItem.quelle, editingItem.newName, editingItem.newMenge)}
                           className="flex-1 text-sm rounded-lg px-2 py-1 outline-none"
                           style={{ backgroundColor: '#F7F3EE', border: '1.5px solid #D97706', color: '#1C1917' }}
                         />
@@ -302,7 +328,7 @@ export default function EinkaufenPage({ navigateTo }) {
                           style={{ backgroundColor: '#F7F3EE', border: '1.5px solid #E7E5E4', color: '#1C1917' }}
                         />
                         <button
-                          onClick={() => extraBearbeiten(item.name, editingItem.newName, editingItem.newMenge)}
+                          onClick={() => itemBearbeiten(editingItem.originalName, editingItem.quelle, editingItem.newName, editingItem.newMenge)}
                           className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 cursor-pointer"
                           style={{ backgroundColor: '#D97706', color: '#fff' }}
                           title="Speichern"
@@ -343,6 +369,19 @@ export default function EinkaufenPage({ navigateTo }) {
                           <span className="text-[10px] shrink-0" style={{ color: '#D4CFC8' }}>nicht kaufen</span>
                         )}
 
+                        {/* Edit-Button — für alle Items */}
+                        <button
+                          onClick={() => setEditingItem({ originalName: item.originalName, quelle: item.quelle, newName: item.name, newMenge: item.mengeLabel || '' })}
+                          className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all cursor-pointer"
+                          style={{ backgroundColor: '#F7F3EE', color: '#A8A29E' }}
+                          title="Bearbeiten"
+                        >
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                          </svg>
+                        </button>
+
                         {/* Rezept-Items: Toggle durchstreichen/wiederherstellen */}
                         {!isExtra && (
                           <button
@@ -357,31 +396,18 @@ export default function EinkaufenPage({ navigateTo }) {
                           </button>
                         )}
 
-                        {/* Extra-Items: Edit + Delete */}
+                        {/* Extra-Items: Delete */}
                         {isExtra && (
-                          <>
-                            <button
-                              onClick={() => setEditingItem({ name: item.name, newName: item.name, newMenge: item.mengeLabel || '' })}
-                              className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all cursor-pointer"
-                              style={{ backgroundColor: '#F7F3EE', color: '#A8A29E' }}
-                              title="Bearbeiten"
-                            >
-                              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                              </svg>
-                            </button>
-                            <button
-                              onClick={() => extraEntfernen(item.name)}
-                              className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all cursor-pointer"
-                              style={{ backgroundColor: '#F7F3EE', color: '#A8A29E' }}
-                              title="Entfernen"
-                            >
-                              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                                <line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/>
-                              </svg>
-                            </button>
-                          </>
+                          <button
+                            onClick={() => extraEntfernen(item.name)}
+                            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all cursor-pointer"
+                            style={{ backgroundColor: '#F7F3EE', color: '#A8A29E' }}
+                            title="Entfernen"
+                          >
+                            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                              <line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/>
+                            </svg>
+                          </button>
                         )}
                       </>
                     )}

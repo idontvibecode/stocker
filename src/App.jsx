@@ -100,7 +100,7 @@ export default function App() {
           const P = pages[tab]
           return (
             <div key={tab} className={tab === activeTab ? 'page-enter' : ''} style={{ display: tab === activeTab ? '' : 'none' }}>
-              <P navigateTo={navigateTo} weiter={weiter} />
+              <P navigateTo={navigateTo} weiter={weiter} isActive={tab === activeTab} />
             </div>
           )
         })}
