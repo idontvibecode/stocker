@@ -18,8 +18,6 @@ export default function App() {
   // Swipe: track start position + direction lock (null | 'h' | 'v')
   const gesture = useRef(null)
 
-  const Page = pages[activeTab]
-
   function navigateTo(tab) {
     setActiveTab(tab)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -33,7 +31,7 @@ export default function App() {
   function onTouchStart(e) {
     const tag = document.activeElement?.tagName
     if (tag === 'INPUT' || tag === 'TEXTAREA') return
-    gesture.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: null }
+    gesture.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: null, t: Date.now() }
   }
 
   function onTouchMove(e) {
@@ -48,8 +46,9 @@ export default function App() {
   function onTouchEnd(e) {
     if (!gesture.current || gesture.current.dir !== 'h') { gesture.current = null; return }
     const dx = e.changedTouches[0].clientX - gesture.current.x
+    const dt = Date.now() - gesture.current.t
     gesture.current = null
-    if (Math.abs(dx) < 55) return
+    if (Math.abs(dx) < 100 || Math.abs(dx) / dt < 0.3) return
     const idx = TAB_ORDER.indexOf(activeTab)
     if (dx < 0 && idx < TAB_ORDER.length - 1) navigateTo(TAB_ORDER[idx + 1])
     else if (dx > 0 && idx > 0)               navigateTo(TAB_ORDER[idx - 1])
@@ -92,14 +91,19 @@ export default function App() {
         </svg>
       </div>
 
-      {/* Page content */}
+      {/* Page content — alle 3 Pages gleichzeitig gemountet, inaktive per display:none versteckt */}
       <main
         className="max-w-2xl mx-auto px-4 relative"
         style={{ paddingTop: '20px', paddingBottom: '96px' }}
       >
-        <div key={activeTab} className="page-enter">
-          <Page navigateTo={navigateTo} weiter={weiter} />
-        </div>
+        {TAB_ORDER.map(tab => {
+          const P = pages[tab]
+          return (
+            <div key={tab} className={tab === activeTab ? 'page-enter' : ''} style={{ display: tab === activeTab ? '' : 'none' }}>
+              <P navigateTo={navigateTo} weiter={weiter} />
+            </div>
+          )
+        })}
       </main>
 
       {/* Bottom tab bar */}
