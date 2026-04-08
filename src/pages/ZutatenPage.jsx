@@ -164,16 +164,16 @@ export default function ZutatenPage({ weiter }) {
       </div>
 
       {/* KI-Import */}
-      <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#1A2E23' }}>
+      <div className="rounded-2xl overflow-hidden bg-white card-shadow">
         <div className="p-4">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
-              style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+              style={{ backgroundColor: '#F7F3EE' }}>
               📷
             </div>
             <div>
-              <p className="font-medium text-white text-sm">Mit KI importieren</p>
-              <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.4)' }}>Foto → KI → JSON einfügen</p>
+              <p className="font-medium text-sm" style={{ color: '#1C1917' }}>Mit KI importieren</p>
+              <p className="text-xs mt-0.5" style={{ color: '#A8A29E' }}>Foto → KI → JSON einfügen</p>
             </div>
           </div>
 
@@ -181,8 +181,8 @@ export default function ZutatenPage({ weiter }) {
             onClick={promptKopieren}
             className="w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.97] cursor-pointer"
             style={kopiert
-              ? { backgroundColor: 'rgba(16,185,129,0.15)', color: '#6ee7b7', border: '1px solid rgba(16,185,129,0.25)' }
-              : { backgroundColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.12)' }
+              ? { backgroundColor: '#f0fdf4', color: '#16a34a', border: '1px solid #bbf7d0' }
+              : { backgroundColor: '#F7F3EE', color: '#78716C', border: '1px solid #E8E2D9' }
             }
           >
             {kopiert ? (
@@ -201,7 +201,7 @@ export default function ZutatenPage({ weiter }) {
           <button
             onClick={() => setAnleitung(v => !v)}
             className="w-full text-center text-xs py-2.5 cursor-pointer font-medium flex items-center justify-center gap-1.5"
-            style={{ color: 'rgba(255,255,255,0.35)' }}
+            style={{ color: '#C4BCBA' }}
           >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {anleitung ? <polyline points="18 15 12 9 6 15"/> : <polyline points="6 9 12 15 18 9"/>}
@@ -211,7 +211,7 @@ export default function ZutatenPage({ weiter }) {
         </div>
 
         {anleitung && (
-          <div className="px-4 pb-4 pt-2 space-y-2.5" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="px-4 pb-4 pt-2 space-y-2.5" style={{ borderTop: '1px solid #F7F3EE' }}>
             {[
               ['📷', 'Mach ein Foto von deinem Kühlschrank'],
               ['🤖', 'Öffne ChatGPT, Claude oder Gemini'],
@@ -222,7 +222,7 @@ export default function ZutatenPage({ weiter }) {
             ].map(([icon, text], i) => (
               <div key={i} className="flex items-start gap-2.5">
                 <span className="text-base">{icon}</span>
-                <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>{text}</p>
+                <p className="text-xs leading-relaxed" style={{ color: '#A8A29E' }}>{text}</p>
               </div>
             ))}
           </div>
