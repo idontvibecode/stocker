@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0b0d" />
+  <meta name="description" content="Eine handverlesene Filmauswahl für unseren nächsten Abend zu zweit." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="robots" content="noindex" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'none'" />
+  <title>Filmabend</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230b0b0d'/%3E%3Cpath d='M39 30 L73 50 L39 70 Z' fill='%23e3b25f'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --ink: #f4f1ea;
+      --ink-dim: #a8a49c;
+      --ink-faint: #6e6b64;
+      --gold: #e3b25f;
+      --gold-bright: #f1cd8d;
+      --line: rgba(255, 255, 255, 0.09);
+      --display: "Oswald", "Arial Narrow", sans-serif;
+      --body: "Inter", system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(227, 178, 95, 0.10), transparent 55%),
+        radial-gradient(circle at 50% 55%, transparent 58%, rgba(0, 0, 0, 0.55));
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 60;
+      opacity: 0.05;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .wrap { position: relative; z-index: 1; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      width: min(900px, 92vw);
+      height: 520px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(227, 178, 95, 0.16), transparent 68%);
+      animation: glow 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { opacity: 0.65; }
+      to { opacity: 1; }
+    }
+
+    .hero > * { position: relative; }
+
+    .kicker {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .kicker::before,
+    .kicker::after {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .kicker::after { background: linear-gradient(90deg, var(--gold), transparent); }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(4rem, 17vw, 12.5rem);
+      line-height: 0.86;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin: 1.4rem 0 0.2rem;
+      background: linear-gradient(180deg, #fffaf0 30%, #d9cdb4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 60px rgba(227, 178, 95, 0.18);
+    }
+
+    .hero-sub {
+      max-width: 31rem;
+      color: var(--ink-dim);
+      font-size: 1.02rem;
+      margin: 1.4rem auto 0;
+    }
+
+    .hero-meta {
+      font-family: var(--display);
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      color: var(--ink-faint);
+      margin-top: 1.4rem;
+    }
+
+    .hero-actions {
+      margin-top: 2.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .surprise {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      padding: 0.95rem 2.3rem;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .surprise:hover {
+      background: transparent;
+      color: var(--gold-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(227, 178, 95, 0.22);
+    }
+
+    .surprise:focus-visible {
+      outline: 2px solid var(--gold-bright);
+      outline-offset: 4px;
+    }
+
+    .pick-result {
+      font-family: var(--display);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+      color: var(--gold-bright);
+      min-height: 1.4rem;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .pick-result.show { opacity: 1; }
+
+    .scroll-cue {
+      margin-top: 3.2rem;
+      width: 1px;
+      height: 54px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      animation: cue 2.2s ease-in-out infinite;
+    }
+
+    @keyframes cue {
+      0%, 100% { opacity: 0.25; transform: scaleY(0.6); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ---------- Kategorien ---------- */
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 2rem;
+    }
+
+    .category { padding: 3.4rem 0; }
+
+    .cat-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.4rem;
+      margin-bottom: 2.4rem;
+      padding-bottom: 1.6rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cat-num {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 0.8;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(227, 178, 95, 0.6);
+      flex-shrink: 0;
+    }
+
+    .cat-head h2 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.7rem, 4.4vw, 2.7rem);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .cat-desc {
+      color: var(--ink-dim);
+      font-size: 0.95rem;
+      max-width: 32rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ---------- Film-Raster ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .film {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: #161619;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      scroll-margin: 90px;
+      transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+                  box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .film:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.6);
+      border-color: rgba(227, 178, 95, 0.55);
+    }
+
+    .poster-wrap {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      background: #0d0d0f;
+    }
+
+    .poster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .film:hover .poster { transform: scale(1.055); }
+
+    .poster-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom,
+        rgba(0, 0, 0, 0.34) 0%, transparent 20%,
+        transparent 80%, rgba(0, 0, 0, 0.45) 100%);
+    }
+
+    .film-cat {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      z-index: 1;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      padding: 0.32rem 0.66rem;
+      border-radius: 100px;
+      backdrop-filter: blur(4px);
+    }
+
+    .film-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 1.15rem 1.2rem 1.3rem;
+    }
+
+    .film-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.16rem;
+      line-height: 1.14;
+      letter-spacing: 0.012em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .film-tag {
+      flex: 1;
+      margin-top: 0.5rem;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--ink-dim);
+    }
+
+    .badge {
+      align-self: flex-start;
+      margin-top: 0.8rem;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 0.64rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      background: rgba(227, 178, 95, 0.15);
+      border: 1px solid rgba(227, 178, 95, 0.55);
+      padding: 0.3rem 0.66rem;
+      border-radius: 100px;
+    }
+
+    .trailer-btn {
+      align-self: flex-start;
+      margin-top: 1.15rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      text-decoration: none;
+      background: rgba(227, 178, 95, 0.09);
+      border: 1px solid rgba(227, 178, 95, 0.5);
+      padding: 0.6rem 1.05rem;
+      border-radius: 100px;
+      transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
+    }
+
+    .trailer-btn:hover {
+      background: var(--gold);
+      color: var(--bg);
+      transform: translateY(-2px);
+    }
+
+    .trailer-btn:focus-visible {
+      outline: 2px solid var(--gold-bright);
+      outline-offset: 3px;
+    }
+
+    .play-ico {
+      width: 0.72rem;
+      height: 0.72rem;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .film.is-picked {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-color: var(--gold);
+      animation: pickpulse 1.3s ease-out 2;
+    }
+
+    @keyframes pickpulse {
+      0% { box-shadow: 0 0 0 0 rgba(227, 178, 95, 0.5); }
+      100% { box-shadow: 0 0 0 26px rgba(227, 178, 95, 0); }
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      text-align: center;
+      padding: 4.5rem 1.5rem 5rem;
+      border-top: 1px solid var(--line);
+      margin-top: 2rem;
+    }
+
+    .footer-mark {
+      width: 46px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1.6rem;
+    }
+
+    footer p {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+
+    .footer-sub {
+      font-size: 0.8rem !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase;
+      color: var(--ink-faint) !important;
+      margin-top: 0.6rem;
+    }
+
+    /* ---------- Animationen ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .grid .reveal:nth-child(1) { transition-delay: 0.04s; }
+    .grid .reveal:nth-child(2) { transition-delay: 0.11s; }
+    .grid .reveal:nth-child(3) { transition-delay: 0.18s; }
+    .grid .reveal:nth-child(4) { transition-delay: 0.25s; }
+
+    .hero .kicker,
+    .hero h1,
+    .hero .hero-sub,
+    .hero .hero-meta,
+    .hero .hero-actions { animation: rise 0.95s both cubic-bezier(0.2, 0.7, 0.2, 1); }
+    .hero h1 { animation-delay: 0.12s; }
+    .hero .hero-sub { animation-delay: 0.26s; }
+    .hero .hero-meta { animation-delay: 0.36s; }
+    .hero .hero-actions { animation-delay: 0.46s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .cat-head { flex-direction: column; gap: 0.4rem; }
+      .hero h1 { letter-spacing: -0.01em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header class="hero">
+      <p class="kicker">Für dich ausgesucht</p>
+      <h1>Filmabend</h1>
+      <p class="hero-sub">
+        Ein paar Filme, die ich für unseren nächsten Abend zu zweit rausgesucht habe.
+        Schau einfach, worauf du Lust hast, oder lass den Zufall entscheiden.
+      </p>
+      <p class="hero-meta">Neun Filme &middot; Drei Stimmungen</p>
+      <div class="hero-actions">
+        <button class="surprise" id="surprise" type="button">Überrascht uns</button>
+        <p class="pick-result" id="pick-result" role="status" aria-live="polite"></p>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <section class="category">
+        <div class="cat-head reveal">
+          <span class="cat-num">01</span>
+          <div>
+            <h2>Animiert &amp; leicht</h2>
+            <p class="cat-desc">Für die Abende, an denen es einfach nur leicht und schön sein soll.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/wilder-roboter.jpg" alt="Filmplakat: Der wilde Roboter" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Animationsfilm</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Der wilde Roboter</h3>
+              <p class="film-tag">Ein Roboter strandet allein auf einer Insel und findet dort sowas wie eine Familie. Sieht richtig herzig aus.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=GLxXBH8US9c" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/super-mario.jpg" alt="Filmplakat: Der Super Mario Bros. Film" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Animationsfilm</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Super Mario Bros.</h3>
+              <p class="film-tag">Einfach bunt, schnell und gute Laune. Genau richtig, wenn wir mal nichts zum Nachdenken wollen.</p>
+              <span class="badge">Kaufen / Leihen</span>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=XIbbR2CKbZU" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="category">
+        <div class="cat-head reveal">
+          <span class="cat-num">02</span>
+          <div>
+            <h2>Spannender</h2>
+            <p class="cat-desc">Wenn du Lust auf ein bisschen Nervenkitzel hast.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/great-wall.jpg" alt="Filmplakat: The Great Wall" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Action / Fantasy</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">The Great Wall</h3>
+              <p class="film-tag">Matt Damon verteidigt die Chinesische Mauer gegen Monster. Klingt verrückt, sieht aber riesig aus.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=UdAmp9bIfUs" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/arctic-convoy.jpg" alt="Filmplakat: Arctic Convoy - Todesfalle Eismeer" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Kriegsdrama</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Arctic Convoy - Todesfalle Eismeer</h3>
+              <p class="film-tag">Ein Schiffskonvoi im eiskalten Nordmeer, mitten im Krieg. Ziemlich angespannt das Ganze.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=rBgrrjyEojI" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/gletschergrab.jpg" alt="Filmplakat: Gletschergrab" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Thriller</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Gletschergrab</h3>
+              <p class="film-tag">Ein altes Flugzeugwrack im Eis, das besser vergraben geblieben wäre. So ein Mystery-Thriller eben.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=YZ70mjs5ZJ8" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="category">
+        <div class="cat-head reveal">
+          <span class="cat-num">03</span>
+          <div>
+            <h2>Sonstiges</h2>
+            <p class="cat-desc">Der Rest, der mir noch so eingefallen ist. Von lustig bis ziemlich schräg.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/stromberg.jpg" alt="Filmplakat: Stromberg - Der Film" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Komödie</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Stromberg</h3>
+              <p class="film-tag">Büro, jede Menge Fremdscham und Stromberg eben. Falls wir einfach was zum Lachen brauchen.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=EL4gnmTufwo" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/arthur.jpg" alt="Filmplakat: Arthur der Große" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Abenteuer</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Arthur der Große</h3>
+              <p class="film-tag">Ein Hund schließt sich einem Abenteuerrennen an und gibt einfach nicht auf. Wird bestimmt zum Heulen schön.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=IDs9Yk3rzJI" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/bestatter.jpg" alt="Filmplakat: Krieg der Bestatter" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Justizdrama</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Krieg der Bestatter</h3>
+              <p class="film-tag">Der Kleine gegen den übermächtigen Konzern, vor Gericht. Soll richtig stark sein, mit Jamie Foxx.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=7eWu-tVyMic" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+          <article class="film reveal">
+            <div class="poster-wrap">
+              <img class="poster" src="posters/triangle.jpg" alt="Filmplakat: Triangle of Sadness" loading="lazy" decoding="async" width="780" height="1170" />
+              <span class="film-cat">Satire</span>
+            </div>
+            <div class="film-info">
+              <h3 class="film-title">Triangle of Sadness</h3>
+              <p class="film-tag">Reiche Leute auf einer Luxusyacht, bis alles aus dem Ruder läuft. Ziemlich schräge Satire.</p>
+              <a class="trailer-btn" href="https://www.youtube.com/watch?v=SEd70H2p2RI" target="_blank" rel="noopener noreferrer">
+                <svg class="play-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                Trailer ansehen
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-mark" aria-hidden="true"></div>
+      <p>Popcorn, Decke, Licht aus.</p>
+      <p class="footer-sub">Bis zum nächsten Filmabend</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Sanftes Einblenden beim Scrollen
+      var revealEls = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window && !reduceMotion) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.16 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add("visible"); });
+      }
+
+      // Zufallsfilm ziehen
+      var films = Array.prototype.slice.call(document.querySelectorAll(".film"));
+      var button = document.getElementById("surprise");
+      var result = document.getElementById("pick-result");
+      var lastIndex = -1;
+
+      button.addEventListener("click", function () {
+        films.forEach(function (f) { f.classList.remove("is-picked"); });
+
+        var index = Math.floor(Math.random() * films.length);
+        if (films.length > 1) {
+          while (index === lastIndex) {
+            index = Math.floor(Math.random() * films.length);
+          }
+        }
+        lastIndex = index;
+
+        var chosen = films[index];
+        var titleEl = chosen.querySelector(".film-title");
+        var title = titleEl ? titleEl.textContent.trim() : "";
+
+        result.textContent = "Euer Film für heute Abend: „" + title + "“";
+        result.classList.add("show");
+
+        // Neu-Anstoßen der Hervorhebungs-Animation
+        void chosen.offsetWidth;
+        chosen.classList.add("is-picked");
+
+        chosen.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth",
+          block: "center"
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
